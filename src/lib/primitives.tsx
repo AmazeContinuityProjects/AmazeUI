@@ -32,11 +32,11 @@ export const Pressable = React.forwardRef<any, PressableProps & { className?: st
 });
 Pressable.displayName = "Pressable";
 
-export const TextInput = React.forwardRef<any, TextInputProps & { className?: string, onChange?: any }>(({ className, style, onChangeText, onChange, value, ...props }, ref) => {
+export const TextInput = React.forwardRef<any, TextInputProps & { className?: string, onChange?: any }>(({ className, style, onChangeText, onChange, value, placeholderTextColor, ...props }, ref) => {
   if (Platform.OS === 'web') {
     const C = "input" as any;
     return <C ref={ref} value={value} onChange={(e: any) => { onChangeText?.(e.target.value); onChange?.(e); }} className={className} style={{ ...(style as any) }} {...props as any} />;
   }
-  return <RNTextInput ref={ref} value={value} onChangeText={onChangeText} onChange={onChange} className={className} style={style} {...props} />;
+  return <RNTextInput ref={ref} value={value} onChangeText={onChangeText} onChange={onChange} placeholderTextColor={placeholderTextColor} className={className} style={style} {...props} />;
 });
 TextInput.displayName = "TextInput";
