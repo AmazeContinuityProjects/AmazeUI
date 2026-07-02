@@ -64,9 +64,13 @@ const Button = React.forwardRef<React.ElementRef<typeof Pressable>, ButtonProps>
         {...({ className: cn(buttonVariants({ variant, size }), className) } as any)}
         {...props}
       >
-        {typeof children === 'string' ? (
-           <Text {...({ className: cn(buttonTextVariants({ variant }), textClassName) } as any)}>{children}</Text>
-        ) : children}
+        {React.Children.map(children, (child) => 
+          typeof child === 'string' || typeof child === 'number' ? (
+            <Text {...({ className: cn(buttonTextVariants({ variant }), textClassName) } as any)}>{child}</Text>
+          ) : (
+            child
+          )
+        )}
       </Pressable>
     )
   }

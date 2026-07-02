@@ -6,7 +6,7 @@ const Card = React.forwardRef<React.ElementRef<typeof View>, ViewProps & { class
   ({ className, ...props }, ref) => (
     <View
       ref={ref}
-      {...({ className: cn("rounded-xl border border-border bg-card shadow-sm", className) } as any)}
+      {...({ className: cn("rounded-xl border border-border bg-card/60 backdrop-blur-xl shadow-sm dark:bg-card/40", className) } as any)}
       {...props}
     />
   )
