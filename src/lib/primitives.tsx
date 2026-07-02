@@ -2,10 +2,13 @@ import * as React from "react";
 import { Platform, View as RNView, Text as RNText, Pressable as RNPressable, TextInput as RNTextInput } from "react-native";
 import type { ViewProps, TextProps, PressableProps, TextInputProps } from "react-native";
 
+import { cn } from "./utils";
+
 export const View = React.forwardRef<any, ViewProps & { className?: string }>(({ className, style, ...props }, ref) => {
   if (Platform.OS === 'web') {
     const C = "div" as any;
-    return <C ref={ref} className={className} style={{ display: 'flex', flexDirection: 'column', alignItems: 'stretch', justifyContent: 'flex-start', minWidth: 0, minHeight: 0, ...(style as any) }} {...props as any} />;
+    return <C ref={ref} className={cn("flex flex-col items-stretch justify-start min-w-0 min-h-0 relative", className)} style={style as any} {...props as any} />;
+    // Note: removed inline styles that override tailwind classes
   }
   return <RNView ref={ref} className={className} style={style} {...props} />;
 });
@@ -14,7 +17,7 @@ View.displayName = "View";
 export const Text = React.forwardRef<any, TextProps & { className?: string }>(({ className, style, ...props }, ref) => {
   if (Platform.OS === 'web') {
     const C = "span" as any;
-    return <C ref={ref} className={className} style={{ display: 'inline', margin: 0, padding: 0, ...(style as any) }} {...props as any} />;
+    return <C ref={ref} className={cn("inline m-0 p-0", className)} style={style as any} {...props as any} />;
   }
   return <RNText ref={ref} className={className} style={style} {...props} />;
 });
@@ -23,7 +26,7 @@ Text.displayName = "Text";
 export const Pressable = React.forwardRef<any, PressableProps & { className?: string, onClick?: any }>(({ className, style, onPress, onClick, ...props }, ref) => {
   if (Platform.OS === 'web') {
     const C = "button" as any;
-    return <C ref={ref} type="button" onClick={onPress || onClick} className={className} style={{ display: 'flex', flexDirection: 'column', alignItems: 'stretch', justifyContent: 'flex-start', background: 'transparent', border: 'none', padding: 0, margin: 0, cursor: 'pointer', outline: 'none', ...(style as any) }} {...props as any} />;
+    return <C ref={ref} type="button" onClick={onPress || onClick} className={cn("flex flex-col items-stretch justify-start bg-transparent border-none p-0 m-0 cursor-pointer outline-none relative", className)} style={style as any} {...props as any} />;
   }
   return <RNPressable ref={ref} onPress={onPress || onClick} className={className} style={style} {...props} />;
 });
