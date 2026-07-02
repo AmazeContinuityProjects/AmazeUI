@@ -42,7 +42,7 @@ export const Sidebar = React.forwardRef<HTMLDivElement, SidebarProps>(
           ref={ref}
           data-state={openState ? "expanded" : "collapsed"}
           className={cn(
-            "fixed top-4 z-40 hidden h-[calc(100vh-2rem)] flex-col overflow-visible rounded-[24px] border border-sidebar-border bg-sidebar text-sidebar-foreground shadow-lg dark:shadow-[0_8px_32px_rgba(0,0,0,0.3)] transition-all duration-300 ease-[cubic-bezier(0.2,0.8,0.2,1)] md:flex",
+            "fixed top-4 z-50 hidden h-[calc(100vh-2rem)] flex-col overflow-visible rounded-[24px] border border-sidebar-border bg-sidebar text-sidebar-foreground shadow-lg dark:shadow-[0_8px_32px_rgba(0,0,0,0.3)] transition-all duration-300 ease-[cubic-bezier(0.2,0.8,0.2,1)] md:flex",
             openState ? "w-[280px]" : "w-[72px]",
             side === "left" ? "left-4" : "right-4",
             className
