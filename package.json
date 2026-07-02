@@ -1,7 +1,13 @@
 {
-  "name": "amazeui",
+  "name": "@amazecontinuityprojects/amazeui",
+  "publishConfig": {
+    "access": "public"
+  },
   "version": "1.0.0",
   "description": "The design library for AmazeCC",
+  "files": [
+    "dist"
+  ],
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
