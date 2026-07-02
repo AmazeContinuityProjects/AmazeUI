@@ -19,6 +19,15 @@
   --color-surface-hover: var(--surface-hover);
   --color-border-muted: var(--border-muted);
   --color-border-strong: var(--border-strong);
+  --color-border: var(--border-strong);
+  --color-input: var(--border-muted);
+  --color-ring: var(--primary);
+  --color-muted: var(--surface-secondary);
+  --color-muted-foreground: var(--text-muted);
+  --color-popover: var(--surface);
+  --color-popover-foreground: var(--text-primary);
+  --color-card: var(--surface);
+  --color-card-foreground: var(--text-primary);
   --color-success: var(--success);
   --color-success-foreground: var(--success-foreground);
   --color-success-surface: var(--success-surface);
