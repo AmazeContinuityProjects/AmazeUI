@@ -4,13 +4,19 @@ import * as React from "react"
 import { type ViewProps, type TextProps } from "react-native"
 import { cn } from "../../lib/utils"
 
-const Header = React.forwardRef<React.ElementRef<typeof View>, ViewProps & { className?: string }>(
-  ({ className, ...props }, ref) => (
+const headerVariants = {
+  default: "border-border",
+  accent: "bg-indigo-50/60 dark:bg-indigo-950/30 border-b border-indigo-100/50 dark:border-indigo-900/30",
+}
+
+const Header = React.forwardRef<React.ElementRef<typeof View>, ViewProps & { className?: string; variant?: keyof typeof headerVariants }>(
+  ({ className, variant = "default", ...props }, ref) => (
     <View
       ref={ref}
       {...({ className: cn(
         "rounded-b-2xl border-b px-6 py-6 sm:py-8",
         "mb-8 w-full transition-all duration-300",
+        headerVariants[variant],
         className
       ) } as any)}
       {...props}

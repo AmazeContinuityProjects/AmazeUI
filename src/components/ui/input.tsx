@@ -9,6 +9,7 @@ export interface InputProps extends TextInputProps {
   name?: string;
   type?: string;
   required?: boolean;
+  onKeyDown?: (e: any) => void;
 }
 
 const Input = React.forwardRef<React.ElementRef<typeof TextInput>, InputProps>(
