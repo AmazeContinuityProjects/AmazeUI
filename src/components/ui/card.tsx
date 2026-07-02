@@ -1,9 +1,10 @@
+"use client";
 import { View, Text } from "../../lib/primitives";
 import * as React from "react"
 import {   type ViewProps, type TextProps } from "react-native"
 import { cn } from "../../lib/utils"
 
-const Card = React.forwardRef<React.ElementRef<typeof View>, ViewProps & { className?: string }>(
+const Card = React.forwardRef<React.ElementRef<typeof View>, ViewProps & { className?: string; onClick?: React.MouseEventHandler<HTMLDivElement>; onPress?: any }>(
   ({ className, ...props }, ref) => (
     <View
       ref={ref}
@@ -66,3 +67,4 @@ const CardFooter = React.forwardRef<React.ElementRef<typeof View>, ViewProps & {
 CardFooter.displayName = "CardFooter"
 
 export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent }
+

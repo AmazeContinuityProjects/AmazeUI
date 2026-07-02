@@ -1,3 +1,4 @@
+"use client";
 import { View, Text, Pressable } from "../../lib/primitives";
 import * as React from "react"
 import {    type ViewProps, type PressableProps, type TextProps } from "react-native"
@@ -106,3 +107,4 @@ const TabsContent = React.forwardRef<React.ElementRef<typeof View>, ViewProps & 
 TabsContent.displayName = "TabsContent"
 
 export { Tabs, TabsList, TabsTrigger, TabsContent }
+

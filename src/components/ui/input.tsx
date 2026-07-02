@@ -1,3 +1,4 @@
+"use client";
 import { TextInput } from "../../lib/primitives";
 import * as React from "react"
 import {  type TextInputProps } from "react-native"
@@ -22,3 +23,4 @@ const Input = React.forwardRef<React.ElementRef<typeof TextInput>, InputProps>(
 Input.displayName = "Input"
 
 export { Input }
+

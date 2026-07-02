@@ -1,3 +1,4 @@
+"use client";
 import { View, Text } from "../../lib/primitives";
 import * as React from "react"
 import {   type ViewProps, type TextProps } from "react-native"
@@ -84,3 +85,4 @@ export {
   TableRow,
   TableHead,
   TableCell}
+

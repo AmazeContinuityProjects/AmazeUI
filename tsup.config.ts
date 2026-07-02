@@ -11,5 +11,10 @@ export default defineConfig({
   sourcemap: true,
   loader: {
     '.css': 'copy'
+  },
+  esbuildOptions(options) {
+    options.banner = {
+      js: '"use client";',
+    };
   }
 });

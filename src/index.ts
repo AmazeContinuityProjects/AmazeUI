@@ -10,4 +10,6 @@ export * from "./components/ui/table";
 export * from "./components/ui/dialog";
 export * from "./components/ui/dropdown-menu";
 export * from "./components/ui/popover";
+export * from "./components/ui/sidebar";
+export * from "./components/ui/theme-provider";
 export * from "./lib/utils";

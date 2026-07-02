@@ -1,3 +1,4 @@
+"use client";
 import { Text } from "../../lib/primitives";
 import * as React from "react"
 import {  type TextProps } from "react-native"
@@ -27,3 +28,4 @@ const Label = React.forwardRef<React.ElementRef<typeof Text>, LabelProps>(
 Label.displayName = "Label"
 
 export { Label }
+

@@ -1,3 +1,4 @@
+"use client";
 import { Text, Pressable } from "../../lib/primitives";
 import * as React from "react"
 import {   type PressableProps, type TextProps } from "react-native"
@@ -71,3 +72,4 @@ const Button = React.forwardRef<React.ElementRef<typeof Pressable>, ButtonProps>
 Button.displayName = "Button"
 
 export { Button, buttonVariants, buttonTextVariants }
+

@@ -1,3 +1,4 @@
+"use client";
 import * as React from "react"
 import { Switch as NativeSwitch, type SwitchProps as NativeSwitchProps } from "react-native"
 
@@ -21,3 +22,4 @@ const Switch = React.forwardRef<React.ElementRef<typeof NativeSwitch>, SwitchPro
 Switch.displayName = "Switch"
 
 export { Switch }
+

@@ -1,3 +1,4 @@
+"use client";
 import { View, Text, Pressable } from "../../lib/primitives";
 import * as React from "react"
 import { Modal,    type ViewProps, type TextProps } from "react-native"
@@ -102,3 +103,4 @@ export {
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator}
+

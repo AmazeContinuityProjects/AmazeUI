@@ -1,3 +1,4 @@
+"use client";
 import { View, Pressable } from "../../lib/primitives";
 import * as React from "react"
 import { Modal,   type ViewProps } from "react-native"
@@ -63,3 +64,4 @@ const PopoverContent = React.forwardRef<React.ElementRef<typeof View>, ViewProps
 PopoverContent.displayName = "PopoverContent"
 
 export { Popover, PopoverTrigger, PopoverContent }
+
