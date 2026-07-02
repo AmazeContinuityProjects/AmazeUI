@@ -12,4 +12,7 @@ export * from "./components/ui/dropdown-menu";
 export * from "./components/ui/popover";
 export * from "./components/ui/sidebar";
 export * from "./components/ui/theme-provider";
+export * from "./components/ui/page-header";
+export * from "./components/ui/textarea";
+export * from "./components/ui/select";
 export * from "./lib/utils";
