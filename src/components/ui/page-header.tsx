@@ -9,10 +9,8 @@ const Header = React.forwardRef<React.ElementRef<typeof View>, ViewProps & { cla
     <View
       ref={ref}
       {...({ className: cn(
-        "bg-indigo-50/60 dark:bg-indigo-950/30",
-        "rounded-b-2xl shadow-sm px-6 py-6 sm:py-8",
-        "border-b border-indigo-100/50 dark:border-indigo-900/30",
-        "mb-8 max-w-7xl mx-auto w-full transition-all duration-300",
+        "rounded-b-2xl border-b px-6 py-6 sm:py-8",
+        "mb-8 w-full transition-all duration-300",
         className
       ) } as any)}
       {...props}
@@ -26,8 +24,7 @@ const Title = React.forwardRef<React.ElementRef<typeof Text>, TextProps & { clas
     <Text
       ref={ref}
       {...({ className: cn(
-        "text-3xl sm:text-4xl font-black tracking-tight",
-        "text-indigo-950 dark:text-indigo-100",
+        "text-3xl sm:text-4xl font-black tracking-tight text-foreground",
         className
       ) } as any)}
       {...props}
@@ -41,9 +38,7 @@ const Description = React.forwardRef<React.ElementRef<typeof Text>, TextProps & 
     <Text
       ref={ref}
       {...({ className: cn(
-        "mt-2 text-sm font-medium",
-        "text-indigo-700/80 dark:text-indigo-300/80",
-        "max-w-xl",
+        "mt-2 text-sm text-muted-foreground max-w-xl",
         className
       ) } as any)}
       {...props}

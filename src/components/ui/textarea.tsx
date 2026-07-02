@@ -6,6 +6,8 @@ import { cn } from "../../lib/utils"
 
 export interface TextareaProps extends Omit<TextInputProps, 'multiline'> {
   className?: string;
+  name?: string;
+  required?: boolean;
 }
 
 const Textarea = React.forwardRef<React.ElementRef<typeof TextInput>, TextareaProps>(

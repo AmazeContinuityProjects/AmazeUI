@@ -6,6 +6,9 @@ import { cn } from "../../lib/utils"
 
 export interface InputProps extends TextInputProps {
   className?: string;
+  name?: string;
+  type?: string;
+  required?: boolean;
 }
 
 const Input = React.forwardRef<React.ElementRef<typeof TextInput>, InputProps>(

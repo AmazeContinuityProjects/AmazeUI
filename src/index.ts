@@ -15,4 +15,7 @@ export * from "./components/ui/theme-provider";
 export * from "./components/ui/page-header";
 export * from "./components/ui/textarea";
 export * from "./components/ui/select";
+export * from "./components/ui/image";
+export * from "./components/ui/link";
+export { View, Text, Pressable } from "./lib/primitives";
 export * from "./lib/utils";

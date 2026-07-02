@@ -48,6 +48,7 @@ export interface ButtonProps
   className?: string;
   textClassName?: string;
   onClick?: (event: any) => void;
+  type?: "button" | "submit" | "reset";
 }
 
 const Button = React.forwardRef<React.ElementRef<typeof Pressable>, ButtonProps>(
