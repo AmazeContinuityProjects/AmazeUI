@@ -1,0 +1,91 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-text-heading: var(--text-heading);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+  --color-text-disabled: var(--text-disabled);
+  --color-surface: var(--surface);
+  --color-surface-secondary: var(--surface-secondary);
+  --color-surface-tertiary: var(--surface-tertiary);
+  --color-surface-raised: var(--surface-raised);
+  --color-surface-hover: var(--surface-hover);
+  --color-border-muted: var(--border-muted);
+  --color-border-strong: var(--border-strong);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-success-surface: var(--success-surface);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-warning-surface: var(--warning-surface);
+  --color-danger: var(--danger);
+  --color-danger-foreground: var(--danger-foreground);
+  --color-danger-surface: var(--danger-surface);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+  --color-info-surface: var(--info-surface);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+:root {
+  --radius: 0.625rem;
+  --background: oklch(0.982 0.004 247);
+  --foreground: oklch(0.205 0.023 255);
+  --text-heading: oklch(0.18 0.026 255);
+  --text-primary: oklch(0.25 0.024 255);
+  --text-secondary: oklch(0.42 0.023 255);
+  --text-muted: oklch(0.52 0.02 255);
+  --text-disabled: oklch(0.68 0.015 255);
+  --surface: oklch(1 0 0);
+  --surface-secondary: oklch(0.965 0.005 247);
+  --surface-tertiary: oklch(0.935 0.008 247);
+  --surface-raised: oklch(1 0 0);
+  --surface-hover: oklch(0.955 0.007 247);
+  --border-muted: oklch(0.93 0.007 247);
+  --border-strong: oklch(0.84 0.012 247);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: var(--surface-secondary);
+  --secondary-foreground: var(--text-primary);
+  --danger: oklch(0.52 0.2 27);
+  --danger-foreground: oklch(0.42 0.17 27);
+}
+
+.dark {
+  --background: oklch(0.09 0.015 255);
+  --foreground: oklch(0.96 0.005 247);
+  --text-heading: oklch(0.985 0.003 247);
+  --text-primary: oklch(0.95 0.005 247);
+  --text-secondary: oklch(0.85 0.008 247);
+  --text-muted: oklch(0.72 0.01 247);
+  --text-disabled: oklch(0.55 0.01 247);
+  --surface: oklch(0.20 0 0);
+  --surface-secondary: oklch(0.25 0 0);
+  --surface-tertiary: oklch(0.28 0 0);
+  --surface-raised: oklch(0.23 0 0);
+  --surface-hover: oklch(0.27 0 0);
+  --border-muted: oklch(0.98 0.004 247 / 0.16);
+  --border-strong: oklch(0.98 0.004 247 / 0.28);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.15 0 0);
+  --secondary: var(--surface-secondary);
+  --secondary-foreground: var(--text-primary);
+  --danger: oklch(0.74 0.19 27);
+  --danger-foreground: oklch(0.8 0.17 27);
+}
