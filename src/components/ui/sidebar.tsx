@@ -23,11 +23,10 @@ export interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> {
 
 export const Sidebar = React.forwardRef<HTMLDivElement, SidebarProps>(
   ({ className, isOpen = true, onOpenChange, side = "left", children, ...props }, ref) => {
-    // We let the parent control state if onOpenChange is passed
     const [internalOpen, setInternalOpen] = React.useState(isOpen)
     const isControlled = onOpenChange !== undefined
     const openState = isControlled ? isOpen : internalOpen
-    
+
     const handleToggle = React.useCallback((open: boolean) => {
       if (isControlled) {
         onOpenChange(open)
@@ -42,8 +41,8 @@ export const Sidebar = React.forwardRef<HTMLDivElement, SidebarProps>(
           ref={ref}
           data-state={openState ? "expanded" : "collapsed"}
           className={cn(
-            "fixed top-4 z-50 hidden h-[calc(100vh-2rem)] flex-col overflow-visible rounded-[24px] border border-sidebar-border bg-sidebar text-sidebar-foreground shadow-lg dark:shadow-[0_8px_32px_rgba(0,0,0,0.3)] transition-all duration-300 ease-[cubic-bezier(0.2,0.8,0.2,1)] md:flex",
-            openState ? "w-[280px]" : "w-[72px]",
+            "fixed top-4 z-50 hidden h-[calc(100vh-2rem)] flex-col rounded-[24px] border border-sidebar-border bg-sidebar text-sidebar-foreground shadow-lg dark:shadow-[0_8px_32px_rgba(0,0,0,0.3)] transition-all duration-300 ease-[cubic-bezier(0.2,0.8,0.2,1)] md:flex",
+            openState ? "overflow-hidden w-[280px]" : "overflow-visible w-[72px]",
             side === "left" ? "left-4" : "right-4",
             className
           )}
@@ -81,8 +80,9 @@ export const SidebarContent = React.forwardRef<HTMLDivElement, React.HTMLAttribu
     return (
       <div
         ref={ref}
+        style={{ overflowY: "auto", overflowX: "hidden" }}
         className={cn(
-          "flex-1 overflow-y-auto overflow-x-hidden hide-scrollbar scroll-smooth",
+          "min-h-0 flex-1",
           isOpen ? "px-3 py-4" : "px-2 py-4 items-center",
           className
         )}
@@ -136,8 +136,8 @@ export const SidebarItem = React.forwardRef<HTMLButtonElement, SidebarItemProps>
         ref={ref}
         data-active={isActive}
         className={cn(
-          "group relative flex items-center rounded-xl transition-all duration-200 w-full hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
-          isOpen ? "gap-3 px-3 py-2.5 justify-start text-sm" : "justify-center p-3 h-11 w-11 mt-1",
+          "group relative flex items-center rounded-xl transition-all duration-150 w-full hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
+          isOpen ? "gap-3 px-3 py-2 justify-start text-sm" : "justify-center p-3 h-11 w-11 mt-1",
           isActive 
             ? "bg-sidebar-accent border border-sidebar-border text-info font-semibold shadow-sm" 
             : "text-sidebar-foreground/70 border border-transparent",
@@ -187,4 +187,3 @@ export const SidebarFooter = React.forwardRef<HTMLDivElement, React.HTMLAttribut
   }
 )
 SidebarFooter.displayName = "SidebarFooter"
-
