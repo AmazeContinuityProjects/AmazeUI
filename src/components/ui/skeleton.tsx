@@ -1,0 +1,18 @@
+import * as React from "react"
+import { View, type ViewProps } from "react-native"
+import { cn } from "../../lib/utils"
+
+export interface SkeletonProps extends ViewProps {
+  className?: string;
+}
+
+function Skeleton({ className, ...props }: SkeletonProps) {
+  return (
+    <View
+      {...({ className: cn("animate-pulse rounded-md bg-primary/10", className) } as any)}
+      {...props}
+    />
+  )
+}
+
+export { Skeleton }
