@@ -1,5 +1,6 @@
+import { TextInput } from "../../lib/primitives";
 import * as React from "react"
-import { TextInput, type TextInputProps } from "react-native"
+import {  type TextInputProps } from "react-native"
 import { cn } from "../../lib/utils"
 
 export interface InputProps extends TextInputProps {

@@ -1,5 +1,6 @@
+import { Text } from "../../lib/primitives";
 import * as React from "react"
-import { Text, type TextProps } from "react-native"
+import {  type TextProps } from "react-native"
 import { cn } from "../../lib/utils"
 import { cva, type VariantProps } from "class-variance-authority"
 
@@ -7,8 +8,7 @@ const labelVariants = cva(
   "text-sm font-medium leading-none text-foreground peer-disabled:opacity-70",
   {
     variants: {},
-    defaultVariants: {},
-  }
+    defaultVariants: {}}
 )
 
 export interface LabelProps extends TextProps, VariantProps<typeof labelVariants> {

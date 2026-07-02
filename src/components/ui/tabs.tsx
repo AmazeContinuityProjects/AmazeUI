@@ -1,5 +1,6 @@
+import { View, Text, Pressable } from "../../lib/primitives";
 import * as React from "react"
-import { View, Pressable, Text, type ViewProps, type PressableProps, type TextProps } from "react-native"
+import {    type ViewProps, type PressableProps, type TextProps } from "react-native"
 import { cn } from "../../lib/utils"
 
 const TabsContext = React.createContext<{

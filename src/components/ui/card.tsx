@@ -1,5 +1,6 @@
+import { View, Text } from "../../lib/primitives";
 import * as React from "react"
-import { View, Text, type ViewProps, type TextProps } from "react-native"
+import {   type ViewProps, type TextProps } from "react-native"
 import { cn } from "../../lib/utils"
 
 const Card = React.forwardRef<React.ElementRef<typeof View>, ViewProps & { className?: string }>(

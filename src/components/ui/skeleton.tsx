@@ -1,5 +1,6 @@
+import { View } from "../../lib/primitives";
 import * as React from "react"
-import { View, type ViewProps } from "react-native"
+import {  type ViewProps } from "react-native"
 import { cn } from "../../lib/utils"
 
 export interface SkeletonProps extends ViewProps {

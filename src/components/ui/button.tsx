@@ -1,5 +1,6 @@
+import { Text, Pressable } from "../../lib/primitives";
 import * as React from "react"
-import { Pressable, Text, type PressableProps, type TextProps } from "react-native"
+import {   type PressableProps, type TextProps } from "react-native"
 import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "../../lib/utils"
 
@@ -13,20 +14,15 @@ const buttonVariants = cva(
         outline: "border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground",
         secondary: "bg-secondary hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
-        link: "underline-offset-4 hover:underline",
-      },
+        link: "underline-offset-4 hover:underline"},
       size: {
         default: "h-9 px-4 py-2",
         sm: "h-8 rounded-md px-3",
         lg: "h-10 rounded-md px-6",
-        icon: "h-9 w-9",
-      },
-    },
+        icon: "h-9 w-9"}},
     defaultVariants: {
       variant: "default",
-      size: "default",
-    },
-  }
+      size: "default"}}
 )
 
 const buttonTextVariants = cva(
@@ -39,13 +35,9 @@ const buttonTextVariants = cva(
         outline: "text-foreground",
         secondary: "text-secondary-foreground",
         ghost: "text-foreground",
-        link: "text-primary",
-      },
-    },
+        link: "text-primary"}},
     defaultVariants: {
-      variant: "default",
-    },
-  }
+      variant: "default"}}
 )
 
 export interface ButtonProps
