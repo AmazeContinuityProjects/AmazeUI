@@ -54,12 +54,13 @@ export interface ButtonProps
   children: React.ReactNode;
   className?: string;
   textClassName?: string;
+  onClick?: (event: any) => void;
 }
 
 const Button = React.forwardRef<React.ElementRef<typeof Pressable>, ButtonProps>(
-  ({ className, variant, size, children, textClassName, ...props }, ref) => {
+  ({ className, variant, size, children, textClassName, onClick, onPress, ...props }, ref) => {
     return (
-      <Pressable
+      <Pressable onPress={onPress || onClick}
         ref={ref}
         {...({ className: cn(buttonVariants({ variant, size }), className) } as any)}
         {...props}

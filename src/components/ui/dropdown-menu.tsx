@@ -26,7 +26,7 @@ const DropdownMenuTrigger = React.forwardRef<React.ElementRef<typeof Pressable>,
   ({ onPress, children, ...props }, ref) => {
     const context = React.useContext(DropdownContext)
     return (
-      <Pressable ref={ref} onPress={(e) => { context?.setOpen(!context.open); onPress?.(e) }} {...props}>
+      <Pressable ref={ref} onPress={(e) => { context?.setOpen(!context.open); onPress?.(e); (props as any).onClick?.(e) }} {...props}>
         {children}
       </Pressable>
     )
@@ -67,7 +67,7 @@ const DropdownMenuItem = React.forwardRef<React.ElementRef<typeof Pressable>, Re
     return (
       <Pressable
         ref={ref}
-        onPress={(e) => { context?.setOpen(false); onPress?.(e) }}
+        onPress={(e) => { context?.setOpen(false); onPress?.(e); (props as any).onClick?.(e) }}
         {...({ className: cn("relative flex-row items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors hover:bg-accent focus:bg-accent", className) } as any)}
         {...props}
       >

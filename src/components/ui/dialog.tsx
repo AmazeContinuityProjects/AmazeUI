@@ -40,7 +40,7 @@ const DialogTrigger = React.forwardRef<React.ElementRef<typeof Pressable>, React
   ({ onPress, children, ...props }, ref) => {
     const { onOpenChange } = useDialog()
     return (
-      <Pressable ref={ref} onPress={(e) => { onOpenChange(true); onPress?.(e) }} {...props}>
+      <Pressable ref={ref} onPress={(e) => { onOpenChange(true); onPress?.(e); (props as any).onClick?.(e) }} {...props}>
         {children}
       </Pressable>
     )

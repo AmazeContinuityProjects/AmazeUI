@@ -26,7 +26,7 @@ const PopoverTrigger = React.forwardRef<React.ElementRef<typeof Pressable>, Reac
   ({ onPress, children, ...props }, ref) => {
     const context = React.useContext(PopoverContext)
     return (
-      <Pressable ref={ref} onPress={(e) => { context?.setOpen(!context.open); onPress?.(e) }} {...props}>
+      <Pressable ref={ref} onPress={(e) => { context?.setOpen(!context.open); onPress?.(e); (props as any).onClick?.(e) }} {...props}>
         {children}
       </Pressable>
     )
