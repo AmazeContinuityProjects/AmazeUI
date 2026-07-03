@@ -3,7 +3,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "version": "1.4.2",
+  "version": "1.4.3",
   "description": "The design library for AmazeCC",
   "files": [
     "dist"
@@ -50,6 +50,8 @@
     "@tailwindcss/typography": "^0.5.20",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "esbuild": "^0.28.1",
+    "framer-motion": "^12.42.2",
     "lucide-react-native": "^1.23.0",
     "nativewind": "^5.0.0-preview.4",
     "next-themes": "^0.4.6",
@@ -59,6 +61,7 @@
     "react-native-css": "^3.0.7",
     "react-native-web": "^0.21.2",
     "tailwind-merge": "^3.6.0",
-    "tw-animate-css": "^1.4.0"
+    "tw-animate-css": "^1.4.0",
+    "uuid": "^14.0.1"
   }
 }

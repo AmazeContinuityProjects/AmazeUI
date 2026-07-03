@@ -6,7 +6,8 @@ export interface SwitchProps extends NativeSwitchProps {
   onCheckedChange?: (checked: boolean) => void;
   checked?: boolean;
   onChange?: (event: any) => void;
-  className?: string; // Kept for interface compatibility, though Native Switch styling is limited via className
+  disabled?: boolean;
+  className?: string;
 }
 
 const Switch = React.forwardRef<React.ElementRef<typeof NativeSwitch>, SwitchProps>(

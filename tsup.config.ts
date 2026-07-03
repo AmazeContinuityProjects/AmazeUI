@@ -6,7 +6,7 @@ export default defineConfig({
   dts: {
     entry: 'src/index.ts'
   },
-  external: ['react', 'react-dom', 'react-native', 'react-native-web'],
+  external: ['react', 'react-dom', 'react-native', 'react-native-web', 'framer-motion'],
   clean: true,
   sourcemap: true,
   loader: {
