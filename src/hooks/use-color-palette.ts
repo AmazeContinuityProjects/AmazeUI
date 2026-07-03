@@ -13,6 +13,9 @@ const COLOR_PALETTES: Record<string, PaletteDefinition> = {
   forest: { accent: "#059669", background: "#f8fffb", surface: "#ffffff" },
   rose: { accent: "#e11d48", background: "#fff8fa", surface: "#ffffff" },
   amber: { accent: "#d97706", background: "#fffdf6", surface: "#ffffff" },
+  ocean: { accent: "#3b82f6", background: "#f0f7ff", surface: "#ffffff" },
+  lavender: { accent: "#8b5cf6", background: "#f8f6ff", surface: "#ffffff" },
+  sunset: { accent: "#f59e0b", background: "#fffdf6", surface: "#ffffff" },
 };
 
 export interface ColorPaletteOption {
@@ -27,6 +30,9 @@ export const PALETTE_OPTIONS: ColorPaletteOption[] = [
   { id: "forest", label: "Forest", swatches: ["#059669", "#ffffff", "#f7fee7"] },
   { id: "rose", label: "Rose", swatches: ["#e11d48", "#ffffff", "#fff1f2"] },
   { id: "amber", label: "Amber", swatches: ["#d97706", "#ffffff", "#fffbeb"] },
+  { id: "ocean", label: "Ocean", swatches: ["#3b82f6", "#ffffff", "#f0f7ff"] },
+  { id: "lavender", label: "Lavender", swatches: ["#8b5cf6", "#ffffff", "#f8f6ff"] },
+  { id: "sunset", label: "Sunset", swatches: ["#f59e0b", "#ffffff", "#fffdf6"] },
 ];
 
 function getSettings() {
@@ -51,22 +57,31 @@ export function useColorPalette() {
     const saved = getSettings();
     if (saved?.colorPalette) {
       setPaletteIdState(saved.colorPalette);
+    } else {
+      const legacyAccent = localStorage.getItem("accent");
+      if (legacyAccent && COLOR_PALETTES[legacyAccent]) {
+        setPaletteIdState(legacyAccent);
+      }
     }
   }, []);
 
   const setPaletteId = useCallback((id: string) => {
     setPaletteIdState(id);
     saveSettings({ colorPalette: id });
+    try { localStorage.setItem("accent", id); } catch {}
   }, []);
 
   useEffect(() => {
     const root = document.documentElement;
-    const selectedId = paletteId === "ocean" ? "neonPink" : paletteId;
+    const selectedId = paletteId;
     const palette = COLOR_PALETTES[selectedId];
 
     if (!palette || selectedId === "default") {
       root.removeAttribute("data-color-palette");
+      root.removeAttribute("data-accent");
       root.style.removeProperty("--theme-accent");
+      root.style.removeProperty("--accent-color");
+      root.style.removeProperty("--accent-foreground-color");
       root.style.removeProperty("--primary");
       root.style.removeProperty("--primary-foreground");
       root.style.removeProperty("--info");
@@ -85,11 +100,14 @@ export function useColorPalette() {
     const lightBase = "oklch(0.982 0.004 247)";
 
     root.setAttribute("data-color-palette", selectedId);
+    root.setAttribute("data-accent", selectedId);
 
     const setVar = (name: string, value: string) => root.style.setProperty(name, value);
     const remVar = (name: string) => root.style.removeProperty(name);
 
     setVar("--theme-accent", accent);
+    setVar("--accent-color", accent);
+    setVar("--accent-foreground-color", isDark ? "#000000" : "#ffffff");
 
     if (isDark) {
       setVar("--background", `color-mix(in oklab, ${accent} 6%, ${darkBase})`);

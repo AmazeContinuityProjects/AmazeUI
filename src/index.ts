@@ -24,6 +24,7 @@ export * from "./components/ui/timeline";
 export * from "./components/ui/color-palette-picker";
 export * from "./components/ui/option-picker";
 export * from "./components/ui/fab";
+export * from "./components/ui/theme-switcher";
 export { useColorPalette, PALETTE_OPTIONS } from "./hooks/use-color-palette";
 export { View, Text, Pressable } from "./lib/primitives";
 export * from "./lib/utils";

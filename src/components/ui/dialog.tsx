@@ -100,6 +100,18 @@ const DialogDescription = React.forwardRef<React.ElementRef<typeof Text>, TextPr
 )
 DialogDescription.displayName = "DialogDescription"
 
+const DialogClose = React.forwardRef<React.ElementRef<typeof Pressable>, React.ComponentProps<typeof Pressable>>(
+  ({ onPress, children, ...props }, ref) => {
+    const { onOpenChange } = useDialog()
+    return (
+      <Pressable ref={ref} onPress={(e) => { onOpenChange(false); onPress?.(e); (props as any).onClick?.(e) }} {...props}>
+        {children}
+      </Pressable>
+    )
+  }
+)
+DialogClose.displayName = "DialogClose"
+
 export {
   Dialog,
   DialogTrigger,
@@ -107,5 +119,6 @@ export {
   DialogHeader,
   DialogFooter,
   DialogTitle,
-  DialogDescription}
+  DialogDescription,
+  DialogClose}
 

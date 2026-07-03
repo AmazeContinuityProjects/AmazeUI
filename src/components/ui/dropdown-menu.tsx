@@ -6,6 +6,8 @@ import { cn } from "../../lib/utils"
 
 export interface DropdownMenuProps {
   children: React.ReactNode;
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
 }
 
 const DropdownContext = React.createContext<{
@@ -13,8 +15,14 @@ const DropdownContext = React.createContext<{
   setOpen: (open: boolean) => void;
 } | null>(null)
 
-function DropdownMenu({ children }: DropdownMenuProps) {
-  const [open, setOpen] = React.useState(false)
+function DropdownMenu({ children, open: controlledOpen, onOpenChange }: DropdownMenuProps) {
+  const [internalOpen, setInternalOpen] = React.useState(false)
+  const isControlled = controlledOpen !== undefined
+  const open = isControlled ? controlledOpen : internalOpen
+  const setOpen = React.useCallback((val: boolean) => {
+    if (!isControlled) setInternalOpen(val)
+    onOpenChange?.(val)
+  }, [isControlled, onOpenChange])
   return (
     <DropdownContext.Provider value={{ open, setOpen }}>
       <View {...({ className: "relative" } as any)}>
@@ -24,11 +32,20 @@ function DropdownMenu({ children }: DropdownMenuProps) {
   )
 }
 
-const DropdownMenuTrigger = React.forwardRef<React.ElementRef<typeof Pressable>, React.ComponentProps<typeof Pressable>>(
-  ({ onPress, children, ...props }, ref) => {
+const DropdownMenuTrigger = React.forwardRef<React.ElementRef<typeof Pressable>, React.ComponentProps<typeof Pressable> & { asChild?: boolean }>(
+  ({ onPress, children, asChild, ...props }, ref) => {
     const context = React.useContext(DropdownContext)
+    const handler = (e: any) => { context?.setOpen(!context.open); onPress?.(e); (props as any).onClick?.(e) }
+    if (asChild && React.isValidElement(children)) {
+      return React.cloneElement(children, {
+        ...(children.props as any),
+        ...props,
+        onPress: handler,
+        onClick: handler,
+      })
+    }
     return (
-      <Pressable ref={ref} onPress={(e) => { context?.setOpen(!context.open); onPress?.(e); (props as any).onClick?.(e) }} {...props}>
+      <Pressable ref={ref} onPress={handler} {...props}>
         {children}
       </Pressable>
     )
@@ -36,8 +53,8 @@ const DropdownMenuTrigger = React.forwardRef<React.ElementRef<typeof Pressable>,
 )
 DropdownMenuTrigger.displayName = "DropdownMenuTrigger"
 
-const DropdownMenuContent = React.forwardRef<React.ElementRef<typeof View>, ViewProps & { className?: string }>(
-  ({ className, children, ...props }, ref) => {
+const DropdownMenuContent = React.forwardRef<React.ElementRef<typeof View>, ViewProps & { className?: string; align?: "start" | "end" | "center"; sideOffset?: number }>(
+  ({ className, children, align, sideOffset, ...props }, ref) => {
     const context = React.useContext(DropdownContext)
     if (!context?.open) return null
 
