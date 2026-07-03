@@ -2,7 +2,7 @@
 import { View, Text, Pressable } from "../../lib/primitives";
 import * as React from "react"
 import { createPortal } from "react-dom"
-import { Modal } from "react-native"
+import { Modal } from "react-native-web"
 import { cn } from "../../lib/utils"
 
 export interface OptionPickerOption {

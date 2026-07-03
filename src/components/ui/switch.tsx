@@ -1,6 +1,6 @@
 "use client";
 import * as React from "react"
-import { Switch as NativeSwitch, type SwitchProps as NativeSwitchProps } from "react-native"
+import { Switch as NativeSwitch, type SwitchProps as NativeSwitchProps } from "react-native-web"
 
 export interface SwitchProps extends NativeSwitchProps {
   onCheckedChange?: (checked: boolean) => void;

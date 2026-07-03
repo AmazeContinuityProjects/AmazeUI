@@ -1,6 +1,6 @@
 import * as React from "react";
-import { Platform, View as RNView, Text as RNText, Pressable as RNPressable, TextInput as RNTextInput } from "react-native";
-import type { ViewProps, TextProps, PressableProps, TextInputProps } from "react-native";
+import { Platform, View as RNView, Text as RNText, Pressable as RNPressable, TextInput as RNTextInput } from "react-native-web";
+import type { ViewProps, TextProps, PressableProps, TextInputProps } from "react-native-web";
 
 import { cn } from "./utils";
 
