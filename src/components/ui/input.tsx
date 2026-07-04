@@ -1,30 +1,113 @@
 "use client";
-import { TextInput } from "../../lib/primitives";
-import * as React from "react"
-import {  type TextInputProps } from "react-native"
-import { cn } from "../../lib/utils"
+import * as React from "react";
+import { cn } from "../../lib/utils";
 
-export interface InputProps extends TextInputProps {
-  className?: string;
-  name?: string;
-  type?: string;
-  required?: boolean;
-  onKeyDown?: (e: any) => void;
+export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  label?: string;
+  error?: string;
 }
 
-const Input = React.forwardRef<React.ElementRef<typeof TextInput>, InputProps>(
-  ({ className, ...props }, ref) => {
+export const Input = React.forwardRef<HTMLInputElement, InputProps>(
+  ({ className, label, error, id, ...props }, ref) => {
+    const inputId = id || label?.toLowerCase().replace(/\s+/g, "-");
     return (
-      <TextInput
-        ref={ref}
-        placeholderTextColor="#a3a3a3" // gray-400 equivalent for default placeholder
-        {...({ className: cn("flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm text-foreground", className) } as any)}
-        {...props}
-      />
-    )
+      <div>
+        {label && (
+          <label htmlFor={inputId} className="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1 ml-1">
+            {label}
+          </label>
+        )}
+        <input
+          ref={ref}
+          id={inputId}
+          className={cn(
+            "w-full bg-white dark:bg-black",
+            "border border-gray-200 dark:border-gray-800",
+            "rounded-xl px-4 py-2.5",
+            "text-gray-900 dark:text-gray-100",
+            "focus:outline-none focus:border-blue-500/50 transition-colors",
+            error && "border-red-500",
+            className
+          )}
+          {...props}
+        />
+        {error && <p className="text-xs text-red-500 mt-1 ml-1">{error}</p>}
+      </div>
+    );
   }
-)
-Input.displayName = "Input"
+);
+Input.displayName = "Input";
 
-export { Input }
+export interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
+  label?: string;
+  error?: string;
+}
 
+export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
+  ({ className, label, error, id, ...props }, ref) => {
+    const inputId = id || label?.toLowerCase().replace(/\s+/g, "-");
+    return (
+      <div>
+        {label && (
+          <label htmlFor={inputId} className="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1 ml-1">
+            {label}
+          </label>
+        )}
+        <textarea
+          ref={ref}
+          id={inputId}
+          className={cn(
+            "w-full bg-white dark:bg-black",
+            "border border-gray-200 dark:border-gray-800",
+            "rounded-xl px-4 py-2",
+            "text-sm text-gray-900 dark:text-gray-100",
+            "font-mono focus:outline-none focus:border-blue-500/50 transition-colors resize-none",
+            error && "border-red-500",
+            className
+          )}
+          {...props}
+        />
+        {error && <p className="text-xs text-red-500 mt-1 ml-1">{error}</p>}
+      </div>
+    );
+  }
+);
+Textarea.displayName = "Textarea";
+
+export interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
+  label?: string;
+  options: { value: string; label: string }[];
+}
+
+export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
+  ({ className, label, options, id, ...props }, ref) => {
+    const inputId = id || label?.toLowerCase().replace(/\s+/g, "-");
+    return (
+      <div>
+        {label && (
+          <label htmlFor={inputId} className="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1 ml-1">
+            {label}
+          </label>
+        )}
+        <select
+          ref={ref}
+          id={inputId}
+          className={cn(
+            "w-full bg-white dark:bg-black",
+            "border border-gray-200 dark:border-gray-800",
+            "rounded-xl px-4 py-2.5",
+            "text-gray-900 dark:text-gray-100",
+            "focus:outline-none focus:border-blue-500/50 transition-colors",
+            className
+          )}
+          {...props}
+        >
+          {options.map((opt) => (
+            <option key={opt.value} value={opt.value}>{opt.label}</option>
+          ))}
+        </select>
+      </div>
+    );
+  }
+);
+Select.displayName = "Select";

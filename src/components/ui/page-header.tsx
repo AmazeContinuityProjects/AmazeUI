@@ -1,56 +1,35 @@
 "use client";
-import { View, Text } from "../../lib/primitives";
-import * as React from "react"
-import { type ViewProps, type TextProps } from "react-native"
-import { cn } from "../../lib/utils"
+import * as React from "react";
+import { cn } from "../../lib/utils";
 
-const headerVariants = {
-  default: "border-border",
-  accent: "bg-indigo-50/60 dark:bg-indigo-950/30 border-b border-indigo-100/50 dark:border-indigo-900/30",
+export interface PageHeaderProps {
+  icon?: React.ReactNode;
+  title: string;
+  meta?: React.ReactNode;
+  actions?: React.ReactNode;
+  className?: string;
 }
 
-const Header = React.forwardRef<React.ElementRef<typeof View>, ViewProps & { className?: string; variant?: keyof typeof headerVariants }>(
-  ({ className, variant = "default", ...props }, ref) => (
-    <View
-      ref={ref}
-      {...({ className: cn(
-        "rounded-b-2xl border-b px-6 py-6 sm:py-8",
-        "mb-8 w-full transition-all duration-300",
-        headerVariants[variant],
+export function PageHeader({ icon, title, meta, actions, className }: PageHeaderProps) {
+  return (
+    <div
+      className={cn(
+        "bg-blue-50/60 border-b border-x border-gray-200 rounded-b-2xl py-4 px-5 sm:py-4.5 sm:px-6 shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4 -mx-4 md:-mx-6 mb-6 relative z-10 dark:bg-blue-950/20 dark:border-gray-800",
         className
-      ) } as any)}
-      {...props}
-    />
-  )
-)
-Header.displayName = "Header"
-
-const Title = React.forwardRef<React.ElementRef<typeof Text>, TextProps & { className?: string }>(
-  ({ className, ...props }, ref) => (
-    <Text
-      ref={ref}
-      {...({ className: cn(
-        "text-3xl sm:text-4xl font-black tracking-tight text-foreground",
-        className
-      ) } as any)}
-      {...props}
-    />
-  )
-)
-Title.displayName = "Title"
-
-const Description = React.forwardRef<React.ElementRef<typeof Text>, TextProps & { className?: string }>(
-  ({ className, ...props }, ref) => (
-    <Text
-      ref={ref}
-      {...({ className: cn(
-        "mt-2 text-sm text-muted-foreground max-w-xl",
-        className
-      ) } as any)}
-      {...props}
-    />
-  )
-)
-Description.displayName = "Description"
-
-export { Header, Title, Description }
+      )}
+    >
+      <div className="flex flex-wrap items-center gap-2.5 z-10 min-w-0 w-full sm:w-auto">
+        <h1 className="text-base sm:text-xl md:text-2xl font-black tracking-tight text-gray-900 dark:text-gray-100 flex items-center gap-2.5 min-w-0">
+          {icon}
+          <span className="truncate">{title}</span>
+        </h1>
+        {meta}
+      </div>
+      {actions && (
+        <div className="flex items-center gap-2.5 z-10 w-full sm:w-auto justify-end sm:justify-start">
+          {actions}
+        </div>
+      )}
+    </div>
+  );
+}
