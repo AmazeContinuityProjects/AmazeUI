@@ -1,107 +1,89 @@
 "use client";
-import { View, Text } from "../../lib/primitives";
-import * as React from "react"
-import {  type ViewProps, type TextProps } from "react-native"
-import { cn } from "../../lib/utils"
+import * as React from "react";
+import { cn } from "../../lib/utils";
 
-export interface CardProps extends ViewProps {
+export interface CardProps {
+  children?: React.ReactNode;
   className?: string;
-  onClick?: React.MouseEventHandler<HTMLDivElement>;
-  onPress?: any;
+  onClick?: () => void;
+  hover?: boolean;
+  variant?: "default" | "glass" | "gradient" | "outline";
+  gradient?: string;
   title?: React.ReactNode;
   subtitle?: React.ReactNode;
   action?: React.ReactNode;
 }
 
-const Card = React.forwardRef<React.ElementRef<typeof View>, CardProps>(
-  ({ className, title, subtitle, action, children, ...props }, ref) => {
-    const hasHeader = title !== undefined || subtitle !== undefined || action !== undefined;
-    return (
-      <View
-        ref={ref}
-        {...({ className: cn("rounded-xl border border-border bg-card/60 backdrop-blur-xl shadow-sm dark:bg-card/40", className) } as any)}
-        {...props}
-      >
-        {hasHeader && (
-          <CardHeader action={action}>
-            {title && <CardTitle>{title}</CardTitle>}
-            {subtitle && <CardDescription>{subtitle}</CardDescription>}
-          </CardHeader>
-        )}
-        {children && <CardContent>{children}</CardContent>}
-      </View>
-    )
-  }
-)
-Card.displayName = "Card"
+export function Card({
+  children,
+  className,
+  onClick,
+  hover = false,
+  variant = "default",
+  gradient,
+  title,
+  subtitle,
+  action,
+}: CardProps) {
+  const base = "rounded-2xl transition-all duration-300";
 
-const CardHeader = React.forwardRef<React.ElementRef<typeof View>, ViewProps & { className?: string; action?: React.ReactNode }>(
-  ({ className, action, children, ...props }, ref) => {
-    if (action) {
-      return (
-        <View
-          ref={ref}
-          {...({ className: cn("flex flex-row items-start justify-between gap-4 p-6", className) } as any)}
-          {...props}
-        >
-          <View {...({ className: "flex flex-col space-y-1.5 flex-1 min-w-0" } as any)}>
-            {children}
-          </View>
-          <View {...({ className: "shrink-0" } as any)}>
-            {action}
-          </View>
-        </View>
-      );
-    }
+  const variants = {
+    default: "bg-white text-gray-900 border border-gray-200 shadow-sm dark:bg-gray-950 dark:text-gray-100 dark:border-gray-800",
+    glass: "bg-white/70 backdrop-blur-xl border border-gray-200 dark:bg-gray-950/40 dark:border-gray-800",
+    gradient: gradient
+      ? `border-none text-white shadow-md ${gradient}`
+      : "bg-gradient-to-r from-blue-600 to-indigo-600 border-none text-white shadow-md",
+    outline: "border border-gray-200 bg-transparent text-gray-900 dark:border-gray-800 dark:text-gray-100",
+  };
+
+  const hoverClasses = hover
+    ? "hover:shadow-lg hover:-translate-y-0.5 cursor-pointer"
+    : onClick
+      ? "cursor-pointer"
+      : "";
+
+  const hasHeader = title !== undefined || subtitle !== undefined || action !== undefined;
+
+  return (
+    <div
+      onClick={onClick}
+      className={cn(base, variants[variant], hoverClasses, onClick && "cursor-pointer", className)}
+    >
+      {hasHeader && (
+        <CardHeader action={action}>
+          {title && <CardTitle>{title}</CardTitle>}
+          {subtitle && <CardDescription>{subtitle}</CardDescription>}
+        </CardHeader>
+      )}
+      {children}
+    </div>
+  );
+}
+
+export function CardHeader({ className, action, children, ...props }: React.HTMLAttributes<HTMLDivElement> & { action?: React.ReactNode }) {
+  if (action) {
     return (
-      <View
-        ref={ref}
-        {...({ className: cn("flex flex-col space-y-1.5 p-6", className) } as any)}
-        {...props}
-      />
+      <div className={cn("flex items-start justify-between gap-4 p-6", className)} {...props}>
+        <div className="flex flex-col space-y-1.5 flex-1 min-w-0">{children}</div>
+        <div className="shrink-0">{action}</div>
+      </div>
     );
   }
-)
-CardHeader.displayName = "CardHeader"
+  return <div className={cn("flex flex-col space-y-1.5 p-6", className)} {...props}>{children}</div>;
+}
 
-const CardTitle = React.forwardRef<React.ElementRef<typeof Text>, TextProps & { className?: string }>(
-  ({ className, ...props }, ref) => (
-    <Text
-      ref={ref}
-      {...({ className: cn("font-semibold text-lg leading-none tracking-tight text-foreground", className) } as any)}
-      {...props}
-    />
-  )
-)
-CardTitle.displayName = "CardTitle"
+export function CardTitle({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) {
+  return <h3 className={cn("font-semibold text-lg leading-none tracking-tight text-gray-900 dark:text-gray-100", className)} {...props} />;
+}
 
-const CardDescription = React.forwardRef<React.ElementRef<typeof Text>, TextProps & { className?: string }>(
-  ({ className, ...props }, ref) => (
-    <Text
-      ref={ref}
-      {...({ className: cn("text-sm text-muted-foreground", className) } as any)}
-      {...props}
-    />
-  )
-)
-CardDescription.displayName = "CardDescription"
+export function CardDescription({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {
+  return <p className={cn("text-sm text-gray-500 dark:text-gray-400", className)} {...props} />;
+}
 
-const CardContent = React.forwardRef<React.ElementRef<typeof View>, ViewProps & { className?: string }>(
-  ({ className, ...props }, ref) => (
-    <View ref={ref} {...({ className: cn("p-6 pt-0", className) } as any)} {...props} />
-  )
-)
-CardContent.displayName = "CardContent"
+export function CardContent({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
+  return <div className={cn("p-6 pt-0", className)} {...props} />;
+}
 
-const CardFooter = React.forwardRef<React.ElementRef<typeof View>, ViewProps & { className?: string }>(
-  ({ className, ...props }, ref) => (
-    <View
-      ref={ref}
-      {...({ className: cn("flex flex-row items-center p-6 pt-0", className) } as any)}
-      {...props}
-    />
-  )
-)
-CardFooter.displayName = "CardFooter"
-
-export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent }
+export function CardFooter({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
+  return <div className={cn("flex items-center p-6 pt-0", className)} {...props} />;
+}
