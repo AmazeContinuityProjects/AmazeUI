@@ -13,9 +13,10 @@ export interface MobileBottomNavItem {
 export interface MobileBottomNavProps {
   items: MobileBottomNavItem[];
   className?: string;
+  compact?: boolean;
 }
 
-export function MobileBottomNav({ items, className }: MobileBottomNavProps) {
+export function MobileBottomNav({ items, className, compact }: MobileBottomNavProps) {
   return (
     <View
       className={cn(
@@ -36,7 +37,7 @@ export function MobileBottomNav({ items, className }: MobileBottomNavProps) {
           )}
         >
           <View className="shrink-0">{item.icon}</View>
-          <Text className="mt-0.5">{item.label}</Text>
+          {!compact && <Text className="mt-0.5">{item.label}</Text>}
         </Pressable>
       ))}
     </View>
