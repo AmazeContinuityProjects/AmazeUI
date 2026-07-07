@@ -2,7 +2,7 @@
 import { useState, useEffect, useCallback, useRef, useMemo } from "react";
 import { cn } from "../../lib/utils";
 
-export interface CommandItem {
+export interface CommandPaletteItem {
   id: string;
   label: string;
   description?: string;
@@ -17,7 +17,7 @@ export interface CommandItem {
 export interface CommandPaletteProps {
   isOpen: boolean;
   onClose: () => void;
-  commands: CommandItem[];
+  commands: CommandPaletteItem[];
   onQueryChange?: (query: string) => void;
   storageKeyPrefix?: string;
 }
@@ -72,7 +72,7 @@ function fuzzyMatch(text: string, query: string): boolean {
   return qi === q.length;
 }
 
-function scoreCommand(cmd: CommandItem, query: string): number {
+function scoreCommand(cmd: CommandPaletteItem, query: string): number {
   const q = query.trim().toLowerCase();
   if (!q) return 1;
   const label = cmd.label.toLowerCase();
@@ -213,7 +213,7 @@ export function CommandPalette({ isOpen, onClose, commands, onQueryChange, stora
 
   const goBack = useCallback(() => { setSubpage(null); setTimeout(() => inputRef.current?.focus(), 50); }, []);
 
-  const rememberCommand = useCallback((cmd: CommandItem) => {
+  const rememberCommand = useCallback((cmd: CommandPaletteItem) => {
     const id = cmd.id.startsWith("recent-") ? cmd.id.slice(7) : cmd.id;
     setRecentCommandIds(prev => {
       const next = [id, ...prev.filter(i => i !== id)].slice(0, MAX_RECENT);
@@ -222,7 +222,7 @@ export function CommandPalette({ isOpen, onClose, commands, onQueryChange, stora
     });
   }, [RECENT_KEY]);
 
-  const executeCommand = useCallback((cmd: CommandItem) => {
+  const executeCommand = useCallback((cmd: CommandPaletteItem) => {
     rememberCommand(cmd);
     saveToHistory(query);
     cmd.onSelect();
@@ -256,12 +256,12 @@ export function CommandPalette({ isOpen, onClose, commands, onQueryChange, stora
     return () => window.removeEventListener("keydown", handler);
   }, [isOpen, onClose, subpage]);
 
-  const handleItemClick = useCallback((cmd: CommandItem) => {
+  const handleItemClick = useCallback((cmd: CommandPaletteItem) => {
     if (cmd.subpage) { rememberCommand(cmd); setSubpage(cmd.subpage); }
     else { executeCommand(cmd); onClose(); }
   }, [executeCommand, onClose, rememberCommand]);
 
-  const grouped = useMemo(() => results.reduce<Record<string, CommandItem[]>>((acc, cmd) => {
+  const grouped = useMemo(() => results.reduce<Record<string, CommandPaletteItem[]>>((acc, cmd) => {
     const cat = cmd.category || "General";
     if (!acc[cat]) acc[cat] = [];
     acc[cat].push(cmd);
