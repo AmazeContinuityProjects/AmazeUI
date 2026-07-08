@@ -26,7 +26,7 @@ export function SubpageLayout({
         <View className="flex flex-row items-center gap-3 min-w-0">
           <BackButton onClick={onBack} />
           <View className="min-w-0">
-            <Text className="text-xl font-black text-gray-900 dark:text-gray-100 truncate">
+            <Text className="text-xl font-black bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-400 truncate tracking-tight">
               {title}
             </Text>
             {subtitle && (
@@ -44,7 +44,7 @@ export function SubpageLayout({
         <View className="flex flex-row items-center gap-3">
           <BackButton onClick={onBack} />
           <View>
-            <Text className="text-2xl md:text-3xl font-black text-gray-900 dark:text-gray-100 leading-tight">
+            <Text className="text-2xl md:text-3xl font-black bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-400 leading-tight tracking-tight">
               {title}
             </Text>
             {subtitle && (

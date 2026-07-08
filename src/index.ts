@@ -8,6 +8,7 @@ export * from "./components/ui/progress";
 export * from "./components/ui/tabs";
 export * from "./components/ui/table";
 export * from "./components/ui/dialog";
+export * from "./components/ui/command";
 
 export * from "./components/ui/dropdown-menu";
 export * from "./components/ui/popover";
@@ -29,6 +30,11 @@ export * from "./components/ui/app-library";
 export * from "./components/ui/mobile-bottom-nav";
 export * from "./components/ui/back-button";
 export * from "./components/ui/badge";
+// Custom / Complex UI
+export { default as LoginForm } from "./components/custom/LoginForm";
+export { default as NavigationTabs } from "./components/custom/NavigationTabs";
+
+export type { BadgeProps } from "./components/ui/badge";
 export * from "./components/ui/circular-progress";
 export * from "./components/ui/data-table";
 export * from "./components/ui/error-display";
@@ -52,6 +58,9 @@ export * from "./components/ui/timetable-grid";
 export * from "./components/ui/course-list-table";
 export * from "./components/ui/about-section";
 export * from "./components/ui/settings-panel";
+export * from "./components/ui/checkbox";
+export * from "./components/ui/status-badge";
+export * from "./components/ui/breadcrumbs";
 export { useColorPalette, PALETTE_OPTIONS } from "./hooks/use-color-palette";
 export { View, Text, Pressable } from "./lib/primitives";
 export * from "./lib/utils";
