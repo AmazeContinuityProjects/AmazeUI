@@ -60,7 +60,7 @@ import {
   SidebarThemeControl,
   SidebarExpandButton,
 } from "../../index";
-import { AppLibrary, MobileBottomNav } from "../../index";
+import { AppLibrary, MobileBottomNav, OptionPicker } from "../../index";
 
 type NavItem = {
   id: string;
@@ -867,21 +867,15 @@ export default function NavigationTabs({
             <div className="flex items-center gap-1.5 px-1 pb-3">
               <span className="text-[10px] font-bold uppercase tracking-wider text-gray-400 dark:text-gray-500">Active Sem:</span>
               <div className="relative flex items-center">
-                <select
+                <OptionPicker
                   value={settings.currSemesterID || semesterIDs[semesterIDs.length - 2]}
-                  onChange={(e) => {
-                    const val = e.target.value;
-                    handleReloadRequest(val);
-                  }}
-                  className="appearance-none border-none bg-transparent py-0 pr-3.5 text-xs font-black text-info hover:underline focus:outline-none"
-                >
-                  {semesterIDs.map((semId: string) => (
-                    <option key={semId} value={semId} className="bg-white text-xs text-gray-900 dark:bg-neutral-900 dark:text-white">
-                      {formatSemesterName(semId)}
-                    </option>
-                  ))}
-                </select>
-                <ChevronDown className="pointer-events-none absolute right-0 top-1/2 h-2.5 w-2.5 -translate-y-1/2 text-info" />
+                  onChange={(val) => handleReloadRequest(val)}
+                  options={semesterIDs.map((semId: string) => ({
+                    value: semId,
+                    label: formatSemesterName(semId)
+                  }))}
+                  className="w-[150px]"
+                />
               </div>
             </div>
           )}
@@ -1091,21 +1085,15 @@ export default function NavigationTabs({
                   <div className="flex items-center justify-between">
                     <div className="font-semibold text-sidebar-foreground/75 tracking-wide text-[10px] uppercase">Current Semester</div>
                     <div className="relative flex items-center">
-                      <select
+                      <OptionPicker
                         value={settings.currSemesterID || semesterIDs[semesterIDs.length - 2]}
-                        onChange={(e) => {
-                          const val = e.target.value;
-                          handleReloadRequest(val);
-                        }}
-                        className="appearance-none bg-transparent border-none text-[10px] font-black text-info hover:underline cursor-pointer focus:outline-none pr-3.5 py-0 select-none text-right"
-                      >
-                        {semesterIDs.map((semId: string) => (
-                          <option key={semId} value={semId} className="bg-sidebar text-sidebar-foreground text-xs">
-                            {formatSemesterName(semId)}
-                          </option>
-                        ))}
-                      </select>
-                      <ChevronDown className="absolute right-0 top-1/2 -translate-y-1/2 w-2.5 h-2.5 text-info pointer-events-none" />
+                        onChange={(val) => handleReloadRequest(val)}
+                        options={semesterIDs.map((semId: string) => ({
+                          value: semId,
+                          label: formatSemesterName(semId)
+                        }))}
+                        className="w-[140px]"
+                      />
                     </div>
                   </div>
                   <div className="space-y-1">
@@ -1348,14 +1336,15 @@ export default function NavigationTabs({
                   <Server size={14} className="text-sidebar-foreground/" />
                   <span className="text-xs font-bold text-sidebar-foreground">API Server</span>
                 </div>
-                <select 
+                <OptionPicker 
                   value={activeApi} 
-                  onChange={(e) => onApiChange(e.target.value)}
-                  className="text-[10px] bg-transparent border-none focus:ring-0 text-info font-bold cursor-pointer max-w-[80px]"
-                >
-                  <option value={primaryApiUrl}>Primary</option>
-                  <option value={backupApiUrl}>Backup</option>
-                </select>
+                  onChange={onApiChange}
+                  options={[
+                    { value: primaryApiUrl, label: "Primary" },
+                    { value: backupApiUrl, label: "Backup" }
+                  ]}
+                  className="w-[110px]"
+                />
               </div>
             </motion.div>
           ) : (
@@ -1468,15 +1457,15 @@ export default function NavigationTabs({
                       <div className="group relative flex w-full items-center gap-2.5 rounded-lg px-2.5 py-1.5 text-xs font-medium transition-[color,background-color] duration-150 text-sidebar-foreground/ hover:bg-sidebar-accent hover:text-sidebar-foreground">
                         <Server className="h-4 w-4 shrink-0 text-sidebar-foreground/ group-hover:text-sidebar-foreground" />
                         <span className="truncate flex-1 text-left">API Server</span>
-                        <select 
+                        <OptionPicker 
                           value={activeApi} 
-                          onChange={(e) => onApiChange(e.target.value)}
-                          className="bg-transparent text-[10px] font-bold text-info cursor-pointer focus:outline-none border-none p-0 max-w-[65px]"
-                          onClick={(e) => e.stopPropagation()}
-                        >
-                          <option value={primaryApiUrl}>Primary</option>
-                          <option value={backupApiUrl}>Backup</option>
-                        </select>
+                          onChange={onApiChange}
+                          options={[
+                            { value: primaryApiUrl, label: "Primary" },
+                            { value: backupApiUrl, label: "Backup" }
+                          ]}
+                          className="w-[110px]"
+                        />
                       </div>
                     </div>
 
