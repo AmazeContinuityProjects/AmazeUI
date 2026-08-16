@@ -64,7 +64,7 @@ const PopoverContent = React.forwardRef<React.ElementRef<typeof View>, ViewProps
            onPress={() => context.setOpen(false)} 
            {...({ className: "flex-1 bg-transparent justify-center items-center" } as any)}
         >
-          <Pressable onPress={(e) => e.stopPropagation()}>
+          <Pressable onPress={(e: any) => e.stopPropagation()}>
             <View
               ref={ref}
               {...({ className: cn("z-50 w-72 rounded-md border border-border bg-popover p-4 text-popover-foreground shadow-md outline-none", className) } as any)}

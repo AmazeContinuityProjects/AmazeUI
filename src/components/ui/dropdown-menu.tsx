@@ -1,7 +1,7 @@
 "use client";
 import { View, Text, Pressable } from "../../lib/primitives";
 import * as React from "react"
-import { Modal,    type ViewProps, type TextProps } from "react-native-web"
+import { Modal, type ViewProps, type TextProps } from "react-native-web"
 import { cn } from "../../lib/utils"
 
 export interface DropdownMenuProps {
@@ -64,7 +64,7 @@ const DropdownMenuContent = React.forwardRef<React.ElementRef<typeof View>, View
            onPress={() => context.setOpen(false)} 
            {...({ className: "flex-1 bg-black/10 justify-end sm:justify-center items-center" } as any)}
         >
-          <Pressable onPress={(e) => e.stopPropagation()}>
+          <Pressable onPress={(e: any) => e.stopPropagation()}>
             <View
               ref={ref}
               {...({ className: cn("z-50 min-w-[8rem] overflow-hidden rounded-md border border-border bg-popover p-1 text-popover-foreground shadow-md animate-in fade-in-80 zoom-in-95", className) } as any)}
@@ -86,7 +86,7 @@ const DropdownMenuItem = React.forwardRef<React.ElementRef<typeof Pressable>, Re
     return (
       <Pressable
         ref={ref}
-        onPress={(e) => { context?.setOpen(false); onPress?.(e); (props as any).onClick?.(e) }}
+        onPress={(e: any) => { context?.setOpen(false); onPress?.(e); (props as any).onClick?.(e) }}
         {...({ className: cn("relative flex-row items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors hover:bg-accent focus:bg-accent", className) } as any)}
         {...props}
       >
@@ -119,5 +119,5 @@ export {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuSeparator}
-
+  DropdownMenuSeparator
+}

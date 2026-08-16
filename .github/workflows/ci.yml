@@ -1,0 +1,115 @@
+name: CI / Security & Package Safety Scan
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  security-scan:
+    name: Security & Vulnerability Scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Codebase
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Run Secret Leak Detection (Gitleaks)
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Run Dependency Vulnerability Audit
+        run: |
+          echo "=== Scanning dependencies for high/critical security advisories ==="
+          npm audit --audit-level=high
+
+  typecheck:
+    name: TypeScript Type Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Codebase
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Run Typecheck
+        run: npm run typecheck
+
+  build-and-validate:
+    name: Build & Package Validation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Codebase
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Build Package
+        run: npm run build
+
+      - name: Verify Bundle Output Files
+        run: |
+          echo "=== Verifying generated distribution bundle ==="
+          test -f dist/index.js || { echo "❌ Missing dist/index.js"; exit 1; }
+          test -f dist/index.mjs || { echo "❌ Missing dist/index.mjs"; exit 1; }
+          test -f dist/index.d.ts || { echo "❌ Missing dist/index.d.ts"; exit 1; }
+          test -f dist/index.d.mts || { echo "❌ Missing dist/index.d.mts"; exit 1; }
+          test -f dist/tailwind.css || { echo "❌ Missing dist/tailwind.css"; exit 1; }
+          echo "✅ All expected bundle artifacts exist."
+
+      - name: Validate Package Archive (Dry Run)
+        run: |
+          echo "=== Running npm pack dry run ==="
+          npm pack --dry-run
+
+      - name: Lint Package Exports (Publint)
+        run: |
+          echo "=== Running publint for exports validation ==="
+          npx --yes publint
+
+  ci-gate:
+    name: CI / Safety Gate
+    needs: [security-scan, typecheck, build-and-validate]
+    runs-on: ubuntu-latest
+    if: always()
+    steps:
+      - name: Verify All Checks Succeeded
+        run: |
+          if [ "${{ needs.security-scan.result }}" != "success" ] || \
+             [ "${{ needs.typecheck.result }}" != "success" ] || \
+             [ "${{ needs.build-and-validate.result }}" != "success" ]; then
+            echo "❌ One or more required safety checks failed."
+            exit 1
+          fi
+          echo "✅ All safety scans, typechecks, and package build checks passed successfully!"

@@ -1,5 +1,6 @@
 "use client";
 import * as React from "react";
+import { View, Text } from "../../lib/primitives";
 import { cn } from "../../lib/utils";
 
 export interface CardProps {
@@ -45,7 +46,7 @@ export function Card({
   const hasHeader = title !== undefined || subtitle !== undefined || action !== undefined;
 
   return (
-    <div
+    <View
       onClick={onClick}
       className={cn(base, variants[variant], hoverClasses, onClick && "cursor-pointer", className)}
     >
@@ -56,34 +57,34 @@ export function Card({
         </CardHeader>
       )}
       {children}
-    </div>
+    </View>
   );
 }
 
-export function CardHeader({ className, action, children, ...props }: React.HTMLAttributes<HTMLDivElement> & { action?: React.ReactNode }) {
+export function CardHeader({ className, action, children, ...props }: { className?: string; action?: React.ReactNode; children?: React.ReactNode; [key: string]: any }) {
   if (action) {
     return (
-      <div className={cn("flex items-start justify-between gap-4 p-6", className)} {...props}>
-        <div className="flex flex-col space-y-1.5 flex-1 min-w-0">{children}</div>
-        <div className="shrink-0">{action}</div>
-      </div>
+      <View className={cn("flex items-start justify-between gap-4 p-6", className)} {...props}>
+        <View className="flex flex-col space-y-1.5 flex-1 min-w-0">{children}</View>
+        <View className="shrink-0">{action}</View>
+      </View>
     );
   }
-  return <div className={cn("flex flex-col space-y-1.5 p-6", className)} {...props}>{children}</div>;
+  return <View className={cn("flex flex-col space-y-1.5 p-6", className)} {...props}>{children}</View>;
 }
 
-export function CardTitle({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) {
-  return <h3 className={cn("font-semibold text-lg leading-none tracking-tight text-gray-900 dark:text-gray-100", className)} {...props} />;
+export function CardTitle({ className, ...props }: { className?: string; [key: string]: any }) {
+  return <Text className={cn("font-semibold text-lg leading-none tracking-tight text-gray-900 dark:text-gray-100", className)} {...props} />;
 }
 
-export function CardDescription({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {
-  return <p className={cn("text-sm text-gray-500 dark:text-gray-400", className)} {...props} />;
+export function CardDescription({ className, ...props }: { className?: string; [key: string]: any }) {
+  return <Text className={cn("text-sm text-gray-500 dark:text-gray-400", className)} {...props} />;
 }
 
-export function CardContent({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
-  return <div className={cn("p-6 pt-0", className)} {...props} />;
+export function CardContent({ className, ...props }: { className?: string; [key: string]: any }) {
+  return <View className={cn("p-6 pt-0", className)} {...props} />;
 }
 
-export function CardFooter({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
-  return <div className={cn("flex items-center p-6 pt-0", className)} {...props} />;
+export function CardFooter({ className, ...props }: { className?: string; [key: string]: any }) {
+  return <View className={cn("flex items-center p-6 pt-0", className)} {...props} />;
 }

@@ -42,7 +42,7 @@ const DialogTrigger = React.forwardRef<React.ElementRef<typeof Pressable>, React
   ({ onPress, children, ...props }, ref) => {
     const { onOpenChange } = useDialog()
     return (
-      <Pressable ref={ref} onPress={(e) => { onOpenChange(true); onPress?.(e); (props as any).onClick?.(e) }} {...props}>
+      <Pressable ref={ref} onPress={(e: any) => { onOpenChange(true); onPress?.(e); (props as any).onClick?.(e) }} {...props}>
         {children}
       </Pressable>
     )
@@ -104,7 +104,7 @@ const DialogClose = React.forwardRef<React.ElementRef<typeof Pressable>, React.C
   ({ onPress, children, ...props }, ref) => {
     const { onOpenChange } = useDialog()
     return (
-      <Pressable ref={ref} onPress={(e) => { onOpenChange(false); onPress?.(e); (props as any).onClick?.(e) }} {...props}>
+      <Pressable ref={ref} onPress={(e: any) => { onOpenChange(false); onPress?.(e); (props as any).onClick?.(e) }} {...props}>
         {children}
       </Pressable>
     )
@@ -120,5 +120,5 @@ export {
   DialogFooter,
   DialogTitle,
   DialogDescription,
-  DialogClose}
-
+  DialogClose
+}
