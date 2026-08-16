@@ -25,14 +25,14 @@ export interface ColorPaletteOption {
 }
 
 export const PALETTE_OPTIONS: ColorPaletteOption[] = [
-  { id: "default", label: "Default", swatches: ["#0ea5e9", "#ffffff", "#f8fafc"] },
-  { id: "neonPink", label: "Neon Pink", swatches: ["#ff2bd6", "#ffffff", "#fff7fd"] },
-  { id: "forest", label: "Forest", swatches: ["#059669", "#ffffff", "#f7fee7"] },
-  { id: "rose", label: "Rose", swatches: ["#e11d48", "#ffffff", "#fff1f2"] },
-  { id: "amber", label: "Amber", swatches: ["#d97706", "#ffffff", "#fffbeb"] },
-  { id: "ocean", label: "Ocean", swatches: ["#3b82f6", "#ffffff", "#f0f7ff"] },
-  { id: "lavender", label: "Lavender", swatches: ["#8b5cf6", "#ffffff", "#f8f6ff"] },
-  { id: "sunset", label: "Sunset", swatches: ["#f59e0b", "#ffffff", "#fffdf6"] },
+  { id: "default", label: "Default", swatches: ["#0ea5e9", "#38bdf8", "#0284c7"] },
+  { id: "neonPink", label: "Neon Pink", swatches: ["#ff2bd6", "#f472b6", "#db2777"] },
+  { id: "forest", label: "Forest", swatches: ["#059669", "#34d399", "#047857"] },
+  { id: "rose", label: "Rose", swatches: ["#e11d48", "#fb7185", "#be123c"] },
+  { id: "amber", label: "Amber", swatches: ["#d97706", "#fbbf24", "#b45309"] },
+  { id: "ocean", label: "Ocean", swatches: ["#3b82f6", "#60a5fa", "#2563eb"] },
+  { id: "lavender", label: "Lavender", swatches: ["#8b5cf6", "#a78bfa", "#7c3aed"] },
+  { id: "sunset", label: "Sunset", swatches: ["#f59e0b", "#fbbf24", "#d97706"] },
 ];
 
 function getSettings() {
@@ -73,65 +73,85 @@ export function useColorPalette() {
 
   useEffect(() => {
     const root = document.documentElement;
-    const selectedId = paletteId;
-    const palette = COLOR_PALETTES[selectedId];
 
-    if (!palette || selectedId === "default") {
-      root.removeAttribute("data-color-palette");
-      root.removeAttribute("data-accent");
-      root.style.removeProperty("--theme-accent");
-      root.style.removeProperty("--accent-color");
-      root.style.removeProperty("--accent-foreground-color");
-      root.style.removeProperty("--primary");
-      root.style.removeProperty("--primary-foreground");
-      root.style.removeProperty("--info");
-      root.style.removeProperty("--info-surface");
-      root.style.removeProperty("--ring");
-      root.style.removeProperty("--chart-1");
-      root.style.removeProperty("--chart-2");
-      root.style.removeProperty("--chart-3");
-      return;
-    }
+    const applyPalette = () => {
+      const selectedId = paletteId;
+      const palette = COLOR_PALETTES[selectedId];
 
-    const accent = palette.accent;
-    const isDark = document.documentElement.classList.contains("dark");
-    const darkBase = "oklch(0.09 0.015 255)";
-    const darkSurface = "oklch(0.20 0 0)";
-    const lightBase = "oklch(0.982 0.004 247)";
+      if (!palette || selectedId === "default") {
+        root.removeAttribute("data-color-palette");
+        root.removeAttribute("data-accent");
+        root.style.removeProperty("--theme-accent");
+        root.style.removeProperty("--accent-color");
+        root.style.removeProperty("--accent-foreground-color");
+        root.style.removeProperty("--primary");
+        root.style.removeProperty("--primary-foreground");
+        root.style.removeProperty("--info");
+        root.style.removeProperty("--info-surface");
+        root.style.removeProperty("--ring");
+        root.style.removeProperty("--chart-1");
+        root.style.removeProperty("--chart-2");
+        root.style.removeProperty("--chart-3");
+        root.style.removeProperty("--background");
+        root.style.removeProperty("--surface");
+        return;
+      }
 
-    root.setAttribute("data-color-palette", selectedId);
-    root.setAttribute("data-accent", selectedId);
+      const accent = palette.accent;
+      const isDark = root.classList.contains("dark");
+      const darkBase = "oklch(0.03 0 0)";
+      const darkSurface = "oklch(0.09 0 0)";
+      const lightBase = "oklch(0.985 0 0)";
 
-    const setVar = (name: string, value: string) => root.style.setProperty(name, value);
-    const remVar = (name: string) => root.style.removeProperty(name);
+      root.setAttribute("data-color-palette", selectedId);
+      root.setAttribute("data-accent", selectedId);
 
-    setVar("--theme-accent", accent);
-    setVar("--accent-color", accent);
-    setVar("--accent-foreground-color", isDark ? "#000000" : "#ffffff");
+      const setVar = (name: string, value: string) => root.style.setProperty(name, value);
 
-    if (isDark) {
-      setVar("--background", `color-mix(in oklab, ${accent} 6%, ${darkBase})`);
-      setVar("--surface", `color-mix(in oklab, ${accent} 4%, ${darkSurface})`);
-      setVar("--primary", accent);
-      setVar("--primary-foreground", "#ffffff");
-      setVar("--info", accent);
-      setVar("--info-surface", `color-mix(in oklab, ${accent} 18%, transparent)`);
-      setVar("--ring", accent);
-      setVar("--chart-1", accent);
-      setVar("--chart-2", `color-mix(in oklab, ${accent} 70%, #10b981)`);
-      setVar("--chart-3", `color-mix(in oklab, ${accent} 70%, #f59e0b)`);
-    } else {
-      setVar("--background", palette.background || lightBase);
-      setVar("--surface", palette.surface || "#ffffff");
-      setVar("--primary", accent);
-      setVar("--primary-foreground", "#ffffff");
-      setVar("--info", accent);
-      setVar("--info-surface", `color-mix(in oklab, ${accent} 14%, transparent)`);
-      setVar("--ring", accent);
-      setVar("--chart-1", accent);
-      setVar("--chart-2", `color-mix(in oklab, ${accent} 70%, #10b981)`);
-      setVar("--chart-3", `color-mix(in oklab, ${accent} 70%, #f59e0b)`);
-    }
+      setVar("--theme-accent", accent);
+      setVar("--accent-color", accent);
+      setVar("--accent-foreground-color", isDark ? "#000000" : "#ffffff");
+
+      if (isDark) {
+        setVar("--background", `color-mix(in oklab, ${accent} 6%, ${darkBase})`);
+        setVar("--surface", `color-mix(in oklab, ${accent} 4%, ${darkSurface})`);
+        setVar("--primary", accent);
+        setVar("--primary-foreground", "#ffffff");
+        setVar("--info", accent);
+        setVar("--info-surface", `color-mix(in oklab, ${accent} 18%, transparent)`);
+        setVar("--ring", accent);
+        setVar("--chart-1", accent);
+        setVar("--chart-2", `color-mix(in oklab, ${accent} 70%, #10b981)`);
+        setVar("--chart-3", `color-mix(in oklab, ${accent} 70%, #f59e0b)`);
+      } else {
+        setVar("--background", palette.background || lightBase);
+        setVar("--surface", palette.surface || "#ffffff");
+        setVar("--primary", accent);
+        setVar("--primary-foreground", "#ffffff");
+        setVar("--info", accent);
+        setVar("--info-surface", `color-mix(in oklab, ${accent} 14%, transparent)`);
+        setVar("--ring", accent);
+        setVar("--chart-1", accent);
+        setVar("--chart-2", `color-mix(in oklab, ${accent} 70%, #10b981)`);
+        setVar("--chart-3", `color-mix(in oklab, ${accent} 70%, #f59e0b)`);
+      }
+    };
+
+    applyPalette();
+
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.attributeName === "class") {
+          applyPalette();
+        }
+      });
+    });
+
+    observer.observe(root, { attributes: true, attributeFilter: ["class"] });
+
+    return () => {
+      observer.disconnect();
+    };
   }, [paletteId]);
 
   return { paletteId, setPaletteId, palettes: PALETTE_OPTIONS };
