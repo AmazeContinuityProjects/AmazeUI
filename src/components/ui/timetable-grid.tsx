@@ -75,33 +75,35 @@ export function TimetableGrid({
   const getCourse = (slotName: string) => courses.find(c => c.slots.includes(slotName));
 
   return (
-    <div className={cn('mb-8 rounded-xl border border-gray-200 dark:border-gray-800 shadow-2xl bg-white dark:bg-gray-950', className)}>
-      <div className="p-4 bg-gray-100/80 dark:bg-gray-900/80 border-b border-gray-200 dark:border-gray-800 flex items-center justify-between">
-        <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 flex items-center gap-2">
-          {title}
-        </h3>
-        {showLegend && (
-          <div className="flex items-center gap-4 text-xs font-medium">
-            <div className="flex items-center gap-2">
-              <div className="w-3 h-3 bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-sm" />
-              Theory (Top)
+    <div className={cn('w-full max-w-full rounded-2xl border border-gray-200/80 dark:border-gray-800/80 shadow-sm bg-white dark:bg-gray-950 overflow-hidden flex flex-col', className)}>
+      {title ? (
+        <div className="p-4 bg-gray-50/80 dark:bg-zinc-900/80 border-b border-gray-200/80 dark:border-gray-800/80 flex flex-wrap items-center justify-between gap-3">
+          <h3 className="text-base sm:text-lg font-black text-gray-900 dark:text-gray-100 font-outfit flex items-center gap-2">
+            {title}
+          </h3>
+          {showLegend && (
+            <div className="flex items-center gap-4 text-xs font-semibold text-gray-600 dark:text-gray-400">
+              <div className="flex items-center gap-1.5">
+                <div className="w-3 h-3 bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded" />
+                <span>Theory (Top)</span>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <div className="w-3 h-3 bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded border-dashed" />
+                <span>Lab (Bottom)</span>
+              </div>
             </div>
-            <div className="flex items-center gap-2">
-              <div className="w-3 h-3 bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-sm border-dashed" />
-              Lab (Bottom)
-            </div>
-          </div>
-        )}
-      </div>
-      <div className="min-w-max">
-        <table className="w-full text-left border-collapse">
+          )}
+        </div>
+      ) : null}
+      <div className="w-full max-w-full overflow-x-auto scrollbar-thin">
+        <table className="w-full text-left border-collapse min-w-[760px]">
           <thead>
             <tr className="bg-white dark:bg-gray-900">
-              <th className="p-3 border-b border-r border-gray-200 dark:border-gray-800 font-semibold text-gray-500 dark:text-gray-400 w-24 text-center sticky left-0 z-20 bg-white dark:bg-gray-900">
+              <th className="p-3 border-b border-r border-gray-200 dark:border-gray-800 font-semibold text-gray-500 dark:text-gray-400 w-24 min-w-[80px] text-center sticky left-0 z-30 bg-white dark:bg-gray-900 shadow-[1px_0_0_0_rgba(0,0,0,0.06)] dark:shadow-[1px_0_0_0_rgba(255,255,255,0.06)]">
                 Day
               </th>
               {theoryPeriods.map((period, idx) => (
-                <th key={idx} className="p-2 border-b border-r border-gray-200 dark:border-gray-800 text-xs text-center text-gray-500 dark:text-gray-400 font-medium">
+                <th key={idx} className="p-2 border-b border-r border-gray-200 dark:border-gray-800 text-xs text-center text-gray-500 dark:text-gray-400 font-medium min-w-[80px]">
                   <div className="flex flex-col">
                     <span>{period.start}</span>
                     <span className="text-[10px] text-gray-400 dark:text-gray-500">to</span>
@@ -114,7 +116,7 @@ export function TimetableGrid({
           <tbody>
             {days.map((day) => (
               <tr key={day.id} className="border-b border-gray-200 dark:border-gray-800 hover:bg-gray-100/5 dark:hover:bg-gray-800/5 transition-colors">
-                <td className="p-3 border-r border-gray-200 dark:border-gray-800 font-semibold text-gray-600 dark:text-gray-300 text-center bg-white/95 dark:bg-gray-950/95 sticky left-0 z-20">
+                <td className="p-3 border-r border-gray-200 dark:border-gray-800 font-bold text-gray-700 dark:text-gray-300 text-center bg-white dark:bg-gray-950 sticky left-0 z-30 shadow-[1px_0_0_0_rgba(0,0,0,0.06)] dark:shadow-[1px_0_0_0_rgba(255,255,255,0.06)]">
                   {day.name.substring(0, 3).toUpperCase()}
                 </td>
                 {theoryPeriods.map((period, pIdx) => {
