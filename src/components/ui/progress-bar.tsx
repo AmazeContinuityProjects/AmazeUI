@@ -1,14 +1,14 @@
-import { cn } from "../../lib/utils";
-import { View, Text } from "../../lib/primitives";
+import { cn } from "../../lib/utils"
+import { View, Text } from "../../lib/primitives"
 
 export interface ProgressBarProps {
-  value: number;
-  max?: number;
-  className?: string;
-  barClassName?: string;
-  color?: "blue" | "emerald" | "amber" | "red";
-  showLabel?: boolean;
-  size?: "sm" | "md";
+  value: number
+  max?: number
+  className?: string
+  barClassName?: string
+  color?: "blue" | "emerald" | "amber" | "red"
+  showLabel?: boolean
+  size?: "sm" | "md"
 }
 
 const barColors = {
@@ -16,12 +16,12 @@ const barColors = {
   emerald: "bg-emerald-500",
   amber: "bg-amber-500",
   red: "bg-red-500",
-};
+}
 
 const sizes = {
   sm: "h-1.5",
   md: "h-2",
-};
+}
 
 export function ProgressBar({
   value,
@@ -32,7 +32,7 @@ export function ProgressBar({
   showLabel = false,
   size = "md",
 }: ProgressBarProps) {
-  const pct = Math.min(Math.max((value / max) * 100, 0), 100);
+  const pct = Math.min(Math.max((value / max) * 100, 0), 100)
 
   return (
     <View className={cn("w-full", className)}>
@@ -52,10 +52,8 @@ export function ProgressBar({
         />
       </View>
       {showLabel && (
-        <Text className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-          {Math.round(pct)}%
-        </Text>
+        <Text className="text-xs text-gray-500 dark:text-gray-400 mt-1">{Math.round(pct)}%</Text>
       )}
     </View>
-  );
+  )
 }

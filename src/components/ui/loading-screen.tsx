@@ -1,14 +1,14 @@
-"use client";
-import { cn } from "../../lib/utils";
+"use client"
+import { cn } from "../../lib/utils"
 
 export interface LoadingScreenProps {
-  logoSrc?: string;
-  wordmarkLightSrc?: string;
-  wordmarkDarkSrc?: string;
-  title?: string;
-  subtitle?: string;
-  className?: string;
-  progress?: number;
+  logoSrc?: string
+  wordmarkLightSrc?: string
+  wordmarkDarkSrc?: string
+  title?: string
+  subtitle?: string
+  className?: string
+  progress?: number
 }
 
 export function LoadingScreen({
@@ -20,8 +20,8 @@ export function LoadingScreen({
   className,
   progress,
 }: LoadingScreenProps) {
-  const showWordmark = wordmarkLightSrc || wordmarkDarkSrc;
-  const showText = title;
+  const showWordmark = wordmarkLightSrc || wordmarkDarkSrc
+  const showText = title
 
   return (
     <div
@@ -44,11 +44,7 @@ export function LoadingScreen({
 
       <div className="flex flex-col items-center space-y-6 max-w-xs text-center z-10">
         <div className="relative flex items-center justify-center w-24 h-24 rounded-3xl bg-white dark:bg-neutral-900 border border-slate-200/80 dark:border-neutral-800 shadow-2xl animate-pulse">
-          <img
-            src={logoSrc}
-            alt={title || "Logo"}
-            className="w-14 h-14 object-contain"
-          />
+          <img src={logoSrc} alt={title || "Logo"} className="w-14 h-14 object-contain" />
           <div className="absolute -inset-1.5 rounded-[28px] border border-blue-500/20 animate-ping duration-3000 pointer-events-none" />
         </div>
 
@@ -95,5 +91,5 @@ export function LoadingScreen({
         </div>
       </div>
     </div>
-  );
+  )
 }

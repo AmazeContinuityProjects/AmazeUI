@@ -1,27 +1,23 @@
-"use client";
-import { motion } from "framer-motion";
+"use client"
+import { motion } from "framer-motion"
 
 export interface SubTabStripTab {
-  id: string;
-  label: string;
+  id: string
+  label: string
 }
 
 export interface SubTabStripProps {
-  tabs: SubTabStripTab[];
-  activeTab: string;
-  onChange: (id: string) => void;
+  tabs: SubTabStripTab[]
+  activeTab: string
+  onChange: (id: string) => void
 }
 
-export function SubTabStrip({
-  tabs,
-  activeTab,
-  onChange,
-}: SubTabStripProps) {
+export function SubTabStrip({ tabs, activeTab, onChange }: SubTabStripProps) {
   return (
     <div className="w-full overflow-x-auto mb-5" style={{ scrollbarWidth: "none" }}>
       <div className="flex gap-1 bg-gray-100/80 dark:bg-black/60 backdrop-blur-xl rounded-full p-1.5 border border-gray-200/60 dark:border-gray-800/60 shadow-inner min-w-max w-fit">
         {tabs.map((tab) => {
-          const isActive = activeTab === tab.id;
+          const isActive = activeTab === tab.id
           return (
             <button
               key={tab.id}
@@ -41,9 +37,9 @@ export function SubTabStrip({
               )}
               <span className="relative z-10">{tab.label}</span>
             </button>
-          );
+          )
         })}
       </div>
     </div>
-  );
+  )
 }

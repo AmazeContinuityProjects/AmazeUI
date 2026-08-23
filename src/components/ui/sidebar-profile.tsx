@@ -1,15 +1,15 @@
-"use client";
-import { cn } from "../../lib/utils";
-import { useSidebar } from "./sidebar";
+"use client"
+import { cn } from "../../lib/utils"
+import { useSidebar } from "./sidebar"
 
 export interface SidebarProfileProps {
-  name?: string;
-  degree?: string;
-  avatarUrl?: string;
-  initials?: string;
-  onLogout?: () => void;
-  onProfileClick?: () => void;
-  className?: string;
+  name?: string
+  degree?: string
+  avatarUrl?: string
+  initials?: string
+  onLogout?: () => void
+  onProfileClick?: () => void
+  className?: string
 }
 
 export function SidebarProfile({
@@ -21,7 +21,7 @@ export function SidebarProfile({
   onProfileClick,
   className,
 }: SidebarProfileProps) {
-  const { isOpen } = useSidebar();
+  const { isOpen } = useSidebar()
 
   if (!isOpen) {
     return (
@@ -42,7 +42,7 @@ export function SidebarProfile({
           </span>
         )}
       </button>
-    );
+    )
   }
 
   return (
@@ -59,13 +59,9 @@ export function SidebarProfile({
         </div>
       )}
       <div className="min-w-0 flex-1">
-        <span className="block truncate text-xs font-semibold text-sidebar-foreground">
-          {name}
-        </span>
+        <span className="block truncate text-xs font-semibold text-sidebar-foreground">{name}</span>
         {degree && (
-          <span className="block truncate text-[10px] text-sidebar-foreground/">
-            {degree}
-          </span>
+          <span className="block truncate text-[10px] text-sidebar-foreground/">{degree}</span>
         )}
       </div>
       <button
@@ -74,20 +70,28 @@ export function SidebarProfile({
         title="Log out"
         aria-label="Log out"
       >
-        <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <svg
+          className="h-4 w-4"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
           <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
           <polyline points="16 17 21 12 16 7" />
           <line x1="21" y1="12" x2="9" y2="12" />
         </svg>
       </button>
     </div>
-  );
+  )
 }
 
 export interface SidebarThemeControlProps {
-  theme?: string;
-  onThemeChange?: (theme: string) => void;
-  className?: string;
+  theme?: string
+  onThemeChange?: (theme: string) => void
+  className?: string
 }
 
 export function SidebarThemeControl({
@@ -95,7 +99,7 @@ export function SidebarThemeControl({
   onThemeChange,
   className,
 }: SidebarThemeControlProps) {
-  const { isOpen } = useSidebar();
+  const { isOpen } = useSidebar()
 
   if (!isOpen) {
     return (
@@ -105,7 +109,15 @@ export function SidebarThemeControl({
         title={`Switch to ${theme === "dark" ? "light" : "dark"} theme`}
       >
         {theme === "dark" ? (
-          <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <svg
+            className="h-4 w-4"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
             <circle cx="12" cy="12" r="5" />
             <line x1="12" y1="1" x2="12" y2="3" />
             <line x1="12" y1="21" x2="12" y2="23" />
@@ -117,16 +129,29 @@ export function SidebarThemeControl({
             <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
           </svg>
         ) : (
-          <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <svg
+            className="h-4 w-4"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
           </svg>
         )}
       </button>
-    );
+    )
   }
 
   return (
-    <div className={cn("flex items-center justify-between px-0.5 text-[11px] text-sidebar-foreground/", className)}>
+    <div
+      className={cn(
+        "flex items-center justify-between px-0.5 text-[11px] text-sidebar-foreground/",
+        className
+      )}
+    >
       <span className="text-sidebar-foreground/ text-[8px] font-semibold uppercase tracking-wide">
         Theme
       </span>
@@ -135,24 +160,28 @@ export function SidebarThemeControl({
           onClick={() => onThemeChange?.("light")}
           className={`flex items-center gap-1 transition-colors hover:text-sidebar-foreground ${theme === "light" ? "font-medium text-info" : ""}`}
         >
-          <span className={`h-2 w-2 rounded-full border transition-colors ${theme === "light" ? "border-info bg-info" : "border-sidebar-border"}`} />
+          <span
+            className={`h-2 w-2 rounded-full border transition-colors ${theme === "light" ? "border-info bg-info" : "border-sidebar-border"}`}
+          />
           <span>Light</span>
         </button>
         <button
           onClick={() => onThemeChange?.("dark")}
           className={`flex items-center gap-1 transition-colors hover:text-sidebar-foreground ${theme === "dark" ? "font-medium text-info" : ""}`}
         >
-          <span className={`h-2 w-2 rounded-full border transition-colors ${theme === "dark" ? "border-info bg-info" : "border-sidebar-border"}`} />
+          <span
+            className={`h-2 w-2 rounded-full border transition-colors ${theme === "dark" ? "border-info bg-info" : "border-sidebar-border"}`}
+          />
           <span>Dark</span>
         </button>
       </div>
     </div>
-  );
+  )
 }
 
 export interface SidebarExpandButtonProps {
-  onClick?: () => void;
-  className?: string;
+  onClick?: () => void
+  className?: string
 }
 
 export function SidebarExpandButton({ onClick, className }: SidebarExpandButtonProps) {
@@ -161,16 +190,24 @@ export function SidebarExpandButton({ onClick, className }: SidebarExpandButtonP
       onClick={onClick}
       className={cn(
         "flex h-8 w-8 items-center justify-center rounded-lg text-sidebar-foreground/ transition-colors hover:bg-sidebar-accent hover:text-sidebar-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400/40",
-        className,
+        className
       )}
       title="Expand sidebar"
       aria-label="Expand sidebar"
     >
-      <svg className="h-4.5 w-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <svg
+        className="h-4.5 w-4.5"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
         <line x1="3" y1="12" x2="21" y2="12" />
         <line x1="3" y1="6" x2="21" y2="6" />
         <line x1="3" y1="18" x2="21" y2="18" />
       </svg>
     </button>
-  );
+  )
 }

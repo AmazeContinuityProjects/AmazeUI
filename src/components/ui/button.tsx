@@ -1,7 +1,7 @@
-"use client";
-import { Text, Pressable } from "../../lib/primitives";
+"use client"
+import { Text, Pressable } from "../../lib/primitives"
 import * as React from "react"
-import {   type PressableProps } from "react-native"
+import { type PressableProps } from "react-native"
 import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "../../lib/utils"
 import { Slot } from "../../lib/slot"
@@ -16,36 +16,43 @@ const buttonVariants = cva(
         destructive: "bg-danger text-white hover:bg-danger/90",
         danger: "bg-danger text-white hover:bg-danger/90",
         success: "bg-emerald-500 text-white hover:bg-emerald-500/90",
-        outline: "border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground text-foreground",
+        outline:
+          "border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground text-foreground",
         secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost: "text-foreground hover:bg-accent hover:text-accent-foreground",
-        link: "text-primary underline-offset-4 hover:underline"},
+        link: "text-primary underline-offset-4 hover:underline",
+      },
       size: {
         default: "h-9 px-4 py-2",
         sm: "h-8 rounded-md px-3",
         lg: "h-10 rounded-md px-6",
         icon: "h-9 w-9",
         "icon-sm": "h-8 w-8",
-        "icon-lg": "h-10 w-10"}},
+        "icon-lg": "h-10 w-10",
+      },
+    },
     defaultVariants: {
       variant: "default",
-      size: "default"}}
+      size: "default",
+    },
+  }
 )
 
-export interface ButtonProps
-  extends PressableProps,
-    VariantProps<typeof buttonVariants> {
-  children: React.ReactNode;
-  className?: string;
-  textClassName?: string;
-  onClick?: (event: any) => void;
-  type?: "button" | "submit" | "reset";
-  asChild?: boolean;
-  form?: string;
+export interface ButtonProps extends PressableProps, VariantProps<typeof buttonVariants> {
+  children: React.ReactNode
+  className?: string
+  textClassName?: string
+  onClick?: (event: any) => void
+  type?: "button" | "submit" | "reset"
+  asChild?: boolean
+  form?: string
 }
 
 const Button = React.forwardRef<React.ElementRef<typeof Pressable>, ButtonProps>(
-  ({ className, variant, size, children, textClassName, onClick, onPress, asChild, ...props }, ref) => {
+  (
+    { className, variant, size, children, textClassName, onClick, onPress, asChild, ...props },
+    ref
+  ) => {
     const classes = cn(buttonVariants({ variant, size }), className)
 
     if (asChild) {
@@ -57,13 +64,14 @@ const Button = React.forwardRef<React.ElementRef<typeof Pressable>, ButtonProps>
     }
 
     return (
-      <Pressable onPress={onPress || onClick}
+      <Pressable
+        onPress={onPress || onClick}
         ref={ref}
         {...({ className: classes } as any)}
         {...props}
       >
-        {React.Children.map(children, (child) => 
-          typeof child === 'string' || typeof child === 'number' ? (
+        {React.Children.map(children, (child) =>
+          typeof child === "string" || typeof child === "number" ? (
             <Text {...({ className: cn("font-medium", textClassName) } as any)}>{child}</Text>
           ) : (
             child
@@ -76,4 +84,3 @@ const Button = React.forwardRef<React.ElementRef<typeof Pressable>, ButtonProps>
 Button.displayName = "Button"
 
 export { Button, buttonVariants }
-

@@ -1,33 +1,49 @@
-"use client";
-import { useState } from "react";
-import { cn } from "../../lib/utils";
-import { Pressable, View, Text } from "../../lib/primitives";
+"use client"
+import { useState } from "react"
+import { cn } from "../../lib/utils"
+import { Pressable, View, Text } from "../../lib/primitives"
 
 export interface ExpandableSectionProps {
-  title: string;
-  children: React.ReactNode;
-  defaultOpen?: boolean;
-  className?: string;
-  headerClassName?: string;
-  contentClassName?: string;
-  badge?: React.ReactNode;
-  icon?: React.ReactNode;
+  title: string
+  children: React.ReactNode
+  defaultOpen?: boolean
+  className?: string
+  headerClassName?: string
+  contentClassName?: string
+  badge?: React.ReactNode
+  icon?: React.ReactNode
 }
 
 function ChevronDownIcon({ className }: { className?: string }) {
   return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+    >
       <path d="m6 9 6 6 6-6" />
     </svg>
-  );
+  )
 }
 
 function ChevronUpIcon({ className }: { className?: string }) {
   return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+    >
       <path d="m18 15-6-6-6 6" />
     </svg>
-  );
+  )
 }
 
 export function ExpandableSection({
@@ -40,7 +56,7 @@ export function ExpandableSection({
   badge,
   icon,
 }: ExpandableSectionProps) {
-  const [isOpen, setIsOpen] = useState(defaultOpen);
+  const [isOpen, setIsOpen] = useState(defaultOpen)
 
   return (
     <View className={cn("w-full", className)}>
@@ -75,5 +91,5 @@ export function ExpandableSection({
         </View>
       </View>
     </View>
-  );
+  )
 }

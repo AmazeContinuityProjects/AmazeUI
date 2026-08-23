@@ -1,5 +1,5 @@
-"use client";
-import { View } from "../../lib/primitives";
+"use client"
+import { View } from "../../lib/primitives"
 import * as React from "react"
 import { type ViewProps } from "react-native"
 import { cn } from "../../lib/utils"
@@ -26,12 +26,14 @@ const IconBadge = React.forwardRef<React.ElementRef<typeof View>, IconBadgeProps
   ({ className, color = "blue", size = "md", children, ...props }, ref) => (
     <View
       ref={ref}
-      {...({ className: cn(
-        "shrink-0 flex flex-row items-center justify-center",
-        size === "sm" ? "w-8 h-8 rounded-full" : "w-10 h-10 rounded-xl",
-        colorMap[color] || colorMap.blue,
-        className
-      ) } as any)}
+      {...({
+        className: cn(
+          "shrink-0 flex flex-row items-center justify-center",
+          size === "sm" ? "w-8 h-8 rounded-full" : "w-10 h-10 rounded-xl",
+          colorMap[color] || colorMap.blue,
+          className
+        ),
+      } as any)}
       {...props}
     >
       {children}

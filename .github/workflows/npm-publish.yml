@@ -4,19 +4,48 @@ on:
   release:
     types: [created]
 
+permissions:
+  contents: read
+  id-token: write
+
 jobs:
-  publish-npm:
+  verify:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '20.x'
-          registry-url: 'https://registry.npmjs.org'
-          cache: 'pnpm'
+          node-version: "24"
+          cache: "pnpm"
+      - run: pnpm install --frozen-lockfile
+      - name: Lint
+        run: pnpm lint
+      - name: Typecheck
+        run: pnpm typecheck
+      - name: Test
+        run: pnpm test
+      - name: Audit production dependencies
+        run: pnpm audit --prod --audit-level high
+
+  publish-npm:
+    needs: verify
+    runs-on: ubuntu-latest
+    environment: npm
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          registry-url: "https://registry.npmjs.org"
+          cache: "pnpm"
       - run: pnpm install --frozen-lockfile
       - run: pnpm build
-      - run: pnpm publish --no-git-checks
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Validate package exports (publint + attw)
+        run: pnpm pkg:check
+      - name: Publish via OIDC trusted publishing
+        # pnpm publish delegates to the npm CLI, which exchanges the GitHub
+        # Actions OIDC token automatically. Requires npm >= 11.5.1, so this
+        # job pins Node 24. No NPM_TOKEN secret is used or needed.
+        run: pnpm publish --access public --no-git-checks

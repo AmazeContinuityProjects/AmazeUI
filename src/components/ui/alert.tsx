@@ -1,5 +1,5 @@
-"use client";
-import { View, Text } from "../../lib/primitives";
+"use client"
+import { View, Text } from "../../lib/primitives"
 import * as React from "react"
 import { type ViewProps } from "react-native"
 import { cn } from "../../lib/utils"
@@ -23,16 +23,16 @@ const Alert = React.forwardRef<React.ElementRef<typeof View>, AlertProps>(
   ({ className, variant = "default", icon, children, ...props }, ref) => (
     <View
       ref={ref}
-      {...({ className: cn(
-        "flex flex-row items-start gap-3 p-4 rounded-xl border",
-        variantStyles[variant],
-        className
-      ) } as any)}
+      {...({
+        className: cn(
+          "flex flex-row items-start gap-3 p-4 rounded-xl border",
+          variantStyles[variant],
+          className
+        ),
+      } as any)}
       {...props}
     >
-      {icon && (
-        <View className="shrink-0 mt-0.5">{icon}</View>
-      )}
+      {icon && <View className="shrink-0 mt-0.5">{icon}</View>}
       <Text className="flex-1 text-sm font-medium">{children}</Text>
     </View>
   )

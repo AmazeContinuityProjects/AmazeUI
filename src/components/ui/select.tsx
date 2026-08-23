@@ -1,29 +1,28 @@
-"use client";
-import { View, Text } from "../../lib/primitives";
+"use client"
 import * as React from "react"
 import { cn } from "../../lib/utils"
 
 export interface SelectOption {
-  label: string;
-  value: string;
+  label: string
+  value: string
 }
 
 export interface SelectProps {
-  value: string;
-  onChange: (value: string) => void;
-  options: SelectOption[];
-  className?: string;
-  placeholder?: string;
-  disabled?: boolean;
-  name?: string;
-  required?: boolean;
+  value: string
+  onChange: (value: string) => void
+  options: SelectOption[]
+  className?: string
+  placeholder?: string
+  disabled?: boolean
+  name?: string
+  required?: boolean
 }
 
 const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
   ({ className, value, onChange, options, placeholder, disabled, ...props }, ref) => {
     const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-      onChange(e.target.value);
-    };
+      onChange(e.target.value)
+    }
 
     return (
       <select
@@ -41,9 +40,15 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
         )}
         {...(props as any)}
       >
-        {placeholder && <option value="" disabled>{placeholder}</option>}
+        {placeholder && (
+          <option value="" disabled>
+            {placeholder}
+          </option>
+        )}
         {options.map((opt) => (
-          <option key={opt.value} value={opt.value}>{opt.label}</option>
+          <option key={opt.value} value={opt.value}>
+            {opt.label}
+          </option>
         ))}
       </select>
     )

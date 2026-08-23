@@ -1,13 +1,13 @@
-"use client";
-import * as React from "react";
-import { cn } from "../../lib/utils";
+"use client"
+import * as React from "react"
+import { cn } from "../../lib/utils"
 
 export interface PageHeaderProps {
-  icon?: React.ReactNode;
-  title: string;
-  meta?: React.ReactNode;
-  actions?: React.ReactNode;
-  className?: string;
+  icon?: React.ReactNode
+  title: string
+  meta?: React.ReactNode
+  actions?: React.ReactNode
+  className?: string
 }
 
 export function PageHeader({ icon, title, meta, actions, className }: PageHeaderProps) {
@@ -31,5 +31,5 @@ export function PageHeader({ icon, title, meta, actions, className }: PageHeader
         </div>
       )}
     </div>
-  );
+  )
 }

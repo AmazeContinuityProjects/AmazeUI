@@ -1,18 +1,18 @@
-import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
-import "react-circular-progressbar/dist/styles.css";
+import { CircularProgressbar, buildStyles } from "react-circular-progressbar"
+import "react-circular-progressbar/dist/styles.css"
 
 export interface CircularProgressProps {
-  value: number;
-  text?: string;
-  size?: number;
-  strokeWidth?: number;
-  threshold?: number;
-  midThreshold?: number;
-  className?: string;
+  value: number
+  text?: string
+  size?: number
+  strokeWidth?: number
+  threshold?: number
+  midThreshold?: number
+  className?: string
 }
 
-const defaultThreshold = 75;
-const defaultMidThreshold = 85;
+const defaultThreshold = 75
+const defaultMidThreshold = 85
 
 export function CircularProgress({
   value,
@@ -23,8 +23,7 @@ export function CircularProgress({
   midThreshold = defaultMidThreshold,
   className,
 }: CircularProgressProps) {
-  const pathColor =
-    value < threshold ? "#EF4444" : value < midThreshold ? "#FACC15" : "#10B981";
+  const pathColor = value < threshold ? "#EF4444" : value < midThreshold ? "#FACC15" : "#10B981"
 
   return (
     <div className={className} style={{ width: size, height: size }}>
@@ -41,5 +40,5 @@ export function CircularProgress({
         })}
       />
     </div>
-  );
+  )
 }

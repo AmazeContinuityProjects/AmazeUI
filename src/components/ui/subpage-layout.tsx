@@ -1,14 +1,14 @@
-"use client";
-import { BackButton } from "./back-button";
-import { View, Text } from "../../lib/primitives";
+"use client"
+import { BackButton } from "./back-button"
+import { View, Text } from "../../lib/primitives"
 
 export interface SubpageLayoutProps {
-  title: string;
-  subtitle?: string;
-  onBack: () => void;
-  action?: React.ReactNode;
-  children: React.ReactNode;
-  className?: string;
+  title: string
+  subtitle?: string
+  onBack: () => void
+  action?: React.ReactNode
+  children: React.ReactNode
+  className?: string
 }
 
 export function SubpageLayout({
@@ -30,9 +30,7 @@ export function SubpageLayout({
               {title}
             </Text>
             {subtitle && (
-              <Text className="text-xs text-gray-500 dark:text-gray-400 truncate">
-                {subtitle}
-              </Text>
+              <Text className="text-xs text-gray-500 dark:text-gray-400 truncate">{subtitle}</Text>
             )}
           </View>
         </View>
@@ -48,9 +46,7 @@ export function SubpageLayout({
               {title}
             </Text>
             {subtitle && (
-              <Text className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-                {subtitle}
-              </Text>
+              <Text className="text-sm text-gray-500 dark:text-gray-400 mt-1">{subtitle}</Text>
             )}
           </View>
         </View>
@@ -59,5 +55,5 @@ export function SubpageLayout({
 
       <View className={className}>{children}</View>
     </View>
-  );
+  )
 }
