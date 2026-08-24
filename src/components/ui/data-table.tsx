@@ -1,18 +1,18 @@
-import { cn } from "../../lib/utils";
+import { cn } from "../../lib/utils"
 
 export interface DataTableColumn {
-  key: string;
-  label: string;
-  render?: (value: any, row: any) => React.ReactNode;
-  className?: string;
+  key: string
+  label: string
+  render?: (value: any, row: any) => React.ReactNode
+  className?: string
 }
 
 export interface DataTableProps {
-  columns: DataTableColumn[];
-  data: Record<string, any>[];
-  caption?: string;
-  className?: string;
-  emptyMessage?: string;
+  columns: DataTableColumn[]
+  data: Record<string, any>[]
+  caption?: string
+  className?: string
+  emptyMessage?: string
 }
 
 export function DataTable({
@@ -24,7 +24,12 @@ export function DataTable({
 }: DataTableProps) {
   if (!data || data.length === 0) {
     return (
-      <div className={cn("rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950", className)}>
+      <div
+        className={cn(
+          "rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950",
+          className
+        )}
+      >
         <div className="p-5">
           {caption && (
             <h4 className="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-4">
@@ -36,11 +41,16 @@ export function DataTable({
           </p>
         </div>
       </div>
-    );
+    )
   }
 
   return (
-    <div className={cn("rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950", className)}>
+    <div
+      className={cn(
+        "rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950",
+        className
+      )}
+    >
       <div className="p-5">
         {caption && (
           <h4 className="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-4">
@@ -73,14 +83,9 @@ export function DataTable({
                   {columns.map((col) => (
                     <td
                       key={col.key}
-                      className={cn(
-                        "py-2.5 px-2 text-gray-800 dark:text-gray-200",
-                        col.className
-                      )}
+                      className={cn("py-2.5 px-2 text-gray-800 dark:text-gray-200", col.className)}
                     >
-                      {col.render
-                        ? col.render(row[col.key], row)
-                        : row[col.key] ?? "\u2014"}
+                      {col.render ? col.render(row[col.key], row) : (row[col.key] ?? "\u2014")}
                     </td>
                   ))}
                 </tr>
@@ -90,5 +95,5 @@ export function DataTable({
         </div>
       </div>
     </div>
-  );
+  )
 }

@@ -4,7 +4,7 @@
     "access": "public"
   },
   "packageManager": "pnpm@10.32.1",
-  "version": "1.6.0",
+  "version": "1.6.1",
   "description": "The design library for AmazeCC",
   "files": [
     "dist"
@@ -14,16 +14,30 @@
   "types": "dist/index.d.ts",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "require": "./dist/index.js",
-      "import": "./dist/index.mjs"
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      }
     },
     "./tailwind.css": "./dist/tailwind.css"
   },
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "typecheck": "tsc --noEmit",
+    "pkg:check": "publint && attw --pack . --exclude-entrypoints ./tailwind.css",
+    "audit": "pnpm audit --prod --audit-level high",
+    "verify": "pnpm lint && pnpm format:check && pnpm typecheck && pnpm test && pnpm build"
   },
   "repository": {
     "type": "git",
@@ -38,14 +52,28 @@
   },
   "homepage": "https://github.com/AmazeContinuityProjects/AmazeUI#readme",
   "devDependencies": {
+    "@arethetypeswrong/cli": "^0.18.5",
+    "@testing-library/jest-dom": "^7.0.1",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.6",
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
     "@types/react-native": "^0.72.8",
+    "@vitest/coverage-v8": "^4.1.11",
     "autoprefixer": "^10.5.2",
+    "eslint": "^10.9.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.5.4",
+    "jsdom": "^30.0.1",
     "postcss": "^8.5.16",
+    "prettier": "^3.9.6",
+    "publint": "^0.3.24",
     "tailwindcss": "^4.3.2",
     "tsup": "^8.5.1",
-    "typescript": "^6.0.3"
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.67.0",
+    "vitest": "^4.1.11"
   },
   "pnpm": {
     "onlyBuiltDependencies": [

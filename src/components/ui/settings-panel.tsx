@@ -1,20 +1,20 @@
-"use client";
-import { useState, useMemo, useRef, useEffect, useCallback } from "react";
-import { cn } from "../../lib/utils";
+"use client"
+import { useState, useMemo, useRef, useEffect, useCallback } from "react"
+import { cn } from "../../lib/utils"
 
 export interface SettingsSection {
-  id: string;
-  label: string;
-  icon: React.ComponentType<{ className?: string }>;
+  id: string
+  label: string
+  icon: React.ComponentType<{ className?: string }>
 }
 
 export interface SettingsPanelProps {
-  sections: SettingsSection[];
-  searchPlaceholder?: string;
-  className?: string;
-  children?: React.ReactNode;
-  renderSection: (section: SettingsSection) => React.ReactNode;
-  sidebarLabel?: string;
+  sections: SettingsSection[]
+  searchPlaceholder?: string
+  className?: string
+  children?: React.ReactNode
+  renderSection: (section: SettingsSection) => React.ReactNode
+  sidebarLabel?: string
 }
 
 export function SettingsPanel({
@@ -24,45 +24,45 @@ export function SettingsPanel({
   renderSection,
   sidebarLabel = "Settings",
 }: SettingsPanelProps) {
-  const [searchQuery, setSearchQuery] = useState("");
-  const [activeSection, setActiveSection] = useState(sections[0]?.id || "");
-  const [expandedSection, setExpandedSection] = useState("");
+  const [searchQuery, setSearchQuery] = useState("")
+  const [activeSection, setActiveSection] = useState(sections[0]?.id || "")
+  const [expandedSection, setExpandedSection] = useState("")
 
-  const sectionRefs = useRef<Record<string, HTMLElement | null>>({});
+  const sectionRefs = useRef<Record<string, HTMLElement | null>>({})
 
   const filteredSections = useMemo(() => {
-    if (!searchQuery.trim()) return sections;
-    const q = searchQuery.toLowerCase();
+    if (!searchQuery.trim()) return sections
+    const q = searchQuery.toLowerCase()
     return sections.filter((s) => {
-      if (s.label.toLowerCase().includes(q)) return true;
-      if (s.id.toLowerCase().includes(q)) return true;
-      return false;
-    });
-  }, [sections, searchQuery]);
+      if (s.label.toLowerCase().includes(q)) return true
+      if (s.id.toLowerCase().includes(q)) return true
+      return false
+    })
+  }, [sections, searchQuery])
 
   const scrollToSection = useCallback((id: string) => {
-    const el = sectionRefs.current[id];
+    const el = sectionRefs.current[id]
     if (el) {
-      el.scrollIntoView({ behavior: "smooth", block: "start" });
-      setActiveSection(id);
+      el.scrollIntoView({ behavior: "smooth", block: "start" })
+      setActiveSection(id)
     }
-  }, []);
+  }, [])
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrollPos = window.scrollY + 120;
-      let current = sections[0]?.id || "";
+      const scrollPos = window.scrollY + 120
+      let current = sections[0]?.id || ""
       for (const sec of sections) {
-        const el = sectionRefs.current[sec.id];
+        const el = sectionRefs.current[sec.id]
         if (el && el.offsetTop <= scrollPos) {
-          current = sec.id;
+          current = sec.id
         }
       }
-      setActiveSection(current);
-    };
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [sections]);
+      setActiveSection(current)
+    }
+    window.addEventListener("scroll", handleScroll, { passive: true })
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [sections])
 
   return (
     <div className={cn("w-full h-full pb-16 px-4 md:px-8 max-w-7xl mx-auto", className)}>
@@ -70,9 +70,14 @@ export function SettingsPanel({
         <svg
           className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 dark:text-gray-500"
           xmlns="http://www.w3.org/2000/svg"
-          width="24" height="24" viewBox="0 0 24 24"
-          fill="none" stroke="currentColor" strokeWidth="2"
-          strokeLinecap="round" strokeLinejoin="round"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         >
           <circle cx="11" cy="11" r="8" />
           <path d="m21 21-4.3-4.3" />
@@ -93,8 +98,8 @@ export function SettingsPanel({
               {sidebarLabel}
             </div>
             {filteredSections.map((sec) => {
-              const Icon = sec.icon;
-              const isActive = activeSection === sec.id;
+              const Icon = sec.icon
+              const isActive = activeSection === sec.id
               return (
                 <button
                   key={sec.id}
@@ -106,25 +111,32 @@ export function SettingsPanel({
                       : "text-gray-600 dark:text-gray-450 hover:bg-gray-100/60 dark:hover:bg-slate-800/40 hover:text-gray-900 dark:hover:text-white border border-transparent"
                   )}
                 >
-                  <Icon className={cn("w-4 h-4", isActive ? "text-info" : "text-gray-400 dark:text-gray-500")} />
+                  <Icon
+                    className={cn(
+                      "w-4 h-4",
+                      isActive ? "text-info" : "text-gray-400 dark:text-gray-500"
+                    )}
+                  />
                   <span>{sec.label}</span>
                 </button>
-              );
+              )
             })}
           </aside>
         )}
 
         <div className="flex-1 w-full min-w-0 space-y-8">
           {filteredSections.map((sec) => {
-            const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
-            const Icon = sec.icon;
+            const isMobile = typeof window !== "undefined" && window.innerWidth < 768
+            const Icon = sec.icon
 
             if (isMobile) {
-              const isOpen = expandedSection === sec.id;
+              const isOpen = expandedSection === sec.id
               return (
                 <div
                   key={sec.id}
-                  ref={(el) => { sectionRefs.current[sec.id] = el; }}
+                  ref={(el) => {
+                    sectionRefs.current[sec.id] = el
+                  }}
                   className="border border-gray-200/85 dark:border-gray-800 bg-white/50 dark:bg-slate-900/50 rounded-2xl overflow-hidden shadow-xs"
                 >
                   <button
@@ -141,9 +153,14 @@ export function SettingsPanel({
                         isOpen ? "rotate-90 text-info" : ""
                       )}
                       xmlns="http://www.w3.org/2000/svg"
-                      width="24" height="24" viewBox="0 0 24 24"
-                      fill="none" stroke="currentColor" strokeWidth="2"
-                      strokeLinecap="round" strokeLinejoin="round"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                     >
                       <path d="m9 18 6-6-6-6" />
                     </svg>
@@ -154,14 +171,16 @@ export function SettingsPanel({
                     </div>
                   )}
                 </div>
-              );
+              )
             }
 
             return (
               <section
                 key={sec.id}
                 id={`sec-${sec.id}`}
-                ref={(el) => { sectionRefs.current[sec.id] = el; }}
+                ref={(el) => {
+                  sectionRefs.current[sec.id] = el
+                }}
                 className="scroll-mt-6 space-y-5"
               >
                 <div className="flex items-center gap-2 pb-1 border-b border-gray-150 dark:border-gray-800">
@@ -172,10 +191,10 @@ export function SettingsPanel({
                 </div>
                 {renderSection(sec)}
               </section>
-            );
+            )
           })}
         </div>
       </div>
     </div>
-  );
+  )
 }

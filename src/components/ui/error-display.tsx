@@ -1,38 +1,60 @@
-import { cn } from "../../lib/utils";
-import { Pressable } from "../../lib/primitives";
+import { cn } from "../../lib/utils"
+import { Pressable } from "../../lib/primitives"
 
 function XCircleIcon({ className }: { className?: string }) {
   return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
-      <circle cx="12" cy="12" r="10" /><path d="m15 9-6 6" /><path d="m9 9 6 6" />
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+    >
+      <circle cx="12" cy="12" r="10" />
+      <path d="m15 9-6 6" />
+      <path d="m9 9 6 6" />
     </svg>
-  );
+  )
 }
 
 function AlertTriangleIcon({ className }: { className?: string }) {
   return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
-      <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z" /><path d="M12 9v4" /><path d="M12 17h.01" />
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+    >
+      <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z" />
+      <path d="M12 9v4" />
+      <path d="M12 17h.01" />
     </svg>
-  );
+  )
 }
 
 export interface ErrorDisplayProps {
-  message: string;
-  variant?: "error" | "warning";
-  className?: string;
-  onRetry?: () => void;
+  message: string
+  variant?: "error" | "warning"
+  className?: string
+  onRetry?: () => void
 }
 
 const iconMap = {
   error: XCircleIcon,
   warning: AlertTriangleIcon,
-};
+}
 
 const styleMap = {
-  error: "bg-red-50 border border-red-200 text-red-800 dark:bg-red-950/30 dark:border-red-900/40 dark:text-red-300",
-  warning: "bg-amber-50 border border-amber-200 text-amber-800 dark:bg-amber-950/30 dark:border-amber-900/40 dark:text-amber-300",
-};
+  error:
+    "bg-red-50 border border-red-200 text-red-800 dark:bg-red-950/30 dark:border-red-900/40 dark:text-red-300",
+  warning:
+    "bg-amber-50 border border-amber-200 text-amber-800 dark:bg-amber-950/30 dark:border-amber-900/40 dark:text-amber-300",
+}
 
 export function ErrorDisplay({
   message,
@@ -40,9 +62,15 @@ export function ErrorDisplay({
   className,
   onRetry,
 }: ErrorDisplayProps) {
-  const Icon = iconMap[variant];
+  const Icon = iconMap[variant]
   return (
-    <div className={cn(styleMap[variant], "flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium mb-5", className)}>
+    <div
+      className={cn(
+        styleMap[variant],
+        "flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium mb-5",
+        className
+      )}
+    >
       <Icon className="w-4 h-4 shrink-0" />
       <span className="flex-1">{message}</span>
       {onRetry && (
@@ -54,5 +82,5 @@ export function ErrorDisplay({
         </Pressable>
       )}
     </div>
-  );
+  )
 }

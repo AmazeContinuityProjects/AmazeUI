@@ -1,16 +1,16 @@
-"use client";
-import { cn } from "../../lib/utils";
+"use client"
+import { cn } from "../../lib/utils"
 
 export interface AboutSectionProps {
-  wordmarkLightSrc?: string;
-  wordmarkDarkSrc?: string;
-  tagline?: string;
-  className?: string;
-  version?: string;
-  buildNumber?: string;
-  lastUpdated?: string;
-  platform?: string;
-  credits?: string;
+  wordmarkLightSrc?: string
+  wordmarkDarkSrc?: string
+  tagline?: string
+  className?: string
+  version?: string
+  buildNumber?: string
+  lastUpdated?: string
+  platform?: string
+  credits?: string
 }
 
 export function AboutSection({
@@ -24,8 +24,8 @@ export function AboutSection({
   platform,
   credits = "MADE WITH ❤️ BY AMAZE CONTINUITY PROJECTS",
 }: AboutSectionProps) {
-  const showWordmark = wordmarkLightSrc || wordmarkDarkSrc;
-  const hasInfoGrid = version || buildNumber || lastUpdated || platform;
+  const showWordmark = wordmarkLightSrc || wordmarkDarkSrc
+  const hasInfoGrid = version || buildNumber || lastUpdated || platform
 
   return (
     <div
@@ -50,9 +50,7 @@ export function AboutSection({
               className="h-6 object-contain mx-auto hidden dark:block"
             />
           )}
-          {tagline && (
-            <p className="text-xs text-gray-500 dark:text-gray-400">{tagline}</p>
-          )}
+          {tagline && <p className="text-xs text-gray-500 dark:text-gray-400">{tagline}</p>}
         </div>
       )}
 
@@ -91,5 +89,5 @@ export function AboutSection({
         </p>
       )}
     </div>
-  );
+  )
 }

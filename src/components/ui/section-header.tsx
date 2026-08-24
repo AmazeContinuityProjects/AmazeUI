@@ -1,23 +1,22 @@
-import { cn } from "../../lib/utils";
-import { View, Text } from "../../lib/primitives";
+import { cn } from "../../lib/utils"
+import { View, Text } from "../../lib/primitives"
 
 export interface SectionHeaderProps {
-  icon?: React.ReactNode;
-  title: string;
-  subtitle?: string;
-  action?: React.ReactNode;
-  className?: string;
+  icon?: React.ReactNode
+  title: string
+  subtitle?: string
+  action?: React.ReactNode
+  className?: string
 }
 
-export function SectionHeader({
-  icon,
-  title,
-  subtitle,
-  action,
-  className,
-}: SectionHeaderProps) {
+export function SectionHeader({ icon, title, subtitle, action, className }: SectionHeaderProps) {
   return (
-    <View className={cn("flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4", className)}>
+    <View
+      className={cn(
+        "flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4",
+        className
+      )}
+    >
       <View>
         <Text className="text-2xl font-bold text-gray-900 dark:text-gray-100 flex flex-row items-center gap-2">
           {icon}
@@ -29,5 +28,5 @@ export function SectionHeader({
       </View>
       {action && <View>{action}</View>}
     </View>
-  );
+  )
 }

@@ -1,19 +1,22 @@
-"use client";
-import * as React from "react";
-import { cn } from "../../lib/utils";
+"use client"
+import * as React from "react"
+import { cn } from "../../lib/utils"
 
 export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  label?: string;
-  error?: string;
+  label?: string
+  error?: string
 }
 
 export const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, label, error, id, ...props }, ref) => {
-    const inputId = id || label?.toLowerCase().replace(/\s+/g, "-");
+    const inputId = id || label?.toLowerCase().replace(/\s+/g, "-")
     return (
       <div>
         {label && (
-          <label htmlFor={inputId} className="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1 ml-1">
+          <label
+            htmlFor={inputId}
+            className="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1 ml-1"
+          >
             {label}
           </label>
         )}
@@ -33,23 +36,26 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
         />
         {error && <p className="text-xs text-red-500 mt-1 ml-1">{error}</p>}
       </div>
-    );
+    )
   }
-);
-Input.displayName = "Input";
+)
+Input.displayName = "Input"
 
 export interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
-  label?: string;
-  error?: string;
+  label?: string
+  error?: string
 }
 
 export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
   ({ className, label, error, id, ...props }, ref) => {
-    const inputId = id || label?.toLowerCase().replace(/\s+/g, "-");
+    const inputId = id || label?.toLowerCase().replace(/\s+/g, "-")
     return (
       <div>
         {label && (
-          <label htmlFor={inputId} className="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1 ml-1">
+          <label
+            htmlFor={inputId}
+            className="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1 ml-1"
+          >
             {label}
           </label>
         )}
@@ -69,23 +75,26 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
         />
         {error && <p className="text-xs text-red-500 mt-1 ml-1">{error}</p>}
       </div>
-    );
+    )
   }
-);
-Textarea.displayName = "Textarea";
+)
+Textarea.displayName = "Textarea"
 
 export interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
-  label?: string;
-  options: { value: string; label: string }[];
+  label?: string
+  options: { value: string; label: string }[]
 }
 
 export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
   ({ className, label, options, id, ...props }, ref) => {
-    const inputId = id || label?.toLowerCase().replace(/\s+/g, "-");
+    const inputId = id || label?.toLowerCase().replace(/\s+/g, "-")
     return (
       <div>
         {label && (
-          <label htmlFor={inputId} className="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1 ml-1">
+          <label
+            htmlFor={inputId}
+            className="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1 ml-1"
+          >
             {label}
           </label>
         )}
@@ -103,11 +112,13 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
           {...props}
         >
           {options.map((opt) => (
-            <option key={opt.value} value={opt.value}>{opt.label}</option>
+            <option key={opt.value} value={opt.value}>
+              {opt.label}
+            </option>
           ))}
         </select>
       </div>
-    );
+    )
   }
-);
-Select.displayName = "Select";
+)
+Select.displayName = "Select"

@@ -1,4 +1,4 @@
-"use client";
+"use client"
 import * as React from "react"
 import { cn } from "../../lib/utils"
 
@@ -27,13 +27,16 @@ export const Sidebar = React.forwardRef<HTMLDivElement, SidebarProps>(
     const isControlled = onOpenChange !== undefined
     const openState = isControlled ? isOpen : internalOpen
 
-    const handleToggle = React.useCallback((open: boolean) => {
-      if (isControlled) {
-        onOpenChange(open)
-      } else {
-        setInternalOpen(open)
-      }
-    }, [isControlled, onOpenChange])
+    const handleToggle = React.useCallback(
+      (open: boolean) => {
+        if (isControlled) {
+          onOpenChange(open)
+        } else {
+          setInternalOpen(open)
+        }
+      },
+      [isControlled, onOpenChange]
+    )
 
     return (
       <SidebarContext.Provider value={{ isOpen: openState, setIsOpen: handleToggle }}>
@@ -74,51 +77,46 @@ export const SidebarHeader = React.forwardRef<HTMLDivElement, React.HTMLAttribut
 )
 SidebarHeader.displayName = "SidebarHeader"
 
-export const SidebarContent = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
-  ({ className, ...props }, ref) => {
-    const { isOpen } = useSidebar()
-    return (
-      <div
-        ref={ref}
-        style={{ overflowY: "auto", overflowX: "hidden" }}
-        className={cn(
-          "min-h-0 flex-1",
-          isOpen ? "px-3 py-4" : "px-2 py-4 items-center",
-          className
-        )}
-        {...props}
-      />
-    )
-  }
-)
+export const SidebarContent = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => {
+  const { isOpen } = useSidebar()
+  return (
+    <div
+      ref={ref}
+      style={{ overflowY: "auto", overflowX: "hidden" }}
+      className={cn("min-h-0 flex-1", isOpen ? "px-3 py-4" : "px-2 py-4 items-center", className)}
+      {...props}
+    />
+  )
+})
 SidebarContent.displayName = "SidebarContent"
 
 export const SidebarGroup = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
   ({ className, ...props }, ref) => {
-    return (
-      <div
-        ref={ref}
-        className={cn("flex flex-col gap-1 w-full", className)}
-        {...props}
-      />
-    )
+    return <div ref={ref} className={cn("flex flex-col gap-1 w-full", className)} {...props} />
   }
 )
 SidebarGroup.displayName = "SidebarGroup"
 
-export const SidebarGroupLabel = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
-  ({ className, ...props }, ref) => {
-    const { isOpen } = useSidebar()
-    if (!isOpen) return null
-    return (
-      <div
-        ref={ref}
-        className={cn("px-3 mb-1 mt-4 text-[10px] font-bold uppercase tracking-[0.1em] text-sidebar-foreground/50", className)}
-        {...props}
-      />
-    )
-  }
-)
+export const SidebarGroupLabel = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => {
+  const { isOpen } = useSidebar()
+  if (!isOpen) return null
+  return (
+    <div
+      ref={ref}
+      className={cn(
+        "px-3 mb-1 mt-4 text-[10px] font-bold uppercase tracking-[0.1em] text-sidebar-foreground/50",
+        className
+      )}
+      {...props}
+    />
+  )
+})
 SidebarGroupLabel.displayName = "SidebarGroupLabel"
 
 export interface SidebarItemProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -138,26 +136,31 @@ export const SidebarItem = React.forwardRef<HTMLButtonElement, SidebarItemProps>
         className={cn(
           "group relative flex items-center rounded-xl transition-all duration-150 w-full hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
           isOpen ? "gap-3 px-3 py-2 justify-start text-sm" : "justify-center p-3 h-11 w-11 mt-1",
-          isActive 
-            ? "bg-sidebar-accent border border-sidebar-border text-info font-semibold shadow-sm" 
+          isActive
+            ? "bg-sidebar-accent border border-sidebar-border text-info font-semibold shadow-sm"
             : "text-sidebar-foreground/70 border border-transparent",
           className
         )}
         {...props}
       >
-        <div className={cn("shrink-0", isActive ? "text-info" : "text-sidebar-foreground/60 group-hover:text-sidebar-foreground")}>
+        <div
+          className={cn(
+            "shrink-0",
+            isActive
+              ? "text-info"
+              : "text-sidebar-foreground/60 group-hover:text-sidebar-foreground"
+          )}
+        >
           {icon}
         </div>
         {isOpen && label && (
-          <span className={cn("truncate flex-1 text-left", isActive ? "font-semibold" : "font-medium")}>
+          <span
+            className={cn("truncate flex-1 text-left", isActive ? "font-semibold" : "font-medium")}
+          >
             {label}
           </span>
         )}
-        {isOpen && rightElement && (
-          <div className="shrink-0">
-            {rightElement}
-          </div>
-        )}
+        {isOpen && rightElement && <div className="shrink-0">{rightElement}</div>}
         {!isOpen && label && (
           <div className="absolute left-full ml-4 hidden group-hover:block z-50 px-3 py-1.5 rounded-lg bg-gray-900 text-white dark:bg-gray-100 dark:text-gray-900 text-xs font-medium whitespace-nowrap shadow-xl">
             {label}

@@ -1,13 +1,13 @@
-"use client";
-import * as React from "react";
-import { cn } from "../../lib/utils";
+"use client"
+import * as React from "react"
+import { cn } from "../../lib/utils"
 
 export interface EmptyStateProps {
-  icon?: React.ReactNode;
-  title: string;
-  description?: string;
-  action?: React.ReactNode;
-  className?: string;
+  icon?: React.ReactNode
+  title: string
+  description?: string
+  action?: React.ReactNode
+  className?: string
 }
 
 export function EmptyState({ icon, title, description, action, className }: EmptyStateProps) {
@@ -20,5 +20,5 @@ export function EmptyState({ icon, title, description, action, className }: Empt
       )}
       {action && <div className="mt-6">{action}</div>}
     </div>
-  );
+  )
 }

@@ -1,8 +1,8 @@
-import * as React from "react";
-import { cn } from "../../lib/utils";
+import * as React from "react"
+import { cn } from "../../lib/utils"
 
 export interface SearchInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  containerClassName?: string;
+  containerClassName?: string
 }
 
 export const SearchInput = React.forwardRef<HTMLInputElement, SearchInputProps>(
@@ -18,7 +18,8 @@ export const SearchInput = React.forwardRef<HTMLInputElement, SearchInputProps>(
           strokeLinecap="round"
           strokeLinejoin="round"
         >
-          <circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" />
+          <circle cx="11" cy="11" r="8" />
+          <path d="m21 21-4.3-4.3" />
         </svg>
         <input
           ref={ref}
@@ -35,7 +36,7 @@ export const SearchInput = React.forwardRef<HTMLInputElement, SearchInputProps>(
           {...props}
         />
       </div>
-    );
+    )
   }
-);
-SearchInput.displayName = "SearchInput";
+)
+SearchInput.displayName = "SearchInput"

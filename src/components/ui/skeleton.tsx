@@ -1,11 +1,11 @@
-"use client";
-import { View } from "../../lib/primitives";
+"use client"
+import { View } from "../../lib/primitives"
 import * as React from "react"
-import {  type ViewProps } from "react-native"
+import { type ViewProps } from "react-native"
 import { cn } from "../../lib/utils"
 
 export interface SkeletonProps extends ViewProps {
-  className?: string;
+  className?: string
 }
 
 function Skeleton({ className, ...props }: SkeletonProps) {
@@ -18,4 +18,3 @@ function Skeleton({ className, ...props }: SkeletonProps) {
 }
 
 export { Skeleton }
-
