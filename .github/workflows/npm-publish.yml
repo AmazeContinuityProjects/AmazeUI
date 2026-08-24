@@ -44,8 +44,14 @@ jobs:
       - run: pnpm build
       - name: Validate package exports (publint + attw)
         run: pnpm pkg:check
+      - name: Upgrade npm CLI for OIDC trusted publishing
+        # OIDC-based publishing requires npm >= 11.5.1. Runner toolchains can
+        # bundle older npm versions even on Node 24, so upgrade explicitly.
+        run: |
+          npm --version
+          npm install -g npm@latest
       - name: Publish via OIDC trusted publishing
         # pnpm publish delegates to the npm CLI, which exchanges the GitHub
-        # Actions OIDC token automatically. Requires npm >= 11.5.1, so this
-        # job pins Node 24. No NPM_TOKEN secret is used or needed.
+        # Actions OIDC token automatically. No NPM_TOKEN secret is used or
+        # needed.
         run: pnpm publish --access public --no-git-checks
