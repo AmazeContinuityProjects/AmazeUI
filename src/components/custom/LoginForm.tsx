@@ -39,6 +39,12 @@ interface LoginFormProps {
   backupApiUrl: string
 }
 
+/**
+ * @deprecated Not used by any AmazeCC app any more and out of date with the
+ * live version in AmazeCC (the onboarding flow (`src/components/custom/onboarding/OnboardingIntro.tsx`)).
+ * It is app-specific, not a reusable component, so it will be removed from
+ * AmazeUI in the next major version. Use AmazeUI's form primitives in the app itself instead.
+ */
 export default function LoginForm({
   username,
   setUsername,
