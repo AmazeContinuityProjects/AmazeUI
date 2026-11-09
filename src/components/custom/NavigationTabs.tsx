@@ -82,6 +82,12 @@ function formatSemesterName(semId: string): string {
 const navButtonBase =
   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400/40"
 
+/**
+ * @deprecated Not used by any AmazeCC app any more and out of date with the
+ * live version in AmazeCC (`src/components/custom/header/NavigationTabs.tsx`).
+ * It is app-specific, not a reusable component, so it will be removed from
+ * AmazeUI in the next major version. Use `MobileBottomNav`, `SubTabStrip` and `AppLibrary` instead.
+ */
 export default function NavigationTabs({
   activeTab,
   setActiveTab,
