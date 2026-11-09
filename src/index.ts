@@ -31,6 +31,8 @@ export * from "./components/ui/mobile-bottom-nav"
 export * from "./components/ui/back-button"
 export * from "./components/ui/badge"
 // Custom / Complex UI
+// Deprecated: app-specific copies no AmazeCC app imports any more. Removed in
+// the next major version (see the @deprecated notes on each component).
 export { default as LoginForm } from "./components/custom/LoginForm"
 export { default as NavigationTabs } from "./components/custom/NavigationTabs"
 
