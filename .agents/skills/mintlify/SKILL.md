@@ -15,20 +15,20 @@ The Mintlify CLI also prints current guidance on completing specific tasks in Mi
 
 Read these **only when your task requires them**. Each links to a Mintlify documentation page or, for agent workflow guidance, the source file on GitHub.
 
-| Reference | When to read |
-|------|-------------|
-| [Components](https://mintlify.com/docs/components.md) | Adding or modifying components (callouts, cards, steps, tabs, accordions, code groups, fields, frames, icons, tooltips, badges, trees, mermaid, MDX, panels, prompts, colors, tiles, updates, views). Also covers table column widths. |
-| [Global settings](https://mintlify.com/docs/organize/settings.md) | Changing docs.json settings (theme, colors, logo, fonts, appearance, navbar, footer, banner, redirects, SEO, integrations, API config). Also covers snippets, hidden pages, .mintignore, custom CSS/JS, and the complete frontmatter fields table. |
-| [Navigation](https://mintlify.com/docs/organize/navigation.md) | Modifying site navigation structure (groups, tabs, anchors, dropdowns, products, versions, languages, OpenAPI, and SDK references in nav). |
-| [API playground](https://mintlify.com/docs/api-playground/overview.md) | Setting up API documentation (OpenAPI, AsyncAPI, MDX manual API pages, extensions, playground config). |
-| [CLI commands](https://mintlify.com/docs/cli/commands.md) | Running common CLI commands (dev, validate, add-domain, analytics, score, broken-links, a11y, format, and config) and their key flags. |
-| [Product context](https://raw.githubusercontent.com/mintlify/docs/main/agent-context/context/skills/mintlify/reference/product-context.md) | Before substantial content work (new site, broad restructure, first-time section setup) — check for and maintain `.mintlify/product-brief.md`. |
-| [Custom scripts](https://mintlify.com/docs/customize/custom-scripts.md) | Customizing appearance or browser behavior with CSS, JavaScript, React snippets, selectors, or CSS variables. |
-| [Writing pages](https://raw.githubusercontent.com/mintlify/docs/main/agent-context/context/skills/mintlify/reference/writing.md) | Before creating a page or writing more than a sentence or two: the no-invention rule, page creation and editing steps, quality bar, audience, titles and descriptions, links. |
-| [Publishing and review](https://raw.githubusercontent.com/mintlify/docs/main/agent-context/context/skills/mintlify/reference/publishing-and-review.md) | Publishing, branches and pull requests, "is this live" questions, undoing changes, and reviewing a page with suggestions and comments. |
-| [Project settings](https://raw.githubusercontent.com/mintlify/docs/main/agent-context/context/skills/mintlify/reference/project-settings.md) | Reading or changing dashboard settings (domains, git sources, auth, members, workflows, search, add-ons), settings no tool covers, and analytics questions. |
-| [Widgets](https://raw.githubusercontent.com/mintlify/docs/main/agent-context/context/skills/mintlify/reference/widgets.md) | Before you write or rewrite a page that explains a value that depends on inputs, a process, a structure, a comparison, or a UI: build live React widgets instead of screenshots, recordings or Mermaid. Covers when to build one and the exact limits. |
-| [Site building](https://raw.githubusercontent.com/mintlify/docs/main/agent-context/context/skills/mintlify/reference/site-building.md) | Building or migrating a whole site, a section, or more than a handful of pages: research sizing, generation order, landing page, structure for common kinds of site, porting rules. |
+| Reference                                                                                                                                              | When to read                                                                                                                                                                                                                                           |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| [Components](https://mintlify.com/docs/components.md)                                                                                                  | Adding or modifying components (callouts, cards, steps, tabs, accordions, code groups, fields, frames, icons, tooltips, badges, trees, mermaid, MDX, panels, prompts, colors, tiles, updates, views). Also covers table column widths.                 |
+| [Global settings](https://mintlify.com/docs/organize/settings.md)                                                                                      | Changing docs.json settings (theme, colors, logo, fonts, appearance, navbar, footer, banner, redirects, SEO, integrations, API config). Also covers snippets, hidden pages, .mintignore, custom CSS/JS, and the complete frontmatter fields table.     |
+| [Navigation](https://mintlify.com/docs/organize/navigation.md)                                                                                         | Modifying site navigation structure (groups, tabs, anchors, dropdowns, products, versions, languages, OpenAPI, and SDK references in nav).                                                                                                             |
+| [API playground](https://mintlify.com/docs/api-playground/overview.md)                                                                                 | Setting up API documentation (OpenAPI, AsyncAPI, MDX manual API pages, extensions, playground config).                                                                                                                                                 |
+| [CLI commands](https://mintlify.com/docs/cli/commands.md)                                                                                              | Running common CLI commands (dev, validate, add-domain, analytics, score, broken-links, a11y, format, and config) and their key flags.                                                                                                                 |
+| [Product context](https://raw.githubusercontent.com/mintlify/docs/main/agent-context/context/skills/mintlify/reference/product-context.md)             | Before substantial content work (new site, broad restructure, first-time section setup) — check for and maintain `.mintlify/product-brief.md`.                                                                                                         |
+| [Custom scripts](https://mintlify.com/docs/customize/custom-scripts.md)                                                                                | Customizing appearance or browser behavior with CSS, JavaScript, React snippets, selectors, or CSS variables.                                                                                                                                          |
+| [Writing pages](https://raw.githubusercontent.com/mintlify/docs/main/agent-context/context/skills/mintlify/reference/writing.md)                       | Before creating a page or writing more than a sentence or two: the no-invention rule, page creation and editing steps, quality bar, audience, titles and descriptions, links.                                                                          |
+| [Publishing and review](https://raw.githubusercontent.com/mintlify/docs/main/agent-context/context/skills/mintlify/reference/publishing-and-review.md) | Publishing, branches and pull requests, "is this live" questions, undoing changes, and reviewing a page with suggestions and comments.                                                                                                                 |
+| [Project settings](https://raw.githubusercontent.com/mintlify/docs/main/agent-context/context/skills/mintlify/reference/project-settings.md)           | Reading or changing dashboard settings (domains, git sources, auth, members, workflows, search, add-ons), settings no tool covers, and analytics questions.                                                                                            |
+| [Widgets](https://raw.githubusercontent.com/mintlify/docs/main/agent-context/context/skills/mintlify/reference/widgets.md)                             | Before you write or rewrite a page that explains a value that depends on inputs, a process, a structure, a comparison, or a UI: build live React widgets instead of screenshots, recordings or Mermaid. Covers when to build one and the exact limits. |
+| [Site building](https://raw.githubusercontent.com/mintlify/docs/main/agent-context/context/skills/mintlify/reference/site-building.md)                 | Building or migrating a whole site, a section, or more than a handful of pages: research sizing, generation order, landing page, structure for common kinds of site, porting rules.                                                                    |
 
 ## Starting a new docs site
 
@@ -83,6 +83,7 @@ Two Mintlify MCP servers are available. Use them alongside the reference files i
 Read-only access to Mintlify's published documentation. Use it when the reference files don't cover a specific detail, when you need an up-to-date component signature, or to verify an unfamiliar config option.
 
 Tools:
+
 - `search_mintlify` — Search the Mintlify knowledge base by query. Good for finding guides, examples, and API references.
 - `query_docs_filesystem_mintlify` — Browse the docs file tree (`ls`, `cat`, `grep`, `find`, etc.). Good for reading a specific docs page.
 - `submit_feedback` — Report a docs page that is incorrect, outdated, confusing, or incomplete. The path (relative path or full URL) must match a published page or a redirect source; otherwise the tool returns an error and records nothing.
@@ -96,6 +97,7 @@ Use this server when the user wants to edit their Mintlify content, restructure 
 Workflow: use `read`/`search`/`edit_page`/`write_page`/`list_nodes`/`create_node`/`update_node`/`move_node`/`delete_node`/`update_config` with a `branch` to make changes, then call `publish` with the `branch` and a `title` to publish (or `discard` to abandon). Pass the deploy branch to edit it directly. If the project requires a pull request (**Push directly to your deploy branch** is off, branch protection requires pull requests, deploy branch editing is locked, or the connection uses a client or machine-to-machine token), edits to the deploy branch are refused with the reason and change nothing. Call `create_branch` and pass its `branchName` as `branch` instead. Projects with auto publish turned on have no branches: pass the deploy branch, where edits are committed automatically. `create_branch` and other branches are refused there, and pull request requirements don't apply.
 
 Key tools:
+
 - **`create_branch`** — Start a new branch off the deploy branch with a `title` that also names its pull request. Pass `from` to start off another existing branch instead: `create_branch { title: "Add tips page", from: "docs-refresh" }`. On GitHub, GitLab, and Azure Repos, its pull request then targets the `from` branch. Returns `branchName` and a branch-level `editorUrl` to preview changes live. On a branch, Mintlify commits edits automatically about 15 seconds after the last change, and the first commit opens a pull request.
 - **`list_branches`** — List existing branches; pass any of them as `branch`. Branches that don't exist are refused.
 - **`list_deployments`** — Discover which project(s) this connection can access.
@@ -187,18 +189,18 @@ keywords: ["relevant", "search", "terms"]
 
 ### Common frontmatter fields
 
-| Field | Type | Description |
-|-------|------|-------------|
-| `title` | string | Page title in navigation and browser tabs. Auto-generated from the path if omitted. |
-| `description` | string | Brief description for SEO. Displays under the title. |
-| `sidebarTitle` | string | Short title for sidebar navigation. |
-| `icon` | string | Lucide, Font Awesome, or Tabler icon name. Also accepts a single emoji, a URL, or a file path. |
-| `tag` | string | Label next to page title in sidebar (e.g., "NEW"). |
-| `hidden` | boolean | Remove from sidebar. Page still accessible by URL. |
-| `mode` | string | Page layout: `default`, `wide`, `custom`, `frame`, `center`, `assistant`. |
-| `keywords` | array | Search terms for internal search and SEO. |
-| `api` | string | API endpoint for interactive playground (e.g., `"POST /users"`). |
-| `openapi` | string | OpenAPI endpoint reference (e.g., `"GET /endpoint"`). |
+| Field          | Type    | Description                                                                                    |
+| -------------- | ------- | ---------------------------------------------------------------------------------------------- |
+| `title`        | string  | Page title in navigation and browser tabs. Auto-generated from the path if omitted.            |
+| `description`  | string  | Brief description for SEO. Displays under the title.                                           |
+| `sidebarTitle` | string  | Short title for sidebar navigation.                                                            |
+| `icon`         | string  | Lucide, Font Awesome, or Tabler icon name. Also accepts a single emoji, a URL, or a file path. |
+| `tag`          | string  | Label next to page title in sidebar (e.g., "NEW").                                             |
+| `hidden`       | boolean | Remove from sidebar. Page still accessible by URL.                                             |
+| `mode`         | string  | Page layout: `default`, `wide`, `custom`, `frame`, `center`, `assistant`.                      |
+| `keywords`     | array   | Search terms for internal search and SEO.                                                      |
+| `api`          | string  | API endpoint for interactive playground (e.g., `"POST /users"`).                               |
+| `openapi`      | string  | OpenAPI endpoint reference (e.g., `"GET /endpoint"`).                                          |
 
 For the complete list including `searchable`, `boost`, `deprecated`, `related`, `groups`, and more, read [Pages](https://mintlify.com/docs/organize/pages.md).
 
@@ -221,12 +223,8 @@ Below are the most commonly used components. For full props and all 26 component
 
 ```mdx
 <Steps>
-  <Step title="First step">
-    Instructions for step one.
-  </Step>
-  <Step title="Second step">
-    Instructions for step two.
-  </Step>
+  <Step title="First step">Instructions for step one.</Step>
+  <Step title="Second step">Instructions for step two.</Step>
 </Steps>
 ```
 
@@ -234,16 +232,8 @@ Below are the most commonly used components. For full props and all 26 component
 
 ````mdx
 <Tabs>
-  <Tab title="npm">
-    ```bash
-    npm install package-name
-    ```
-  </Tab>
-  <Tab title="yarn">
-    ```bash
-    yarn add package-name
-    ```
-  </Tab>
+  <Tab title="npm">```bash npm install package-name ```</Tab>
+  <Tab title="yarn">```bash yarn add package-name ```</Tab>
 </Tabs>
 ````
 
@@ -251,7 +241,7 @@ Below are the most commonly used components. For full props and all 26 component
 <CodeGroup>
 
 ```javascript example.js
-const greeting = "Hello, world!";
+const greeting = "Hello, world!"
 ```
 
 ```python example.py
