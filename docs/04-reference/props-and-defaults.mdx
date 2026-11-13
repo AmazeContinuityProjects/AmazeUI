@@ -11,16 +11,16 @@ An optional marker (`prop?: type`) means the caller may omit the prop. A union (
 
 ## Common prop patterns
 
-| Pattern | Meaning in AmazeUI |
-| --- | --- |
-| `children` | Content placed between `<Component>` and `</Component>`. |
-| `className` | Extra Tailwind classes; many components combine them with defaults through `cn`. |
-| `value` plus `onChange` | Usually controlled state: the caller stores the value and passes updates back. Confirm callback type in source. |
-| `open` plus `onOpenChange` | Controlled open/close state for Dialog-like components. |
-| `defaultValue` | Initial state for an uncontrolled component, where supported. |
-| `render(value, row)` | Caller callback that returns custom React content for a data cell. |
-| `React.HTMLAttributes<T>` | Standard web DOM properties for element type `T`. |
-| `ViewProps` / `PressableProps` | Props from React Native Web, which may use `onPress` or different event shapes. |
+| Pattern                        | Meaning in AmazeUI                                                                                              |
+| ------------------------------ | --------------------------------------------------------------------------------------------------------------- |
+| `children`                     | Content placed between `<Component>` and `</Component>`.                                                        |
+| `className`                    | Extra Tailwind classes; many components combine them with defaults through `cn`.                                |
+| `value` plus `onChange`        | Usually controlled state: the caller stores the value and passes updates back. Confirm callback type in source. |
+| `open` plus `onOpenChange`     | Controlled open/close state for Dialog-like components.                                                         |
+| `defaultValue`                 | Initial state for an uncontrolled component, where supported.                                                   |
+| `render(value, row)`           | Caller callback that returns custom React content for a data cell.                                              |
+| `React.HTMLAttributes<T>`      | Standard web DOM properties for element type `T`.                                                               |
+| `ViewProps` / `PressableProps` | Props from React Native Web, which may use `onPress` or different event shapes.                                 |
 
 ## Defaults are source-specific
 

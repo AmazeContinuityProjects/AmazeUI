@@ -15,7 +15,9 @@ The root exports `Dialog`, `DialogTrigger`, `DialogContent`, `DialogHeader`, `Di
       <DialogTitle>Details</DialogTitle>
       <DialogDescription>Review the information before continuing.</DialogDescription>
     </DialogHeader>
-    <DialogFooter><DialogClose>Done</DialogClose></DialogFooter>
+    <DialogFooter>
+      <DialogClose>Done</DialogClose>
+    </DialogFooter>
   </DialogContent>
 </Dialog>
 ```
@@ -29,4 +31,8 @@ The root exports `Dialog`, `DialogTrigger`, `DialogContent`, `DialogHeader`, `Di
 - `DropdownMenu` exports root, trigger, content, item, label, and separator parts. Use menu items for actions and supply appropriate labels.
 - `Command` exports its root, dialog, input, list, empty state, group, item, shortcut, and separator components. `CommandPalette` is a higher-level searchable action list whose caller supplies items and selection behavior.
 
-<Warning>The custom `Modal` implementation is not the same component as the compound `Dialog`, and their prop contracts differ. Inspect focus management and accessible naming behavior for the exact component before using it for a critical modal flow.</Warning>
+<Warning>
+  The custom `Modal` implementation is not the same component as the compound `Dialog`, and their
+  prop contracts differ. Inspect focus management and accessible naming behavior for the exact
+  component before using it for a critical modal flow.
+</Warning>

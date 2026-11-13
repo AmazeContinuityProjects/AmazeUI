@@ -5,13 +5,29 @@ description: Learn to install, style, compose, test, and extend the AmazeCC Reac
 
 AmazeUI is a TypeScript package of reusable React components, hooks, helpers, and a Tailwind CSS entrypoint. This handbook is written for a developer who knows HTML and is new to React, JSX, TypeScript, Tailwind, or npm library integration.
 
-<Warning>This package is not a complete application. Components render UI and expose callbacks; your application remains responsible for routing, fetching, authorization, persistence, and business rules unless a component's source explicitly implements them.</Warning>
+<Warning>
+  This package is not a complete application. Components render UI and expose callbacks; your
+  application remains responsible for routing, fetching, authorization, persistence, and business
+  rules unless a component's source explicitly implements them.
+</Warning>
 
 <CardGroup cols={2}>
-  <Card title="Install and style the package" icon="package" href="/00-start-here/install-and-style">Install the published package and load the Tailwind CSS entrypoint.</Card>
-  <Card title="Build your first component" icon="code" href="/00-start-here/first-component">Import a public component and pass props.</Card>
-  <Card title="Choose a component" icon="blocks" href="/00-start-here/choose-a-component">Find the right control, overlay, display, or composite.</Card>
-  <Card title="Core concepts" icon="book-open" href="/01-concepts/index">Learn JSX, props, state, hooks, and styling.</Card>
+  <Card
+    title="Install and style the package"
+    icon="package"
+    href="/00-start-here/install-and-style"
+  >
+    Install the published package and load the Tailwind CSS entrypoint.
+  </Card>
+  <Card title="Build your first component" icon="code" href="/00-start-here/first-component">
+    Import a public component and pass props.
+  </Card>
+  <Card title="Choose a component" icon="blocks" href="/00-start-here/choose-a-component">
+    Find the right control, overlay, display, or composite.
+  </Card>
+  <Card title="Core concepts" icon="book-open" href="/01-concepts/index">
+    Learn JSX, props, state, hooks, and styling.
+  </Card>
 </CardGroup>
 
 The package source is in `src/`. The root API is defined by `src/index.ts`. If a source file is not exported there, consumers cannot assume it is available from `@amazecontinuityprojects/amazeui`.

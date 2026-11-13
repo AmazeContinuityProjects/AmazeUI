@@ -23,4 +23,7 @@ Available palette ids include `default`, `neonPink`, `forest`, `rose`, `amber`, 
 
 `ColorPalettePicker` is the visual picker; use the hook directly when building custom UI. Palette storage is browser localStorage and is not server-side account synchronization. The hook accesses `window`, `document`, and localStorage, so it is client-side behavior.
 
-<Warning>Changing CSS variables on the document root affects the whole consuming application. Test the palette with app-specific styles and both light and dark modes.</Warning>
+<Warning>
+  Changing CSS variables on the document root affects the whole consuming application. Test the
+  palette with app-specific styles and both light and dark modes.
+</Warning>

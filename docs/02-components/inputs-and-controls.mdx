@@ -7,15 +7,15 @@ description: Choose and configure the public buttons, text fields, selection con
 
 `Button` is exported from `src/components/ui/button.tsx`. It accepts children, optional visual `variant` and `size`, an `onPress` callback from the React Native Web pressable type, a web `onClick` callback, `asChild`, `className`, `textClassName`, `type`, and forwarded pressable props.
 
-| Prop | Accepted values / behavior |
-| --- | --- |
-| `variant` | `default`, `primary`, `destructive`, `danger`, `success`, `outline`, `secondary`, `ghost`, `link`; defaults to `default`. |
-| `size` | `default`, `sm`, `lg`, `icon`, `icon-sm`, `icon-lg`; defaults to `default`. |
-| `type` | `button`, `submit`, `reset`; use the right value when inside a form. |
-| `onPress` / `onClick` | The implementation uses `onPress || onClick`, so `onPress` wins if both are supplied. |
-| `asChild` | When true, clones its single valid child through the internal `Slot` helper and forwards class/callback props. |
-| `className` | Merged after the variant classes; `cn` resolves conflicting Tailwind utilities. |
-| `textClassName` | Applied to string or number children wrapped in the library `Text` primitive. |
+| Prop                  | Accepted values / behavior                                                                                                |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------------- | --- | ------------------------------------------------- |
+| `variant`             | `default`, `primary`, `destructive`, `danger`, `success`, `outline`, `secondary`, `ghost`, `link`; defaults to `default`. |
+| `size`                | `default`, `sm`, `lg`, `icon`, `icon-sm`, `icon-lg`; defaults to `default`.                                               |
+| `type`                | `button`, `submit`, `reset`; use the right value when inside a form.                                                      |
+| `onPress` / `onClick` | The implementation uses `onPress                                                                                          |     | onClick`, so `onPress` wins if both are supplied. |
+| `asChild`             | When true, clones its single valid child through the internal `Slot` helper and forwards class/callback props.            |
+| `className`           | Merged after the variant classes; `cn` resolves conflicting Tailwind utilities.                                           |
+| `textClassName`       | Applied to string or number children wrapped in the library `Text` primitive.                                             |
 
 String and numeric children are wrapped in `Text`; element children are passed through. This affects styling and means custom child composition should be tested in the consuming app.
 
@@ -37,4 +37,7 @@ Each can receive `id`, `className`, and standard element props such as `value`, 
 - `OptionPicker` accepts controlled `value`, `onChange(value)`, `options` (`{ value, label }[]`), optional `placeholder`, `className`, `searchable`, and `disabled`. Its source adapts the presentation to viewport width and uses a portal/modal for its picker surface. The parent still owns the selected value.
 - `Label` and `Textarea` are also separately exported, with the root `Textarea` export currently coming from `input.tsx`.
 
-<Tip>Controls don't own form submission or business validation. Store values and validate them in the parent form, and give each control a visible or programmatic label.</Tip>
+<Tip>
+  Controls don't own form submission or business validation. Store values and validate them in the
+  parent form, and give each control a visible or programmatic label.
+</Tip>
