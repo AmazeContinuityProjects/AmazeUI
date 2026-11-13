@@ -1,0 +1,27 @@
+---
+title: AI and Mintlify tools
+description: Guidance for using repository grounding, Mintlify's component tools, and source control when editing this handbook.
+---
+
+## Source of truth
+
+Future agents should read `grounding/README.md`, `grounding/agent-playbook.md`, and `grounding/writing-standard.md`. These files explain what the package is, how to trace its public API, and how to keep the handbook accurate. `AGENTS.md` points to these documents.
+
+For component behavior, inspect the installed version's package declarations and the matching source. `src/index.ts` determines root exports; `src/` determines behavior; `package.json` and `tsup.config.ts` define built entrypoints. Tests show verified examples but do not prove untested behavior.
+
+## Mintlify workflow
+
+`docs/docs.json` controls navigation, theme, and contextual actions. Each visible MDX page must have `title` and `description` frontmatter and be listed in navigation. Use Mintlify's built-in MDX components for callouts, cards, tabs, steps, and other structured material. Keep component names and props in examples grounded in installed Mintlify guidance.
+
+The project-local Mintlify skill is in `.agents/skills/mintlify/`. `.codex/config.toml` configures the Mintlify Admin MCP and documentation search MCP. The docs MCP is for finding Mintlify docs; the Admin MCP can edit hosted deployments. This repository's source-controlled GitHub pull request remains the reviewable path for package docs.
+
+Validate from the `docs/` directory with `mint validate` and `mint broken-links --check-snippets`. The repo's `.github/workflows/notify-docs.yml` asks the parent aggregator to sync when docs change on `main`.
+
+## Agent prompt for safe component guidance
+
+```text
+Read the AmazeUI grounding first. Inspect src/index.ts, the component's prop
+interface and implementation, and its tests. Explain the caller's state and
+CSS responsibilities. Do not infer props or platform support from a component
+name. Update docs/docs.json navigation and validate the Mintlify site.
+```

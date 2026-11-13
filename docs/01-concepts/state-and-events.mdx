@@ -1,0 +1,28 @@
+---
+title: State and events
+description: Understand which component owns state and how callbacks let applications respond to changes.
+---
+
+## State belongs somewhere
+
+An interface needs a value and a rule for changing it. React state stores values across renders. AmazeUI components often accept a `value` or `open` prop and a callback such as `onChange` or `onOpenChange`; that is a controlled pattern. The calling application stores the value and passes the updated value back after the callback.
+
+```tsx
+const [name, setName] = useState("")
+
+<Input value={name} onChange={(event) => setName(event.target.value)} />
+```
+
+Here the parent owns `name`. The child calls `onChange`; `setName` updates parent state; React renders the new prop into the input. A callback is a function supplied by the parent for the child to call at an appropriate moment.
+
+## Controlled and uncontrolled components
+
+A component is controlled when its displayed state comes from props. For example, `Tabs` accepts `value` and `onValueChange`. `Dialog` accepts `open` and `onOpenChange`. A component is uncontrolled when it stores its own internal state, often initialized with `defaultValue`.
+
+Read the exact implementation before assuming a component supports both. Some components may expose a `value` prop without a `defaultValue`, and some callbacks may not match native DOM event signatures. Follow the TypeScript interface and handlers in the installed version.
+
+## Browser event versus value callback
+
+Native React inputs usually call `onChange(event)`, where `event.target.value` contains the typed string. Some library controls instead call `onChange(value)` or `onCheckedChange(boolean)`. TypeScript helps reveal which one the control expects. Do not pass an event handler with the wrong parameter shape.
+
+The component does not automatically save a value to a server. The application decides when to send requests, how to validate data, and what to do when an operation fails.

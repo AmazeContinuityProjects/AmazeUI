@@ -1,0 +1,22 @@
+---
+title: Data and timetable components
+description: Render records, tables, courses, and timetable periods with the library's display components.
+---
+
+## Tables
+
+`DataTable` accepts `columns` and `data`. A column has a `key`, visible `label`, optional cell `render(value, row)` callback, and optional class. Each row is a record keyed by those column keys. Without a custom renderer, the component displays the value or an em dash for nullish values. With no rows, it renders `emptyMessage` (default `No data available`). It can also display a `caption` and class.
+
+The compound `Table` family (`Table`, `TableHeader`, `TableBody`, `TableRow`, `TableHead`, `TableCell`) gives the caller direct semantic table composition. `CourseListTable` accepts typed course rows and formats a course list; check `CourseListItem` for the expected record shape.
+
+`DataTable` does not sort, paginate, fetch, or mutate rows automatically. Implement those behaviors in the parent and pass the current records/columns.
+
+## Timetables
+
+`TimetableGrid` requires `courses`, `theoryPeriods`, and `labPeriods`; optional props include `days` (Monday–Friday by default), a `blockedSlots` set, `onToggleBlockSlot`, `selectedGapDetails`, title (`Unified Schedule` by default), `showLegend` (true by default), and class. A `TimetablePeriod` can contain start/end strings, a lunch flag, and a day-to-slot map. An `AddedCourse` includes id, code, title, slot strings, faculty, venue, credits, type, color, and optional batch. The exported `SlotMap`, `TimetablePeriod`, `AddedCourse`, and `GapDetail` types describe the rest of the data. Reuse these types when preparing compatible data rather than recreating a similar but subtly different shape.
+
+The grid is a visual component, not a timetable generator or scheduling service. It renders data the caller supplies. Inspect `src/components/ui/timetable-grid.tsx` for how period keys and slot identifiers must line up before building the object.
+
+## Related displays
+
+`Timeline` is a compound family: `Timeline`, `TimelineItem`, `TimelineCard`, `TimelineDate`, `TimelineTitle`, `TimelineDescription`, and `TimelineActions`. `CircularProgress` and `ProgressBar` display scalar progress but do not calculate completion from application data.

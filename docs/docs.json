@@ -1,0 +1,85 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "theme": "mint",
+  "name": "AmazeUI",
+  "description": "Developer handbook for the AmazeCC React component library.",
+  "colors": {
+    "primary": "#4F46E5",
+    "light": "#818CF8",
+    "dark": "#3730A3"
+  },
+  "icons": {
+    "library": "lucide"
+  },
+  "contextual": {
+    "options": ["copy", "view", "chatgpt", "claude", "perplexity", "mcp", "cursor", "vscode"],
+    "display": "header"
+  },
+  "markdown": {
+    "instructions": "Write for junior React developers who know HTML. Explain JSX, TypeScript, state ownership, Tailwind CSS, and package exports. Verify names, defaults, and behavior against src/index.ts and component source. Do not claim native mobile support, data fetching, persistence, or runtime setup without source evidence. Always explain the tailwind.css entrypoint and caller responsibilities."
+  },
+  "navigation": {
+    "groups": [
+      {
+        "group": "Start here",
+        "icon": "rocket",
+        "expanded": true,
+        "pages": [
+          {
+            "group": "Getting started",
+            "root": "00-start-here/index",
+            "pages": ["00-start-here/install-and-style", "00-start-here/first-component", "00-start-here/choose-a-component"]
+          }
+        ]
+      },
+      {
+        "group": "Core concepts",
+        "icon": "book-open",
+        "expanded": true,
+        "pages": [
+          {
+            "group": "React and styling foundations",
+            "root": "01-concepts/index",
+            "pages": ["01-concepts/jsx-and-typescript", "01-concepts/state-and-events", "01-concepts/tailwind-and-theme", "01-concepts/web-platform-primitives"]
+          }
+        ]
+      },
+      {
+        "group": "Component guides",
+        "icon": "blocks",
+        "expanded": true,
+        "pages": [
+          {
+            "group": "Components by task",
+            "root": "02-components/index",
+            "pages": ["02-components/inputs-and-controls", "02-components/feedback-and-status", "02-components/navigation-and-layout", "02-components/overlays-and-command", "02-components/data-and-timetable", "02-components/composite-components", "02-components/theme-and-palette"]
+          }
+        ]
+      },
+      {
+        "group": "Code tours",
+        "icon": "code",
+        "expanded": true,
+        "pages": [
+          {
+            "group": "Read the implementation",
+            "root": "03-code-tour/index",
+            "pages": ["03-code-tour/package-entrypoints", "03-code-tour/button-line-by-line", "03-code-tour/primitives-and-class-merging", "03-code-tour/color-palette-hook", "03-code-tour/dialog-and-controlled-state", "03-code-tour/building-and-testing-components"]
+          }
+        ]
+      },
+      {
+        "group": "Reference",
+        "icon": "library",
+        "expanded": true,
+        "pages": [
+          {
+            "group": "API and maintenance",
+            "root": "04-reference/index",
+            "pages": ["04-reference/public-export-catalog", "04-reference/props-and-defaults", "04-reference/package-and-dependencies", "04-reference/testing-ci-and-release", "04-reference/repository-map", "04-reference/glossary", "04-reference/ai-and-mintlify-tools"]
+          }
+        ]
+      }
+    ]
+  }
+}

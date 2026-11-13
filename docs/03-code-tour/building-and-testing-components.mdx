@@ -1,0 +1,24 @@
+---
+title: Build and test a component
+description: Connect a source edit to Vitest coverage, TypeScript declarations, and package build output.
+---
+
+## Source to test
+
+UI source lives under `src/components/ui/` or `src/components/custom/`. Components may export a props interface and the component itself. Add a test under the corresponding `tests/components/` path when you need to verify rendering or interaction. Hook tests belong under `tests/hooks/` and use `renderHook` from Testing Library. `tests/setup.ts` installs jest-dom matchers, runs DOM cleanup after each test, clears localStorage, and resets palette data attributes.
+
+Vitest runs in the `jsdom` environment. This approximates browser DOM APIs for tests; it is not a real browser or a test of every device and assistive technology.
+
+## Verification scripts
+
+`pnpm verify` runs the repository's defined sequence: ESLint, Prettier check, TypeScript typecheck, Vitest, and tsup build. CI additionally runs a production dependency audit and package export checks (`publint` and Are The Types Wrong) and uploads test coverage. The audit is a separate CI job.
+
+`pnpm test:coverage` runs tests with the V8 coverage provider and emits text and LCOV reports. The Vitest config includes `src/**` and excludes CSS and declaration files.
+
+## Package result
+
+`pnpm build` writes the public JavaScript, declaration, and CSS artifacts to `dist/`. `pnpm pkg:check` checks package metadata and type entrypoints. Keep `package.json` export paths and tsup entrypoints aligned when adding public modules.
+
+## Release boundary
+
+The npm workflow starts when a GitHub Release is created. It verifies the source, builds the package, checks package exports, upgrades npm for OIDC trusted publishing, then publishes to npm. A regular docs change merged to `main` runs CI but does not create a release or publish an npm version.

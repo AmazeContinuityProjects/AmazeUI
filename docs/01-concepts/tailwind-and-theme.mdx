@@ -1,0 +1,20 @@
+---
+title: Tailwind CSS and theme
+description: Understand the Tailwind utilities and CSS variables that AmazeUI components rely on.
+---
+
+## Tailwind classes are style instructions
+
+In `className="rounded-md px-4 text-sm"`, each word is a utility class: rounded corners, horizontal padding, and small text. Responsive prefixes (`sm:`, `md:`) and state prefixes (`hover:`, `focus-visible:`) conditionally apply utilities. Components combine these classes with `cn` so a consumer can add or override styles.
+
+Tailwind generates CSS by scanning configured source files for class names. Because AmazeUI's components live inside a package under `node_modules`, an app may need an explicit Tailwind v4 `@source` directive pointing at the package output. The [installation guide](/00-start-here/install-and-style) shows the pattern AmazeCC uses.
+
+## CSS variables and semantic colors
+
+`src/tailwind.css` defines CSS custom properties such as `--background`, `--foreground`, `--surface`, `--primary`, `--danger`, and `--border-muted`. A custom property is a named CSS value, read with `var(--name)`. Tailwind's `@theme inline` maps these semantic values to utility names used by components, for example `bg-background`, `text-foreground`, and `border-input`.
+
+This indirection lets many components change appearance when the theme variables change. Light and dark values are declared in CSS; the `.dark` class is the custom selector used by the dark variant. Theme mode and a component color palette are related but separate features: `ThemeProvider`/`useTheme` control theme mode; `useColorPalette` changes accent and related variables.
+
+## Override deliberately
+
+Add app-specific styles after the library import when an application needs a local adjustment. Prefer semantic tokens where possible so dark mode remains readable. An arbitrary hard-coded white surface may look correct in light mode and fail in dark mode.

@@ -1,0 +1,36 @@
+---
+title: Button, line by line
+description: Explain how ButtonProps, class variants, Pressable, Slot, and children work together.
+---
+
+Source: `src/components/ui/button.tsx`.
+
+## Imports
+
+`"use client"` marks a client-side module for frameworks that distinguish server and client components. The file imports `Text` and `Pressable` from AmazeUI's platform wrapper, React helpers, a type from `react-native`, `cva` and `VariantProps`, the `cn` class combiner, and the internal `Slot` helper.
+
+An `import type` is erased from runtime JavaScript. Value imports such as `Pressable`, `cva`, `cn`, and `Slot` are used at runtime.
+
+## Variant table
+
+`cva(base, { variants, defaultVariants })` constructs a function for selecting class strings. The first string is always included. `variant` and `size` map named options to additional class strings; defaults are `default` and `default`. The returned function accepts a choice and creates the combined classes.
+
+`VariantProps<typeof buttonVariants>` asks TypeScript to derive the allowed `variant` and `size` values from that table. This avoids defining the same string unions by hand.
+
+## Props interface
+
+`ButtonProps` extends both React Native Web `PressableProps` and the derived variant props. `children` is required; `className`, `textClassName`, event callbacks, `type`, and `asChild` add this component's API. `type` is constrained to the three standard button types.
+
+The use of a platform `PressableProps` means callbacks and inherited props can differ from `React.ButtonHTMLAttributes`. The interface adds web `onClick`, but `onPress` is also accepted.
+
+## Rendering path
+
+`React.forwardRef` creates a component that can pass a ref to its underlying pressable. The function destructures props it handles and collects the remaining `...props`. `cn(buttonVariants(...), className)` adds caller classes after base/variant classes, allowing `tailwind-merge` to resolve conflicts.
+
+When `asChild` is true, `Slot` clones the single valid child and combines the given props with that child's props. This allows the child element to receive the button styling. Because it requires one element and forwards event props, verify the child's element type and callback behavior.
+
+Otherwise it renders `Pressable`. `onPress || onClick` means a truthy `onPress` is preferred. The ref and remaining props are forwarded. `React.Children.map` wraps only text and numeric children in `Text` to apply `textClassName`; elements are returned unchanged.
+
+Finally, `Button.displayName = "Button"` improves the component's name in React developer tooling. The named exports make both `Button` and `buttonVariants` available from the package root.
+
+See the [Button API guide](/02-components/inputs-and-controls) for variants and integration example.
