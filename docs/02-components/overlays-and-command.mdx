@@ -1,0 +1,38 @@
+---
+title: Overlays and command interfaces
+description: Compose dialogs, modals, menus, popovers, and command search using the library's exported parts.
+---
+
+## Dialog compound components
+
+The root exports `Dialog`, `DialogTrigger`, `DialogContent`, `DialogHeader`, `DialogFooter`, `DialogTitle`, `DialogDescription`, and `DialogClose`. Put the pieces under the `Dialog` parent so they can read its context. `Dialog` accepts `open` and `onOpenChange`; it also has internal state when used without `onOpenChange`. `DialogTrigger` opens it, and `DialogClose` closes it. Content uses the React Native Web `Modal` primitive.
+
+```tsx
+<Dialog>
+  <DialogTrigger>Open details</DialogTrigger>
+  <DialogContent>
+    <DialogHeader>
+      <DialogTitle>Details</DialogTitle>
+      <DialogDescription>Review the information before continuing.</DialogDescription>
+    </DialogHeader>
+    <DialogFooter>
+      <DialogClose>Done</DialogClose>
+    </DialogFooter>
+  </DialogContent>
+</Dialog>
+```
+
+`DialogContent` is displayed based on parent state. `DialogTitle` and `DialogDescription` are separate pieces so the consumer can choose text and structure. Verify keyboard/focus behavior in the target app and library version.
+
+## Other overlays
+
+- `Modal` is a separate simple overlay controlled by `isOpen` (defaults to true) and required `onClose`. It closes on Escape and background click, supports `title`, `maxWidth`, `showClose`, `noPadding`, and `className`. Clicking inside the content stops propagation. It is implemented with DOM `div` and `button` elements.
+- `Popover`, `PopoverTrigger`, and `PopoverContent` are compound components using shared open state and the underlying library primitive. Use matching parent/trigger/content composition.
+- `DropdownMenu` exports root, trigger, content, item, label, and separator parts. Use menu items for actions and supply appropriate labels.
+- `Command` exports its root, dialog, input, list, empty state, group, item, shortcut, and separator components. `CommandPalette` is a higher-level searchable action list whose caller supplies items and selection behavior.
+
+<Warning>
+  The custom `Modal` implementation is not the same component as the compound `Dialog`, and their
+  prop contracts differ. Inspect focus management and accessible naming behavior for the exact
+  component before using it for a critical modal flow.
+</Warning>

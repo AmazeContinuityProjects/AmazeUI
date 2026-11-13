@@ -1,0 +1,25 @@
+---
+title: Feedback and status
+description: Show loading, progress, empty, error, alert, sync, and status feedback with the public components.
+---
+
+Choose feedback that tells the user what happened and what they can do next.
+
+| Component               | Use                                                                                                                                                                                                 |
+| ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Skeleton`              | Placeholder blocks while surrounding content is loading. It accepts `className` plus the React Native Web `ViewProps` used in source.                                                               |
+| `LoadingSpinner`        | Small indeterminate spinner; props include `size` (`sm`, `md`, `lg`), optional `label`, and `className`.                                                                                            |
+| `LoadingScreen`         | Larger full-area loading presentation with configurable message/details and layout props from `LoadingScreenProps`.                                                                                 |
+| `EmptyState`            | No-content message with optional icon, title, description, action, and class.                                                                                                                       |
+| `ErrorDisplay`          | Requires a `message`; `variant` is `error` or `warning` (default `error`), with optional `onRetry` and class.                                                                                       |
+| `ErrorDiagnosticCard`   | Diagnostic details and optional recovery action for a specific error context.                                                                                                                       |
+| `Alert`                 | Themed alert surface using the library primitives and semantic classes.                                                                                                                             |
+| `Badge` / `StatusBadge` | Compact category/status indicator. `Badge` variants are default, success, warning, danger, info, purple; sizes are `sm` and `md`.                                                                   |
+| `SyncNotification`      | Notification describing a sync state/result; caller supplies the displayed state/data.                                                                                                              |
+| `Progress`              | Progress primitive based on `react-native-web` View props.                                                                                                                                          |
+| `ProgressBar`           | Horizontal numeric `value` with `max` default 100, color (`blue`, `emerald`, `amber`, `red`), size (`sm`, `md`), optional label, and class overrides. It clamps the calculated percentage to 0–100. |
+| `CircularProgress`      | Circular progress with `value`; default size 80, stroke width 8, low threshold 75 and mid threshold 85. It picks red/yellow/green path colors based on the value.                                   |
+
+`FetchButton` is a button with a `loading` state. When loading or disabled, its rendered native button is disabled; while loading it replaces the optional icon with a spinner. It does not start a fetch request itself: your application supplies the click callback and toggles the `loading` prop.
+
+When the library component leaves a particular accessibility detail to the caller, supply it in the app. For example, use a meaningful spinner label, announce important async changes through the surrounding application, and provide keyboard-accessible retry actions.

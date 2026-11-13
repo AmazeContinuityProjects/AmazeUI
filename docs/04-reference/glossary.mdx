@@ -1,0 +1,24 @@
+---
+title: Glossary
+description: Plain-language definitions for React, TypeScript, styling, package, and testing terms used here.
+---
+
+| Term                    | Meaning in this repository                                                                 |
+| ----------------------- | ------------------------------------------------------------------------------------------ |
+| API                     | The public set of names and props a component package exposes.                             |
+| Callback                | A function passed to a component so it can notify the caller about an interaction.         |
+| CommonJS / ESM          | Two JavaScript module formats; the package build provides both.                            |
+| Component               | A React function or object that describes UI and can receive props.                        |
+| CSS custom property     | A named CSS value such as `--primary`, read through `var(--primary)`.                      |
+| Declaration file        | A `.d.ts`/`.d.mts` file describing JavaScript exports and types to TypeScript.             |
+| Externalized dependency | A package the build leaves as an import/reference instead of bundling into its output.     |
+| Hook                    | A React function such as `useState` or `useColorPalette` for state and lifecycle behavior. |
+| JSX                     | Syntax that describes React UI using element-like tags inside JavaScript/TypeScript.       |
+| Package export map      | `package.json` configuration that defines valid import paths and their files.              |
+| Prop                    | An input value passed from a parent component to a child component.                        |
+| Tailwind utility        | A short class name that represents a CSS declaration, such as `p-4` or `text-sm`.          |
+| Controlled component    | A component whose current value is supplied by the parent through props.                   |
+| Uncontrolled component  | A component that manages its own current value, often with a `defaultValue`.               |
+| `forwardRef`            | React API for passing a parent-provided ref through a component wrapper.                   |
+| `react-native-web`      | Library that maps React Native-style components and APIs to web implementations.           |
+| Vitest                  | Test runner used for component and helper tests in this repository.                        |

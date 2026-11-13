@@ -1,0 +1,27 @@
+---
+title: Navigation and layout
+description: Compose page headers, sidebars, tabs, breadcrumbs, and links from AmazeUI's exported components.
+---
+
+## Page structure
+
+- `PageHeader` renders a page title with optional icon, metadata, actions, and class name.
+- `SectionHeader` renders a section title with optional icon, subtitle/action, and class name.
+- `SubpageLayout` combines a page content area with subpage navigation/back affordances. Read its props and behavior before assuming the back button is conditional.
+- `AboutSection` provides an about/information section for an app or feature.
+- `InfoRow` pairs an icon and children, with optional row and icon classes.
+- `Breadcrumbs` accepts `BreadcrumbItem[]` and renders a breadcrumb navigation element; the item type declares the display label and optional destination fields.
+
+## Navigation state
+
+`Tabs` is a compound component: compose `Tabs`, `TabsList`, `TabsTrigger`, and `TabsContent`. `Tabs` owns the selected value when used uncontrolled or accepts a `value`/`onValueChange` pair when controlled. Triggers identify a panel using matching string values.
+
+`SubTabStrip` accepts a list of tabs, `activeTab`, and an `onChange` callback. `NavigationTabs` is an app-specific custom navigation composite. `MobileBottomNav` accepts `items` whose entries require `id`, `icon`, `label`, and `onClick`, with optional `isActive`; `compact` hides the text labels. `Sidebar` is also compound: use `Sidebar`, `SidebarHeader`, `SidebarContent`, `SidebarGroup`, `SidebarGroupLabel`, `SidebarItem`, and `SidebarFooter` as documented by its exported types.
+
+`useSidebar()` reads sidebar context. It must be called beneath the corresponding `Sidebar` provider/context; the function throws when used without that context. `SidebarProfile`, `SidebarThemeControl`, and `SidebarExpandButton` are adjacent display/control components.
+
+## Links and display mode
+
+`Link` is an anchor wrapper that merges default primary/underline styles with `className`; it accepts standard anchor attributes. `BackButton` invokes the supplied `onClick`. `ViewModeToggle` takes a list of typed options, current value, and `onChange`, so the parent keeps the selected mode.
+
+These components render navigation UI but do not install a router. Supply the appropriate link destination or route callback for your application.

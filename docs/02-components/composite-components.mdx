@@ -1,0 +1,25 @@
+---
+title: Composite components
+description: Understand higher-level AmazeUI composites and which behavior remains the application's responsibility.
+---
+
+Composite components arrange lower-level UI for recurring application patterns. They provide structure, not an application's business model.
+
+| Composite              | Responsibility visible in source                                                                                                 |
+| ---------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| `SettingsPanel`        | Filters a supplied section list, tracks the active/expanded section, and calls `renderSection(section)` to display each section. |
+| `CommandPalette`       | Displays a searchable command list from caller-supplied items and callbacks.                                                     |
+| `AppLibrary`           | Animated mobile bottom sheet with title, optional search/back controls, and caller-provided children.                            |
+| `ColorPalettePicker`   | Lets a caller choose among palette options and reports the selected value.                                                       |
+| `OptionPicker`         | Presents a list of options and reports selection using its prop contract.                                                        |
+| `Fab` / `FabSpeedDial` | Floating action button and expandable action menu primitives.                                                                    |
+| `MobileBottomNav`      | Renders caller-provided navigation items in a mobile-oriented layout.                                                            |
+| `SettingsPanel`        | Creates settings section navigation; the caller implements each section's controls and persistence.                              |
+| `ErrorDiagnosticCard`  | Presents diagnostic/error context passed by the parent and may expose recovery actions.                                          |
+| `SyncNotification`     | Renders sync feedback from the parent-provided state.                                                                            |
+
+The exact prop types are in each component source and summarized in the [export catalog](/04-reference/public-export-catalog). For complex composites, follow the source's prop interface and a current usage in AmazeCC rather than guessing the expected object shape.
+
+## Callback boundary
+
+If a composite takes `onChange`, `onSelect`, `onClose`, or `renderSection`, the parent supplies that function. A rendering component does not automatically know how the application stores, fetches, or authorizes the associated data. Keep these responsibilities in the app layer.

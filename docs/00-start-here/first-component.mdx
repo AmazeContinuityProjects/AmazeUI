@@ -1,0 +1,31 @@
+---
+title: Your first AmazeUI component
+description: Import a Button, pass a variant and event callback, and understand what JSX and props mean.
+---
+
+```tsx
+import { Button } from "@amazecontinuityprojects/amazeui"
+
+export function SaveAction() {
+  function handleSave() {
+    // Call your application's save logic here.
+  }
+
+  return (
+    <Button variant="primary" size="default" onClick={handleSave}>
+      Save changes
+    </Button>
+  )
+}
+```
+
+`import { Button } ...` asks the package root for its named `Button` export. The component is a JavaScript function whose name begins with a capital letter. JSX uses `<Button ...>` to create that component; angle brackets that start with lowercase names are treated as HTML elements.
+
+The values inside the opening tag are **props**: inputs passed from the parent component to the child. Here `variant` and `size` select styles, `onClick` supplies a callback for an interaction, and the text between the tags becomes the `children` prop. AmazeUI renders a button-like pressable; your callback owns the actual save operation.
+
+The JSX is returned from a component function, so this example belongs in a `.tsx` file (TypeScript plus JSX). The Tailwind CSS entrypoint must be loaded for package styles to appear. The button's default variants are also used when `variant` or `size` is omitted; see the Button guide for the complete supported values.
+
+<Tip>
+  Use `type="button"` for a button that should not submit a surrounding HTML form. Use
+  `type="submit"` when submission is intentional.
+</Tip>

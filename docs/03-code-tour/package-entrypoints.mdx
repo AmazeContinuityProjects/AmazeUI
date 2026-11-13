@@ -1,0 +1,29 @@
+---
+title: Package entrypoints
+description: Trace src/index.ts, package.json exports, and tsup output to understand what npm consumers receive.
+---
+
+## 1. The source entrypoint
+
+`src/index.ts` re-exports components from their source modules. For example, `export * from "./components/ui/button"` makes exported declarations from the button module available at the package root. Named exports such as `export { default as LoginForm } ...` rename a module's default export for consumers. The file is the source-level public API allowlist.
+
+Internal modules such as `src/lib/slot.tsx` are not all exported. A consumer should import `cn` from the root because `src/index.ts` re-exports it, not import the internal source path.
+
+## 2. The npm export map
+
+`package.json` names the package `@amazecontinuityprojects/amazeui`. Its `exports` field maps `.` to ESM, CommonJS, and matching type declaration files. It maps `./tailwind.css` to the built CSS file. This means a component import and a CSS import use distinct package paths.
+
+## 3. The build
+
+`tsup.config.ts` builds `src/index.ts` and `src/tailwind.css` in CommonJS and ESM formats, generates declarations for the TypeScript entrypoint, cleans `dist/` before a build, writes source maps, and copies CSS. It externalizes React, React DOM, React Native, React Native Web, and Framer Motion from the JavaScript bundle.
+
+`files: ["dist"]` in `package.json` limits the published file set to build output. Thus changing source alone does not change the package contents until the build runs and a new package version is published.
+
+## 4. Consumer path
+
+```text
+consumer import → package.json exports → dist JavaScript/declarations
+consumer CSS import → ./tailwind.css export → built Tailwind CSS entrypoint
+```
+
+Treat the built files and export map as part of the public API. `pnpm pkg:check` validates package metadata and TypeScript entrypoint compatibility.

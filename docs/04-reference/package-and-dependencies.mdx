@@ -1,0 +1,25 @@
+---
+title: Package and dependencies
+description: Understand the published files, module formats, CSS path, and runtime dependencies.
+---
+
+| Package setting | Current configuration                                                                                                          |
+| --------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| Name/version    | `@amazecontinuityprojects/amazeui`, version declared in `package.json`.                                                        |
+| Published files | `files: ["dist"]`; npm package includes build output.                                                                          |
+| Main entry      | CommonJS `dist/index.js`; ESM `dist/index.mjs`; declaration paths map through `types` and `exports`.                           |
+| CSS subpath     | `@amazecontinuityprojects/amazeui/tailwind.css` maps to `dist/tailwind.css`.                                                   |
+| Build tool      | tsup builds `src/index.ts` and `src/tailwind.css`, outputs ESM/CommonJS and declarations, copies CSS, and creates source maps. |
+| Package manager | `pnpm@10.32.1`; use `pnpm-lock.yaml` with frozen installs in CI.                                                               |
+
+React, React DOM, React Native, React Native Web, Framer Motion, Radix Checkbox, `cmdk`, `next-themes`, Tailwind-related packages, `clsx`, `tailwind-merge`, Lucide icon packages, and other modules appear in dependencies or source imports. The package currently declares runtime `dependencies` in `package.json`; it does not define a `peerDependencies` section. Check the actual package manifest before advising consumer dependency deduplication or compatibility.
+
+The tsup config marks React, React DOM, React Native, React Native Web, and Framer Motion as external. External means they are referenced by the built output rather than bundled into it. The package manifest still lists runtime dependencies; build externalization and npm dependency declarations are distinct settings.
+
+## Tailwind integration
+
+The CSS entrypoint imports Tailwind v4, registers the component source directory, loads the Typography plugin and `tw-animate-css`, defines a custom dark variant, and maps theme variables. Consuming apps should import this subpath from their global stylesheet and tell Tailwind to scan the compiled package output when their setup requires it.
+
+## Inspect the published artifact
+
+`pnpm build` creates `dist/`. `pnpm pkg:check` validates package metadata with `publint` and TypeScript entrypoint compatibility with Are The Types Wrong. `package.json` export-map paths, `files`, and tsup entries must agree or the source may compile locally while the published package is missing a file.

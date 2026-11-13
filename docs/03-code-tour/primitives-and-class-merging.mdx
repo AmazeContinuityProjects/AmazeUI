@@ -1,0 +1,30 @@
+---
+title: Platform primitives and class merging
+description: Follow View/Text/Pressable/TextInput platform branches and the clsx plus tailwind-merge helper.
+---
+
+## `cn` helper
+
+`src/lib/utils.ts` defines:
+
+```ts
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs))
+}
+```
+
+`...inputs` is a rest parameter: callers can pass any number of class inputs. `ClassValue` is the input type from `clsx`, so strings, conditional values, arrays, and object-shaped conditions are supported. `clsx` first turns those inputs into a class string and omits false or empty conditions. `twMerge` then removes conflicting Tailwind classes so later utilities win, for example `cn("px-2", "px-4")` returns `px-4`.
+
+## Platform wrappers
+
+`src/lib/primitives.tsx` imports the React Native Web `Platform` and primitives, then exports React components named `View`, `Text`, `Pressable`, and `TextInput`.
+
+Each wrapper checks `Platform.OS === "web"`. In web rendering, `View` creates a `div`, `Text` a `span`, `Pressable` a `button`, and `TextInput` an `input` or `textarea` according to `multiline`. The wrappers add Tailwind class defaults and translate some native-style props to web events. Outside the web branch, they return the corresponding React Native Web component.
+
+`React.forwardRef` forwards a parent's ref through the wrapper. Prop types come from `react-native-web`, with a few web-specific `className`, `onClick`, and `onChange` additions. Some `any` assertions bridge types that do not exactly describe this mapping; those assertions silence TypeScript but do not validate values at runtime.
+
+## Slot helper
+
+`src/lib/slot.tsx` verifies that `children` is a valid React element. If so, it clones the child and merges its existing props with the new props, where new props take precedence. Otherwise it returns `React.Children.only(children)`, which enforces one child. It is used by `Button`'s `asChild` mode.
+
+Use `cn` from the package root. The internal Slot is not exported in `src/index.ts` and should not be imported by package consumers.

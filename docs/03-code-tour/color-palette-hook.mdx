@@ -1,0 +1,26 @@
+---
+title: Color palette hook
+description: Trace useColorPalette from localStorage reads through React effects and document CSS variables.
+---
+
+Source: `src/hooks/use-color-palette.ts`.
+
+## Definitions and settings helpers
+
+`PaletteDefinition` is a TypeScript interface for an accent plus optional light background and surface. `COLOR_PALETTES` maps stable string ids to those values. `PALETTE_OPTIONS` is the public list used by a picker: each option contains an id, label, and swatch strings.
+
+`getSettings()` returns `null` during server rendering because `window` is unavailable. In the browser it reads `club_hub_settings` from localStorage and parses JSON; parse/storage errors are caught and treated as no settings. `saveSettings(updates)` shallow-merges new properties onto existing settings and serializes the result back to localStorage.
+
+## Hook state and startup effect
+
+`useColorPalette` starts with `paletteId` set to `default`. The first `useEffect` runs after the component mounts in a browser. It restores `colorPalette` from settings, or checks a legacy `accent` value if no saved palette exists. The empty dependency array means it does not rerun for changing props.
+
+The `setPaletteId` callback updates React state, persists the value under `club_hub_settings`, and writes the legacy `accent` key. `useCallback(..., [])` gives consumers a stable callback identity. Storage writes are inside a `try` for the legacy key; `saveSettings` itself relies on `getSettings` and localStorage and can still encounter storage restrictions.
+
+## Apply effect
+
+The second effect runs when `paletteId` changes. It accesses `document.documentElement`, the root `<html>` element. For `default` or an unknown id it removes palette attributes and the list of style variables this hook owns.
+
+For a named palette, it sets `data-color-palette` and `data-accent`, then applies CSS custom properties with `style.setProperty`. It checks whether the root has the `dark` class and chooses light or dark values. Dark colors use CSS `color-mix(in oklab, ...)` to blend the selected accent into the base surface. The effect's dependency `[paletteId]` keeps DOM updates in sync with the selected id.
+
+The returned object contains current id, setter, and the palette options. The hook changes browser-local settings and document-wide styles; it is not an account preference API. Tests in `tests/hooks/use-color-palette.test.tsx` verify initial state, options, persistence, restore, and resetting to default.

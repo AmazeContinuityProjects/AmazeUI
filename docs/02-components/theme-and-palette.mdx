@@ -1,0 +1,29 @@
+---
+title: Theme and color palette
+description: Configure dark mode with ThemeProvider and choose an accent palette with the exported palette hook and picker.
+---
+
+## Theme mode
+
+`ThemeProvider` wraps the `next-themes` provider and forwards its props. It also migrates a legacy stored theme name to `dark` once after mount. `useTheme` is re-exported from `next-themes`; use it beneath the provider to read or change theme mode.
+
+```tsx
+<ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+  <Application />
+</ThemeProvider>
+```
+
+The CSS uses a `.dark` class variant. The provider configuration must match that convention. `ThemeSwitcher` renders an application-level toggle. It does not replace the provider.
+
+## Accent palette
+
+`useColorPalette()` returns `paletteId`, `setPaletteId`, and `palettes`. The options are exported as `PALETTE_OPTIONS`. Selecting one updates React state, writes the selected id into `club_hub_settings` in localStorage, updates a legacy `accent` key, and applies CSS variables and data attributes to `document.documentElement`.
+
+Available palette ids include `default`, `neonPink`, `forest`, `rose`, `amber`, `ocean`, `lavender`, and `sunset`. The source palette definitions include accent and optional light surface colors. In dark mode, the hook mixes accent colors into dark base/surface values using CSS `color-mix`.
+
+`ColorPalettePicker` is the visual picker; use the hook directly when building custom UI. Palette storage is browser localStorage and is not server-side account synchronization. The hook accesses `window`, `document`, and localStorage, so it is client-side behavior.
+
+<Warning>
+  Changing CSS variables on the document root affects the whole consuming application. Test the
+  palette with app-specific styles and both light and dark modes.
+</Warning>

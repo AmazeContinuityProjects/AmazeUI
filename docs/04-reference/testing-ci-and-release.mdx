@@ -1,0 +1,37 @@
+---
+title: Testing, CI, and release
+description: Run AmazeUI's local verification scripts and understand GitHub Actions and npm publishing triggers.
+---
+
+## Local commands
+
+```bash
+pnpm install --frozen-lockfile
+pnpm verify
+pnpm pkg:check
+pnpm audit --prod --audit-level high
+```
+
+`pnpm verify` chains lint, formatting check, TypeScript, tests, and build. The package-check and audit scripts are separately available.
+
+| Script               | Work                                                                    |
+| -------------------- | ----------------------------------------------------------------------- |
+| `pnpm lint`          | Runs ESLint over the repository.                                        |
+| `pnpm format:check`  | Checks files against Prettier without rewriting them.                   |
+| `pnpm typecheck`     | Runs `tsc --noEmit`.                                                    |
+| `pnpm test`          | Runs Vitest once.                                                       |
+| `pnpm test:watch`    | Runs Vitest in watch mode.                                              |
+| `pnpm test:coverage` | Runs Vitest with V8 coverage.                                           |
+| `pnpm build`         | Runs tsup to create package output.                                     |
+| `pnpm pkg:check`     | Runs `publint` and Are The Types Wrong against package metadata/output. |
+| `pnpm audit`         | Checks production dependency advisories at the configured severity.     |
+
+## Pull request CI
+
+`.github/workflows/ci.yml` runs on pushes and pull requests targeting `main`. Its quality job installs with pnpm, checks for leaked secrets, lints, checks formatting, typechecks, runs tests with coverage, builds, and validates package exports. A separate job audits production dependencies. CodeQL analysis runs on pushes/PRs and a weekly schedule.
+
+## npm release
+
+`.github/workflows/npm-publish.yml` runs only when a GitHub Release is created. It verifies source in one job and, after success, builds and validates package output before publishing publicly with GitHub OIDC trusted publishing. It explicitly upgrades npm for OIDC support; it does not use an `NPM_TOKEN` secret in the workflow.
+
+Merging a docs-only pull request to `main` triggers CI. It does not create a GitHub Release and does not publish an npm package. The docs notification workflow separately dispatches the Mintlify aggregator when `docs/**` changes on `main`.

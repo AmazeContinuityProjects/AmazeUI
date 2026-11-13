@@ -1,0 +1,33 @@
+---
+title: Props and defaults
+description: Read component prop interfaces, inherited HTML attributes, callback values, and component defaults.
+---
+
+## How to read a prop type
+
+A component prop interface is its documented input contract. For example, `InputProps extends React.InputHTMLAttributes<HTMLInputElement>` means the component accepts its own `label` and `error` props plus standard input properties such as `value`, `onChange`, `name`, `required`, and `disabled`.
+
+An optional marker (`prop?: type`) means the caller may omit the prop. A union (`"sm" | "md"`) restricts a value to listed alternatives. `React.ReactNode` is renderable children. A callback such as `(value: string) => void` receives a string; it is not the same as a DOM callback that receives a `ChangeEvent`.
+
+## Common prop patterns
+
+| Pattern                        | Meaning in AmazeUI                                                                                              |
+| ------------------------------ | --------------------------------------------------------------------------------------------------------------- |
+| `children`                     | Content placed between `<Component>` and `</Component>`.                                                        |
+| `className`                    | Extra Tailwind classes; many components combine them with defaults through `cn`.                                |
+| `value` plus `onChange`        | Usually controlled state: the caller stores the value and passes updates back. Confirm callback type in source. |
+| `open` plus `onOpenChange`     | Controlled open/close state for Dialog-like components.                                                         |
+| `defaultValue`                 | Initial state for an uncontrolled component, where supported.                                                   |
+| `render(value, row)`           | Caller callback that returns custom React content for a data cell.                                              |
+| `React.HTMLAttributes<T>`      | Standard web DOM properties for element type `T`.                                                               |
+| `ViewProps` / `PressableProps` | Props from React Native Web, which may use `onPress` or different event shapes.                                 |
+
+## Defaults are source-specific
+
+`Button` defaults to variant `default` and size `default`. `Badge` defaults to variant `default` and size `sm`. `DataTable` defaults its empty message to `No data available`. `Modal` defaults to open, shows its close button, uses `max-w-md`, and applies padding unless `noPadding` is true. These defaults come from destructuring defaults in their implementations.
+
+Do not assume a default from a component's name or visual appearance. Check the exact installed package's declarations and source. This handbook describes the repository's current version and may not exactly match an older lockfile.
+
+## Types are not runtime checks
+
+TypeScript prevents many mistakes during compilation, but props received from plain JavaScript or unvalidated JSON can still be unexpected at runtime. A component library's prop interfaces are not a schema validator for API responses.

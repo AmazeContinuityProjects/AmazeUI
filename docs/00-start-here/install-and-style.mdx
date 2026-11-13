@@ -1,0 +1,50 @@
+---
+title: Install and style AmazeUI
+description: Add the AmazeUI npm package, import its public CSS entrypoint, and configure Tailwind source scanning.
+---
+
+## Install
+
+The package name is `@amazecontinuityprojects/amazeui`. Use the package manager already selected by your application and commit the resulting lockfile change.
+
+```bash
+pnpm add @amazecontinuityprojects/amazeui
+```
+
+The library bundles ESM and CommonJS JavaScript and TypeScript declaration files under `dist/`. Its CSS entrypoint is exported separately as `@amazecontinuityprojects/amazeui/tailwind.css`.
+
+## Import the CSS
+
+In your application's global stylesheet, import AmazeUI's CSS entrypoint before writing application overrides:
+
+```css
+@import "@amazecontinuityprojects/amazeui/tailwind.css";
+@source "../node_modules/@amazecontinuityprojects/amazeui/dist";
+```
+
+The first line loads Tailwind v4, AmazeUI's theme variables, dark variant, and animation imports. The `@source` directive tells Tailwind to scan the package's compiled files for class names. Adjust the relative path to match the stylesheet's location and package installation layout. AmazeCC uses this pattern in `src/app/globals.css`.
+
+If the package's utility classes do not appear in your output CSS, check both that the CSS entrypoint is imported and that Tailwind scans the package output. Loading components without their Tailwind styles can leave the DOM present but visually unstyled.
+
+## Theme provider (optional)
+
+Wrap the application with the exported `ThemeProvider` when using the library's theme behavior. AmazeUI wraps `next-themes` and migrates a legacy stored theme value to `dark` on mount.
+
+```tsx
+import { ThemeProvider } from "@amazecontinuityprojects/amazeui"
+
+export function AppProviders({ children }: { children: React.ReactNode }) {
+  return (
+    <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+      {children}
+    </ThemeProvider>
+  )
+}
+```
+
+The props are forwarded to `next-themes`; configure the provider according to that dependency and your app's framework. `useTheme` is also exported from the package root.
+
+<Warning>
+  Do not import from undocumented `src/...` paths in a consuming app. Use only package-root exports
+  and the declared `./tailwind.css` subpath.
+</Warning>

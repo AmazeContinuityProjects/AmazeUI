@@ -1,0 +1,19 @@
+---
+title: Web platform primitives
+description: Learn what React Native Web primitives mean in this library and where their compatibility ends.
+---
+
+Some AmazeUI components build on `react-native-web`: a library that presents React Native-style components and props in web applications. `src/lib/primitives.tsx` wraps `View`, `Text`, `Pressable`, and `TextInput` and renders HTML elements on the web.
+
+For example, `View` maps to a `div`, `Text` maps to a `span`, and `Pressable` maps to a `button` when `Platform.OS === "web"`. The wrapper accepts platform-flavored properties and adds web `className` support. Components such as `Button`, `Progress`, `Tabs`, and timeline pieces use these wrappers.
+
+Other components use standard React DOM elements directly, and some use Radix UI or native HTML controls. This mixed implementation is why an API may have `onPress` while another uses `onClick`, or why a prop type comes from `react-native-web` instead of React DOM.
+
+<Warning>
+  The presence of `react-native-web` does not prove that this published package supports iOS or
+  Android native runtimes. The package build externalizes `react-native` and `react-native-web`
+  while the source also uses web-specific CSS, browser APIs, and DOM components. Verify a requested
+  runtime against the package output and application build before claiming compatibility.
+</Warning>
+
+Use the actual component prop type. Do not assume that all controls accept native HTML attributes or that every click callback has the same event signature.

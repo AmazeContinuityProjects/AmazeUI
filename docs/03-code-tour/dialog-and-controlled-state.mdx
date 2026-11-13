@@ -1,0 +1,24 @@
+---
+title: Dialog and controlled state
+description: Understand the Dialog context, internal state fallback, compound components, and callbacks.
+---
+
+Source: `src/components/ui/dialog.tsx`.
+
+## Context
+
+`DialogContext` stores the current `open` boolean and `onOpenChange` function. The default is `null`, which lets the module detect a compound part rendered outside its parent. `useDialog()` reads the context and throws a clear error when there is no provider.
+
+## Controlled or internal state
+
+`Dialog` accepts `open` and `onOpenChange`. It also creates internal state with `useState(open)`. `isControlled` is true when the callback prop exists. In controlled mode, `currentOpen` comes from the `open` prop and the setter calls the parent's callback. In uncontrolled mode, the setter updates the internal state and still calls the optional callback.
+
+The caller must keep `open` synchronized in controlled mode. Passing an `onOpenChange` while never changing `open` means the dialog can report the requested state but will keep rendering the old `open` value.
+
+## Compound parts
+
+`Dialog` places a provider around `children`. `DialogTrigger` reads `onOpenChange`, calls it with true, then invokes its passed `onPress` and, if present in props, `onClick`. `DialogClose` does the same with false. `DialogContent` reads `open` and renders a React Native Web `Modal` whose `visible` prop matches it; `onRequestClose` requests closing.
+
+`DialogHeader`, `DialogFooter`, `DialogTitle`, and `DialogDescription` provide styled structure. They do not own the text; consumers pass children. `forwardRef` on several parts lets the caller get a reference to the underlying wrapped element.
+
+This compound design shares state without passing `open` through every child. Each subcomponent must remain under `<Dialog>`. Use the [overlay guide](/02-components/overlays-and-command) for composition and compare `Dialog` with the separate simple `Modal` component.

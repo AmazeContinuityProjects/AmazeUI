@@ -1,0 +1,24 @@
+---
+title: Repository map
+description: Locate the files responsible for package APIs, styling, tests, builds, and documentation.
+---
+
+| Task                                           | Start here                                                                                      |
+| ---------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| Find public imports                            | `src/index.ts` and `package.json` `exports`.                                                    |
+| Change a standard control or UI component      | `src/components/ui/<component>.tsx`.                                                            |
+| Change a larger application-oriented composite | `src/components/custom/` or the relevant UI composite module.                                   |
+| Change shared class handling                   | `src/lib/utils.ts` (`cn`).                                                                      |
+| Change web/native-style primitive mapping      | `src/lib/primitives.tsx`.                                                                       |
+| Change as-child prop forwarding                | `src/lib/slot.tsx`.                                                                             |
+| Change palette selection/storage               | `src/hooks/use-color-palette.ts`.                                                               |
+| Change theme token definitions                 | `src/tailwind.css`.                                                                             |
+| Add or update a test                           | `tests/components/`, `tests/hooks/`, or `tests/lib/`.                                           |
+| Change test environment                        | `vitest.config.mts` and `tests/setup.ts`.                                                       |
+| Change build output or module formats          | `tsup.config.ts`, then the package `exports`, `files`, and entrypoint fields in `package.json`. |
+| Change dependencies or scripts                 | `package.json` and `pnpm-lock.yaml`.                                                            |
+| Change CI or release behavior                  | `.github/workflows/ci.yml`, `codeql.yml`, and `npm-publish.yml`.                                |
+| Change handbook structure                      | `docs/docs.json` and pages under `docs/`.                                                       |
+| Change AI grounding                            | `grounding/` and this root `AGENTS.md`.                                                         |
+
+`dist/` is generated build output and is ignored by git. Consumers install the npm artifact rather than importing this repository's source directory.

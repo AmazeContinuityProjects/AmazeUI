@@ -1,0 +1,28 @@
+---
+title: JSX and TypeScript
+description: Translate the component syntax in AmazeUI examples into familiar HTML and JavaScript concepts.
+---
+
+## JSX is a UI description inside JavaScript
+
+```tsx
+<Button variant="danger" disabled={isSaving} onClick={handleDelete}>
+  {isSaving ? "Deleting…" : "Delete"}
+</Button>
+```
+
+This resembles an HTML element with attributes and child text, but it is JSX. Capitalization matters: `Button` refers to an imported React component; lowercase `<button>` is a native HTML element. React turns the JSX into element descriptions and later updates the DOM when props or state change.
+
+Use `className` where HTML uses `class`. A value in braces is a JavaScript expression: `disabled={isSaving}` passes a boolean, and `{condition ? a : b}` chooses one child value. Text can be written directly between opening and closing tags. That content is passed to the child as `children`.
+
+## Types describe the component contract
+
+`interface ButtonProps { ... }` describes which properties may be passed and what kind of values they accept. A string union such as `"primary" | "danger"` means only one of those literal strings is allowed by TypeScript. This catches mistakes in the editor before the app runs; it is not a runtime validation system.
+
+`React.ReactNode` is the broad type for renderable children: text, numbers, elements, fragments, and some empty values. `React.ComponentProps<typeof Button>` derives a component's prop type from the component itself. `React.forwardRef` lets the caller pass a ref through a wrapper to the underlying element.
+
+## Imports and exports
+
+`export` makes a declaration available to another module. `src/index.ts` re-exports the supported public components. `import { Button } from "@amazecontinuityprojects/amazeui"` uses this package root. `import type { TimetablePeriod } ...` imports a compile-time type; it has no runtime JavaScript value.
+
+The package has a CSS subpath export too. JavaScript component imports and CSS imports have separate export-map entries in `package.json`.
